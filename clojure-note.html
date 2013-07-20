@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>clojure 学习笔记</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://blog.easynew.com.cn/clojure-note.html" rel="bookmark"
+           title="Permalink to clojure 学习笔记">clojure 学习笔记</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2013-06-29T13:48:00">
+                Sat 29 June 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->      <p>学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).</p>
+<p>lisp的基础思想是简单的，但lisp语言是复杂的!</p>
+<p>clojure可能是jvm中实现最好的动态语言了, groovy已经沦为java的小弟, 它很少有自己的库(gradle这样的工具不算), jython的更新迟缓, jruby一般就是兼容使用ruby的库,很少有原生为jruby开发的库. 而clojure的库,则是发挥了clojure的特点, 比方说korma 就是一个很吸引人的东西.</p>
+<div class="section" id="lisp">
+<h2>lisp基本点</h2>
+<ol class="arabic simple">
+<li>当对一个列表求值时, 第一个是函数, 其他是参数, 用`阻止对列表求值</li>
+<li>lisp 没有ast这样的过程. 代码就是ast</li>
+</ol>
+</div>
+<div class="section" id="id1">
+<h2>我所讨厌的东西</h2>
+<p>太多了, clojure中充满了各种符号的滥用和一件事情多种做法! 我讨厌一种事情有多种做法，很多时候，它意味着总有一些方法不是最佳的，你总是需要做选择，我讨厌做选择！</p>
+<p>各种符号的滥用解很大程度上是需要改善lisp的括号使用， 符号使用列表:</p>
+<pre class="literal-block">
+# 的使用。 #{1 2 3 } 表示set, #&quot;\W+&quot; 表示正则, #(&gt; (count %) 2) 表示匿名函数， #_宏表示忽略下一个clojure形式.
+* repl 时 *1 *2 *3 表示最近三次求值结果, *e 表示最后一个异常
+% 匿名函数时用%1, %2表示第n个参数, % 也可以表示第一个参数.
+, 逗号等于于空格, 可以用来改善可读性
+/ 除了表示除法外， 还可以调用java类方法，如(Math/pow), 还可以表示有理数，如 3/5
+\ 表示字符，如\c
+. 除了小数点外， 表示调用java方法，执行对象是后一个参数 (.otherMethod otherObj 0) 或者是new, 如(java.util.ArrayList. 100)
+-&gt;/-&gt;&gt;宏
+{}用于 set和map. #{1 2 3}, {&quot;name&quot; &quot;easynew&quot; &quot;url&quot;  &quot;http://blog.easynew.com.cn&quot;}
+&amp; 函数参数列表中是将后续的元素作为一个序列传给&amp;后的变量. (defn f [arg1 arg2 &amp; argn] (println argn)). 如果 (f 1 2 3 4 5) , argn 就是 (3 4 5), 用于解构时也是如此
+: 关键字 如{:name &quot;easynew&quot; :url &quot;http://blog.easynew.com.cn&quot;}
+:as 解构中绑定整个闭合结构到:as 后的变量. (let [[x y :as coords] [1 2 3 4 5 6]]  coords是 [1 2 3 4 5 6]
+` 阻止对列表求值
+() 列表
+[] vector , [1 2 3]其实就是(vector 1 2 3)
+; 注释，还可以用comment注释宏，如(comment (* 2 2)), 但comment会返回nil
+</pre>
+<p>讨厌的东西</p>
+<ul class="simple">
+<li>导入有require或require+refer或use 或import 处理java导入</li>
+<li>匿名函数除了用fn定义(fn [w] (&gt; (count w) 2)), 还可以用#(&gt; (count %) 2 ) , 用%1, %2表示第n个参数, % 也可以表示第一个参数.</li>
+<li>除了false和nil, 其他求值都为true</li>
+<li>(-&gt;Book &quot;title&quot; &quot;author &quot;)  (Book. &quot;title&quot; &quot;author&quot;), 第二个是调用构造函数，第一个理解很费脑 -&gt;不是将前一个作为后一个函数的参数吗？</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>资源</h2>
+</div>
+
+    </div><!-- /.entry-content -->
+        <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "clojure-note.html";
+        var disqus_url = "http://blog.easynew.com.cn/clojure-note.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

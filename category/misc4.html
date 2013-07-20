@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>EasyNew - misc</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+                
+            
+
+                 
+                            <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="5">
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/ymt-b2b-logic.html" rel="bookmark"
+                           title="Permalink to 亿脉通 b2b 业务逻辑描述">亿脉通 b2b 业务逻辑描述</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2008-09-09T00:00:00">
+                Tue 09 September 2008
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>做亿脉通时写的</p>
+<div class="section" id="id1">
+<h2>代理和分销</h2>
+<p>这里试图把这两个单词给明确化,在b2b系统中,代理是指由厂商授权的,在某一地区销售某类产品的权力. 代理可能是独家的,也可能是多家的,总代则是意味着在全国均有销售权力,通常,代理需要有严格的区域约束.每个大区域,如省形成一个代理树,不允许不同的树或树的不同级次进行互通,对于一个产品类别,总的来说是一棵大树,也可以分割为多棵小树
+独家的代理最简单. 非独家的代理,即某一区域允许多家代理时,通常是划分下级区域给不同的代理必须明白的说明,该公司的代理区域. 一个公司可能拥有多个区域的销售.</p>
+<p>公司/代理的类别/允许销售的区域(浙江或是宁波杭州两地区,只需要使用代理区域的顶级代码)</p>
+<p>分销是指拥有代理的公司将权力下放给其他公司的行为,这意味着创建一个树,这个树需要有上面的约束, 一个地区可以有多个分销,授权者可以将某一个或多个分销设置为分销认证
+分销认证将会在系统中被使用,当用户请求绑定一个上家时,系统将查看该上家的代理产品是否已经在该区域上级(但还是隶属于该上家的客户)已有分销认证商家,如果有,则对用户隐藏该产品,并出现该商家的信息以便用户绑定.</p>
+</div>
+<div class="section" id="id2">
+<h2>区域</h2>
+<p>使用 <a class="reference external" href="http://www.stats.gov.cn/tjbz/xzqhdm/t20080215_402462675.htm">国标编码</a></p>
+<ol class="arabic simple">
+<li>两位一级,最大5级</li>
+<li>86 第一级,全国,一个 ...</li></ol></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/ymt-b2b-logic.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/ymt-b2b-logic.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/pallet-algorithm.html" rel="bookmark"
+                           title="Permalink to 预分托盘算法">预分托盘算法</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2008-07-15T00:00:00">
+                Tue 15 July 2008
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数</p>
+<p>建立一个二维数据</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">托盘号</th>
+<th class="head">当前可用箱数</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1</td>
+<td>xx</td>
+</tr>
+<tr><td>2</td>
+<td>xx</td>
+</tr>
+<tr><td>3</td>
+<td>xx</td>
+</tr>
+</tbody>
+</table>
+<p>每取一条出货记录,就遍历这个临时表,如果发现某一托盘有可用箱数,则该记录的托盘号就是它了.</p>
+<p>当然,根据每一托盘的可用箱数,出货记录可能被分成多条,使用多个托盘</p>
+<p class="rubric">关于尾箱处理</p>
+<p>如果尾箱是拼箱的话,则取开始箱号和结束箱号等于该记录安排箱号所在的托盘号,而不是占用托盘数 joinCartonPallet 用该变量来表示</p>
+<p><strong>后面的我也记不清了, 不过语言是axapta的x++</strong></p>
+<p>班组d(散装班组)和其它班组的净重,毛重,数量算法不同,主要是要加上整箱重量和包装盒重量</p>
+<p>班组d和其他班组对尾箱的净重和毛重和数量的算法也不同 ,主要是要加上包装盒重</p>
+<p>上面两者用</p>
+<ul class="simple">
+<li>real boxWeight;</li>
+<li>real cartonWeight;</li>
+</ul>
+<p>这两个变量来区分</p>
+<p>这些用6个变量区分</p>
+<ul class="simple">
+<li>real netWeight,grossWeight,quantity;  //非尾箱</li>
+<li>real trailNetWeight ...</li></ul>
+                <a class="readmore" href="http://blog.easynew.com.cn/pallet-algorithm.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/pallet-algorithm.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+                        <a href="http://blog.easynew.com.cn/category/misc3.html">&laquo;</a>
+                Page 4 / 4
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

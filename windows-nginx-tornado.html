@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>windows 下nginx和tornado 配置</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://blog.easynew.com.cn/windows-nginx-tornado.html" rel="bookmark"
+           title="Permalink to windows 下nginx和tornado 配置">windows 下nginx和tornado 配置</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2012-06-07T13:19:00">
+                Thu 07 June 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->      <p>在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.</p>
+<p>结合nginx和tornado 还是有好处的, 主要是减轻tornado的负担,典型的如让nginx处理静态文件,让nginx处理gzip.由于tornado是单线程的,让nginx进行负载平衡也很有必要.</p>
+<p>修改 nginx/conf目录下的nginx.conf ,替换为</p>
+<div class="section" id="id1">
+<h2>说明</h2>
+<ol class="arabic simple">
+<li>worker_process 配置为1, 是因为windows下只支持一个工作进程</li>
+<li>worker_connections 1024就行，因为select有限制</li>
+</ol>
+<div class="highlight"><pre><span class="c1">#user  nobody;</span>
+
+<span class="k">worker_processes</span>  <span class="mi">1</span><span class="p">;</span>
+<span class="c1">#daemon off;</span>
+
+<span class="c1">#error_log  logs/error.log;</span>
+<span class="c1">#error_log  logs/error.log  notice;</span>
+<span class="c1">#error_log  logs/error.log  info;</span>
+
+<span class="k">pid</span>        <span class="s">logs/nginx.pid</span><span class="p">;</span>
+
+<span class="k">events</span> <span class="p">{</span>
+
+    <span class="kn">worker_connections</span>  <span class="mi">1024</span><span class="p">;</span>
+
+    <span class="kn">accept_mutex</span> <span class="no">off</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+<span class="k">http</span> <span class="p">{</span>
+
+    <span class="kn">include</span>       <span class="s">mime.types</span><span class="p">;</span>
+
+    <span class="kn">default_type</span>  <span class="s">application/octet-stream</span><span class="p">;</span>
+
+    <span class="c1">#log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span>
+
+    <span class="c1">#                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span>
+
+    <span class="c1">#                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span>
+
+
+
+    <span class="c1">#access_log  logs/access.log  main;</span>
+
+
+
+    <span class="kn">sendfile</span>        <span class="no">on</span><span class="p">;</span>
+
+    <span class="c1">#tcp_nopush     on;</span>
+
+    <span class="kn">keepalive_timeout</span>  <span class="mi">65</span><span class="p">;</span>
+
+    <span class="kn">gzip</span>  <span class="no">on</span><span class="p">;</span>
+
+    <span class="kn">gzip_min_length</span>  <span class="mi">1000</span><span class="p">;</span>
+
+    <span class="kn">gzip_buffers</span>     <span class="mi">4</span> <span class="mi">8k</span><span class="p">;</span>
+
+    <span class="kn">gzip_types</span> <span class="s">text/plain</span> <span class="s">application/json</span> <span class="s">application/x-javascript</span> <span class="s">text/css</span> <span class="s">application/xml</span> <span class="s">text/javascript</span> <span class="s">image/jpeg</span> <span class="s">image/gif</span> <span class="s">image/png</span><span class="p">;</span>
+
+    <span class="kn">proxy_next_upstream</span> <span class="s">error</span><span class="p">;</span>
+
+
+
+    <span class="kn">upstream</span> <span class="s">tornadoes</span><span class="p">{</span>
+
+        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">8000</span><span class="p">;</span>
+
+        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">8001</span><span class="p">;</span>
+
+
+
+    <span class="p">}</span>
+
+    <span class="kn">server</span> <span class="p">{</span>
+
+        <span class="kn">listen</span>       <span class="mi">80</span><span class="p">;</span>
+
+        <span class="kn">server_name</span>  <span class="s">localhost</span><span class="p">;</span>
+
+            <span class="kn">location</span> <span class="s">/static/</span><span class="p">{</span>
+
+                <span class="kn">root</span> <span class="s">你的静态文件根目录</span>
+
+            <span class="err">}</span>
+
+        <span class="s">location</span> <span class="s">/</span><span class="p">{</span>
+
+            <span class="kn">proxy_pass_header</span> <span class="s">Server</span><span class="p">;</span>
+
+            <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$http_host</span><span class="p">;</span>
+
+            <span class="kn">proxy_redirect</span> <span class="no">off</span><span class="p">;</span>
+
+            <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+
+            <span class="kn">proxy_set_header</span> <span class="s">X-Scheme</span> <span class="nv">$scheme</span><span class="p">;</span>
+
+            <span class="kn">proxy_pass</span> <span class="s">http://tornadoes</span><span class="p">;</span>
+
+
+
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="worker-processes-worker-connections">
+<h2>延伸: 关于worker_processes/worker_connections</h2>
+<p>默认为1024</p>
+<p>在纯nginx下，web服务器的最大访问客户数 max clients = worker_processes 乘以worker_connections。</p>
+<p>nginx作为反向代理的时候 max clients = worker_processes 乘以worker_connections 再除以4。</p>
+<p>worker_processes 一般等于CPU的内核数目</p>
+<p>配置 worker_processes时一般同时配置event中的 worker_rlimit_nofile, worker_processes 不超过worker_rlimit_nofile</p>
+</div>
+<div class="section" id="daemon-off">
+<h2>延伸: daemon off;</h2>
+<p>如果使用supervisor 管理nginx进程，需要加上, windows下如果使用srvany.exe， 也需要(这个待验证！)</p>
+</div>
+
+    </div><!-- /.entry-content -->
+        <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "windows-nginx-tornado.html";
+        var disqus_url = "http://blog.easynew.com.cn/windows-nginx-tornado.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>EasyNew - jjx</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+                
+            
+
+                 
+                            <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="5">
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/no_attribute_sa_instance_state.html" rel="bookmark"
+                           title="Permalink to AttributeError: 'NoneType' object has no attribute '_sa_instance_state'">AttributeError: 'NoneType' object has no attribute '_sa_instance_state'</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-08-22T00:00:00">
+                Wed 22 August 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>当对sqlalchemy的一些 返回进行pickle处理时会出现如标题的错误，原因是这些返回的类型是sqlalchemy.orm.collections.InstrumentedList</p>
+<p>简单的处理将是将其转换为列表，如</p>
+<div class="highlight"><pre><span class="n">users</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Role</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">users</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">users</span><span class="p">))</span>
+</pre></div>
+
+                <a class="readmore" href="http://blog.easynew.com.cn/no_attribute_sa_instance_state.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/no_attribute_sa_instance_state.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/pallet-algorithm.html" rel="bookmark"
+                           title="Permalink to 预分托盘算法">预分托盘算法</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2008-07-15T00:00:00">
+                Tue 15 July 2008
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数</p>
+<p>建立一个二维数据</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">托盘号</th>
+<th class="head">当前可用箱数</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1</td>
+<td>xx</td>
+</tr>
+<tr><td>2</td>
+<td>xx</td>
+</tr>
+<tr><td>3</td>
+<td>xx</td>
+</tr>
+</tbody>
+</table>
+<p>每取一条出货记录,就遍历这个临时表,如果发现某一托盘有可用箱数,则该记录的托盘号就是它了.</p>
+<p>当然,根据每一托盘的可用箱数,出货记录可能被分成多条,使用多个托盘</p>
+<p class="rubric">关于尾箱处理</p>
+<p>如果尾箱是拼箱的话,则取开始箱号和结束箱号等于该记录安排箱号所在的托盘号,而不是占用托盘数 joinCartonPallet 用该变量来表示</p>
+<p><strong>后面的我也记不清了, 不过语言是axapta的x++</strong></p>
+<p>班组d(散装班组)和其它班组的净重,毛重,数量算法不同,主要是要加上整箱重量和包装盒重量</p>
+<p>班组d和其他班组对尾箱的净重和毛重和数量的算法也不同 ,主要是要加上包装盒重</p>
+<p>上面两者用</p>
+<ul class="simple">
+<li>real boxWeight;</li>
+<li>real cartonWeight;</li>
+</ul>
+<p>这两个变量来区分</p>
+<p>这些用6个变量区分</p>
+<ul class="simple">
+<li>real netWeight,grossWeight,quantity;  //非尾箱</li>
+<li>real trailNetWeight ...</li></ul>
+                <a class="readmore" href="http://blog.easynew.com.cn/pallet-algorithm.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/pallet-algorithm.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/python-web-sublime-text-2.html" rel="bookmark"
+                           title="Permalink to 给用 Python 的 web 开发者的 Sublime Text 2 小贴士">给用 Python 的 web 开发者的 Sublime Text 2 小贴士</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-09-16T00:00:00">
+                Sun 16 September 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>原文：<a class="reference external" href="http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/">http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/</a></p>
+<p>译者： <a class="reference external" href="http://zhuang13.de/">TheLover_Z</a></p>
+<p>Sublime Text 2 是一个很强大的编辑器，最近开始获得了很高的人气 － 这不是没有理由的。它是商业软件。Sublime Text 2 有很多支持 Python 的插件。虽然核心部分保持封闭但围绕着这个编辑器还是形成了 活跃的插件生态系统 。</p>
+<p>提示：你可以免费使用 Sublime 。它只是会提示你“请购买”而已。</p>
+<p>这是我使用 Sublime 这么久以来发现的小技巧。我是站在在 OS X 视角来写的，但在 Linux 和 Windows 平台这些技巧应该也适用。</p>
+<p>我以前是 Eclipse 的死党。虽然 Sublime 并没有像 Eclipse ...</p>
+                <a class="readmore" href="http://blog.easynew.com.cn/python-web-sublime-text-2.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/python-web-sublime-text-2.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/resources.html" rel="bookmark"
+                           title="Permalink to 资源">资源</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-06-19T07:42:00">
+                Wed 19 June 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>此文档用来记录一些资源, 备忘用, 不定期更新</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.boarsoft.com/javascript/gridCombo/">Ext/Sencha Basic GridComboBox</a></li>
+</ul>
+
+                <a class="readmore" href="http://blog.easynew.com.cn/resources.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/resources.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/resume.html" rel="bookmark"
+                           title="Permalink to 简历管理">简历管理</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-07-15T00:00:00">
+                Mon 15 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。</p>
+<div class="section" id="id2">
+<h2>安装</h2>
+<ol class="arabic simple">
+<li>安装visual c++ 2008和2010 运行时</li>
+<li>解压resume.rar 到任一磁盘目录(注意, 路径应该不能包含中文)， 双击目录中的client.exe</li>
+</ol>
+</div>
+<div class="section" id="id3">
+<h2>注意事项</h2>
+<ol class="arabic simple">
+<li>导入的简历文件格式必须同提交给开发者的保持一致， 但也可以通过client.json的中的MAPPING配置项, 重新配置内容和单位格位置的映射。</li>
+<li>在导入时，根据所属单位自动确定所在公司（部门）， 如果所属单位没有找到对应的记录，则会显示在未分类。</li>
+<li>当前，使用comtypes 调用excel, excel 必须安装在目标机器</li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h2>帮助</h2>
+<ol class="arabic simple">
+<li>如果是第一次使用, 会让你输入公司和下级部门(这里部门也可以当子公司概念使用). 后期,可以通过部门维护来维护公司和部门数据. (简称有两个用途,1 是在填写excel简历时,填写者可能写公司缩写, 二是系统在显示时使用简称避免界面上可能的换行)</li>
+</ol>
+<img alt="http://blog.easynew.com.cn/images/quick_start.png" src="http://blog.easynew.com.cn/images/quick_start.png" style="width: 800px; height: 600px;" />
+<ol class="arabic simple" start="2">
+<li>进入主界面. 这个界面完成主要的功能</li>
+</ol>
+<ul class="simple">
+<li>按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历 ...</li></ul></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/resume.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/resume.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/silverlight-future.html" rel="bookmark"
+                           title="Permalink to 关于silverlight 前景的讨论，不吐不快">关于silverlight 前景的讨论，不吐不快</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2010-10-22T00:00:00">
+                Fri 22 October 2010
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>首先，且不讨论这个事件的本身，最近以来，我一直对ms感到失望，这是因为ms在开发技术的延续性上越来越随心所欲，当然，早期的开发者可能也经历过dao,dao direct,rdo,ado的时代，但那时的api 相对很小，学习坡度很小。而现在，自从.net 推出后 windows forms不更新了,wf 更新换代了，linq to sql 也死了，dlr也不管了。问题是这些替代者完全能胜任了吗？没有！！！！</p>
+<p>好吧，现在就讨论silverlight ,或许这个人说的本身就没有错误，silverlight 本身就不能完全的跨所有的平台，虽然它现在能在部分osx和windows 运行，但远远不是真正的跨平台。只有html5 才能真正的跨平台。但是，无论如何，silverlight现在是作为wp7的主要开发技术之一，而wp7 却是你们目前要主推的东西。你完全可以这样说，silverlight 对我们还是很重要，作为wp7的主要开发技术，我们将继续发展silverlight 。但是没有 ...</p>
+                <a class="readmore" href="http://blog.easynew.com.cn/silverlight-future.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/silverlight-future.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+                        <a href="http://blog.easynew.com.cn/author/jjx2.html">&laquo;</a>
+                Page 3 / 4
+            <a href="http://blog.easynew.com.cn/author/jjx4.html">&raquo;</a>
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

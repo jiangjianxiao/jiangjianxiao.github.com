@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>extjs 4 NodeInterface destroy</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html" rel="bookmark"
+           title="Permalink to extjs 4 NodeInterface destroy">extjs 4 NodeInterface destroy</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2013-06-16T16:02:00">
+                Sun 16 June 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->      <p>extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。</p>
+<p>当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack</p>
+<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">proxy</span><span class="p">.</span><span class="nx">Server</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+  <span class="nx">setException</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">response</span><span class="p">){</span>
+      <span class="nx">operation</span><span class="p">.</span><span class="nx">setException</span><span class="p">({</span>
+          <span class="nx">status</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
+          <span class="nx">statusText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">,</span>
+          <span class="nx">responseText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">responseText</span> <span class="c1">//&lt;--Added this line!</span>
+      <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+<p>这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 <a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235">NodeInterface destroy with callback?</a>，无人理睬。</p>
+<p>当然，贴子中 model.superclass.destroy.call(model, {callback: myCallback}}); 现在也不能用了，因为它在</p>
+<div class="highlight"><pre><span class="nx">store</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;bulkremove&#39;</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span> <span class="p">[</span><span class="nx">me</span><span class="p">],</span> <span class="p">[</span><span class="nx">store</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">me</span><span class="p">)],</span> <span class="kc">false</span><span class="p">);</span>
+</pre></div>
+<p>报错, TreeStore没有indexOf方法，所以，思路只有复制该方法，去除该行</p>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">node_destroy</span><span class="p">(</span><span class="nx">me</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="nx">options</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">apply</span><span class="p">({</span>
+          <span class="nx">records</span><span class="o">:</span> <span class="p">[</span><span class="nx">me</span><span class="p">],</span>
+          <span class="nx">action</span> <span class="o">:</span> <span class="s1">&#39;destroy&#39;</span>
+      <span class="p">},</span> <span class="nx">options</span><span class="p">);</span>
+
+      <span class="kd">var</span> <span class="nx">isNotPhantom</span> <span class="o">=</span> <span class="nx">me</span><span class="p">.</span><span class="nx">phantom</span> <span class="o">!==</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nx">scope</span>  <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">scope</span> <span class="o">||</span> <span class="nx">me</span><span class="p">,</span>
+          <span class="nx">stores</span><span class="p">,</span>
+          <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="nx">storeCount</span><span class="p">,</span>
+          <span class="nx">store</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">,</span>
+          <span class="nx">operation</span><span class="p">,</span>
+          <span class="nx">callback</span><span class="p">;</span>
+
+      <span class="nx">operation</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">Operation</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+      <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">operation</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">args</span> <span class="o">=</span> <span class="p">[</span><span class="nx">me</span><span class="p">,</span> <span class="nx">operation</span><span class="p">];</span>
+
+          <span class="c1">// The stores property will be mutated, so clone it first</span>
+          <span class="nx">stores</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">clone</span><span class="p">(</span><span class="nx">me</span><span class="p">.</span><span class="nx">stores</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">operation</span><span class="p">.</span><span class="nx">wasSuccessful</span><span class="p">())</span> <span class="p">{</span>
+              <span class="k">for</span> <span class="p">(</span><span class="nx">storeCount</span> <span class="o">=</span> <span class="nx">stores</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">storeCount</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                  <span class="nx">store</span> <span class="o">=</span> <span class="nx">stores</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+
+                  <span class="c1">// If the store has a remove (it&#39;s not a TreeStore), then</span>
+                  <span class="c1">// remove this record from Store. Avoid Store handling anything by passing the &quot;isMove&quot; flag</span>
+                  <span class="k">if</span> <span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">remove</span><span class="p">)</span> <span class="p">{</span>
+                      <span class="nx">store</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">me</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+                  <span class="p">}</span>
+
+                  <span class="c1">// Other parties may need to know that the record as gone</span>
+                  <span class="c1">// eg View SelectionModels</span>
+                  <span class="c1">// store.fireEvent(&#39;bulkremove&#39;, store, [me], [store.indexOf(me)], false);</span>
+                  <span class="k">if</span> <span class="p">(</span><span class="nx">isNotPhantom</span><span class="p">)</span> <span class="p">{</span>
+                      <span class="nx">store</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;write&#39;</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span> <span class="nx">operation</span><span class="p">);</span>
+                  <span class="p">}</span>
+              <span class="p">}</span>
+              <span class="nx">me</span><span class="p">.</span><span class="nx">clearListeners</span><span class="p">();</span>
+              <span class="nx">Ext</span><span class="p">.</span><span class="nx">callback</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">success</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="nx">Ext</span><span class="p">.</span><span class="nx">callback</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">failure</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="nx">Ext</span><span class="p">.</span><span class="nx">callback</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+      <span class="p">};</span>
+
+      <span class="c1">// Not a phantom, t  en we must perform this operation on the remote datasource.</span>
+      <span class="c1">// Record will be removed from the store in the callback upon a success response</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">isNotPhantom</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">me</span><span class="p">.</span><span class="nx">getProxy</span><span class="p">().</span><span class="nx">destroy</span><span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">me</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="c1">// If it&#39;s a phantom, then call the callback directly with a dummy successful ResultSet</span>
+      <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">operation</span><span class="p">.</span><span class="nx">complete</span> <span class="o">=</span> <span class="nx">operation</span><span class="p">.</span><span class="nx">success</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="nx">operation</span><span class="p">.</span><span class="nx">resultSet</span> <span class="o">=</span> <span class="nx">me</span><span class="p">.</span><span class="nx">getProxy</span><span class="p">().</span><span class="nx">reader</span><span class="p">.</span><span class="nx">nullResultSet</span><span class="p">;</span>
+          <span class="nx">callback</span><span class="p">(</span><span class="nx">operation</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">me</span><span class="p">;</span>
+  <span class="p">}</span>
+</pre></div>
+<p>然后这样调用</p>
+<div class="highlight"><pre><span class="nx">node_destroy</span><span class="p">(</span><span class="nx">rec</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="nx">record</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+
+
+        <span class="p">},</span>
+        <span class="nx">failure</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">record</span><span class="p">,</span> <span class="nx">operation</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">Ext</span><span class="p">.</span><span class="nx">MessageBox</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;出错了&#39;</span><span class="p">,</span> <span class="nx">operation</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+        <span class="p">}</span>
+
+
+<span class="p">});</span>
+</pre></div>
+<p>可以预见的是，如果extjs 不改变这个设计，你得跟随每个版本更新node_destroy方法！</p>
+<p>ok, 看来我不是第一个提出此方法的人 <a class="reference external" href="http://blog.csdn.net/caili314/article/details/7912124">ExtJS 添加和删除树结点:先向服务器请求</a></p>
+
+    </div><!-- /.entry-content -->
+        <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "extjs-nodeinterface-destroy.html";
+        var disqus_url = "http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

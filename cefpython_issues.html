@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>cefpython 当前的两个问题</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://blog.easynew.com.cn/cefpython_issues.html" rel="bookmark"
+           title="Permalink to cefpython 当前的两个问题">cefpython 当前的两个问题</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2013-07-10T13:56:00">
+                Wed 10 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->      <p>最近, 使用cefpython 写 <a class="reference external" href="http://www.yarder.co">yarder.co</a> 的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.</p>
+<p>首先是 当js调用python时, python的异常不会传播到javascript. 这个问题参考 <a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=11">Throw JS / Python exceptions according to execution context</a></p>
+<p>所以,当前你的处理方式应该是在python内部处理异常,并返回一个是否成功的状态给js!</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+                <span class="c">#你的代码</span>
+
+                <span class="k">return</span> <span class="p">{</span><span class="s">&quot;success&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="n">xxxx</span> <span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="c"># log excpeiton</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s">&quot;success&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&quot;error&quot;</span><span class="p">:</span> <span class="n">ex</span><span class="o">.</span><span class="n">message</span><span class="p">}</span>
+</pre></div>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">my_method</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">){</span>
+        <span class="c1">// process result.result</span>
+
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>其次是 javascript 的字符串传递到python时使用的是字节码的方式,你需要显式的转换到utf-8, 就算你做已经做到了下几点</p>
+<ul class="simple">
+<li>网页文件是 utf-8 了</li>
+<li>网页已经 &lt;meta charset=&quot;utf-8&quot;/&gt;</li>
+<li>application_settings已经传递 &quot;string_encoding&quot;: &quot;utf-8&quot;</li>
+<li>browser_settings已经传递 &quot;default_encoding&quot;: &quot;utf-8&quot; 了</li>
+</ul>
+<p>此问题报告在 <a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=60">Strings should be unicode by default, if bytes is required make it explicit</a></p>
+<p>目前, 你可以选择将参数打包为json字符串, 然后在python端 用以下代码处理</p>
+<blockquote>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+</blockquote>
+<p>好在这两个问题cefpython的作者都是acceptd了, 希望能很快出更新版本吧</p>
+
+    </div><!-- /.entry-content -->
+        <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "cefpython_issues.html";
+        var disqus_url = "http://blog.easynew.com.cn/cefpython_issues.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

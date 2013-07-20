@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>extjs 备注</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://blog.easynew.com.cn/extjs-note.html" rel="bookmark"
+           title="Permalink to extjs 备注">extjs 备注</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2012-06-17T00:00:00">
+                Sun 17 June 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->      <div class="section" id="form">
+<h2>设置form所有字段只读</h2>
+<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+
+  <span class="nx">setReadOnlyForAll</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Ext</span><span class="p">.</span><span class="nx">suspendLayouts</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">getForm</span><span class="p">().</span><span class="nx">getFields</span><span class="p">().</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">field</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="nx">Ext</span><span class="p">.</span><span class="nx">resumeLayouts</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="override">
+<h2>通过override 设置缺省值</h2>
+<p>血的教训, 如果你要将所有窗体都设置frame为true, 不要每个form都去设置, 而是使用</p>
+<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+        <span class="nx">bodyPadding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nx">frame</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">// or true</span>
+
+<span class="p">});</span>
+</pre></div>
+<p>extjs 4.2 海皇星主题,frame 将是很粗的一根, 而且当form被嵌入到其他容器时,除了这个很粗的框, 背景没有同容器一样, 所以在该主题中frame应该设置为false</p>
+<ol class="arabic simple">
+<li>Store datachanged 对update没有效果, 仅对add/remove有效果, 4.1.1 rc2,所以可能需要同步监听datachanged和update才行</li>
+<li>Store.loadData,就我个人而言应该设置isLoading返回true,但显然extjs 没有这样做</li>
+<li>form对record的绑定不行,loadRecord/updateRecord需要手动调用,所以很多时候只能通过form.form.findField().setValue完成更新,设计问题</li>
+<li>调用model.destroy() 可以使用success,failure回调,参数是当前model和operation, 典型代码应该是这样</li>
+</ol>
+<div class="highlight"><pre><span class="nx">_sel</span><span class="p">.</span><span class="nx">destroy</span><span class="p">({</span>
+
+        <span class="nx">success</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">rec</span><span class="p">,</span><span class="nx">operation</span><span class="p">){</span>
+        <span class="nx">grid</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">_sel</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="p">});</span>
+</pre></div>
+<ol class="arabic simple" start="5">
+<li>TreeStore和Panel</li>
+</ol>
+<p>如果rootVisible 为false 并且没有定义root,则会自动向TreeStore.setRootNode({expanded:true});</p>
+<p>这个是需要注意的,因为有时你在TreeStore 中定义了root,但又在panel中设置了rootVisible,这里的建议是在总是在panel中设置root,而不在TreeStore的设置root, 不然在rootVisible=false时,自动生成的root覆盖了treestore中的root</p>
+<p>当调用TreeStore.setRootNode时,在如下条件全部成立时自动调用load方法</p>
+<ol class="arabic simple">
+<li>preventLoad!=true ,此参数是setRootNode的第二个参数,通常调用setRootNode会忽略此参数,导致这个条件成立</li>
+<li>root的expanded 为true 或autoLoad为true, 这里可以看到,光设置autoLoad 为false ,但expanded为true时,也会自动调用load</li>
+<li>isLoaded为false</li>
+</ol>
+<p>所以,建议传递loaded:true到root来达到按需加载的效果</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;Ext.tree.Panel&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">rootVisible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">loaded</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">expanded</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="nx">store</span><span class="o">:</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;Ext.data.TreeStore&#39;</span><span class="p">,</span> <span class="p">{</span>
+
+                <span class="s2">&quot;model&quot;</span><span class="o">:</span> <span class="s1">&#39;WorkflowAction&#39;</span><span class="p">,</span>
+                <span class="nx">autoLoad</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="nx">proxy</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;ajax&#39;</span><span class="p">,</span>
+                        <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+                <span class="p">}</span>
+        <span class="p">})</span>
+
+<span class="p">});</span>
+</pre></div>
+</div>
+
+    </div><!-- /.entry-content -->
+        <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "extjs-note.html";
+        var disqus_url = "http://blog.easynew.com.cn/extjs-note.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

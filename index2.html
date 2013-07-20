@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>EasyNew</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+                
+            
+
+                 
+                            <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="5">
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/google-docs-note.html" rel="bookmark"
+                           title="Permalink to 整理google docs上的资料, 记录一些有意思的东西">整理google docs上的资料, 记录一些有意思的东西</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-06-16T22:08:00">
+                Sun 16 June 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了</p>
+<div class="section" id="id1">
+<h2>一些有意思的想法</h2>
+<p>框架设计其实是一个哲学概念,每个成功的框架总是有一套自己的处世哲学,然后在以后一以贯之,比方说大家熟悉的spring,就是以ioc,接口编程贯彻始末.</p>
+<p>不在烦恼架构问题, 对我而言,这就是生产力</p>
+<p>面向对象设计的问题在于使用者必须了解整个对象的体系结构，面向对象设计往往通过template method 达到代码重用，但由于设计改变，开发者不得不引入更多的中间方法。随着对象体系的复杂度增大，整个结构会越来越难以维护。由于更改结构对下层使用者的影响不可估计，也导致改变代码是困难的。</p>
+<p>所以在使用template method时，不要让继承大于3级以上， 一般都是Base/Abstract/具体的类。 多使用策略模式，利用接口和委托减少复杂度。</p>
+<p>看到n年(2007)前写的公司经营设想, 不由的脸红, 不过里面有很多点都是对的, 如</p>
+<ul class="simple">
+<li>对于每个要我们做软件的企业,我们将争取他们为以后的后续服务提供费用</li>
+<li>saas 将是未来软件主要存在的形式,是我们今后的努力方向</li>
+</ul>
+<p>错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制 ...</p></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/google-docs-note.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/google-docs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html" rel="bookmark"
+                           title="Permalink to extjs 4 NodeInterface destroy">extjs 4 NodeInterface destroy</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-06-16T16:02:00">
+                Sun 16 June 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。</p>
+<p>当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack</p>
+<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">proxy</span><span class="p">.</span><span class="nx">Server</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+  <span class="nx">setException</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">response</span><span class="p">){</span>
+      <span class="nx">operation</span><span class="p">.</span><span class="nx">setException</span><span class="p">({</span>
+          <span class="nx">status</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
+          <span class="nx">statusText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">,</span>
+          <span class="nx">responseText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">responseText</span> <span class="c1">//&lt;--Added this line!</span>
+      <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+<p>这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 <a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235">NodeInterface destroy with callback?</a>，无人理睬。</p>
+<p>当然 ...</p>
+                <a class="readmore" href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/tornado-status-check.html" rel="bookmark"
+                           title="Permalink to tornado 服务监测">tornado 服务监测</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-06-14T10:16:00">
+                Fri 14 June 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <div class="section" id="id1">
+<h2>真正的原因</h2>
+<p>下面的都不用看了， 真正的原因应该就是， 我在tornado处理DELETE请求时有一行不应该存在的代码ctx.term(), 结果导致当DELETE请求完成时,如果还有通过该ctx(ctx是单实例的)发出的还未完成的请求(该时段并发高时可能存在)直接就接收不到回复的消息，导致zmq req/rep模式违例(发送无接收)。而tornado+pyzmq时tornado的eventloop由 pyzmq代理的。结果就是tornado后端直接无法访问。造成这些请求和以后向该后端发出的请求都无法得到结果。</p>
+<p>同tornado windows下的表现应该无关，等待这几天验证， 但应该不会差了。</p>
+<p>下面的就不删除了，就当作思考的过程！</p>
+</div>
+<div class="section" id="id2">
+<h2>概述</h2>
+<p>ok , 我有在windows 下部署c9. 当前其架构大体是 nginx -&gt; tornado(多个进程) -&gt; proxy - application server(多个进程).  tornado部分是一个简单的restful framework, 主要就是将nginx请求转发给proxy,然后将proxy返回的结果显示给用户. tornado部分不包括任何业务逻辑. application server 是真正的业务逻辑点. proxy则是tornado和application server 之间的桥梁, 也不包括任何业务逻辑 ...</p></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/tornado-status-check.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/tornado-status-check.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/first-blog.html" rel="bookmark"
+                           title="Permalink to ok, 这是我第一篇 pelican blog">ok, 这是我第一篇 pelican blog</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-06-12T04:12:00">
+                Wed 12 June 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <div class="section" id="id1">
+<h2>自定义菜单</h2>
+<p>通过以下三个选项自定义菜单</p>
+<div class="highlight"><pre><span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">((</span><span class="s">&#39;未分类&#39;</span><span class="p">,</span> <span class="s">&#39;category/misc.html&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;关于我们&#39;</span><span class="p">,</span> <span class="s">&#39;about-us.html&#39;</span><span class="p">),</span> <span class="p">)</span>
+</pre></div>
+<p>建议你建两个同级目录，比方说就是jiangjianxiao.github.com和blog, blog用来存放pelican建立的站点, jiangjianxiao.github.com 就是pelican的原始内容</p>
+<p>修改 pelicanconf.py, 增加:</p>
+<pre class="literal-block">
+OUTPUT_PATH = '../jiangjianxao.github.com'
+</pre>
+<p>pelican-plugins 建议用submodule的方法获取</p>
+<p>git submodule git://github.com/getpelican/pelican-plugins.git</p>
+<p>然后在其他机器就是git submodule init/git submodule update了</p>
+<p>我的publish.sh:</p>
+<pre class="literal-block">
+pelican ...</pre></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/first-blog.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/first-blog.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/c9-open-source-plan.html" rel="bookmark"
+                           title="Permalink to C9 开放源代码计划">C9 开放源代码计划</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-05-31T14:11:00">
+                Fri 31 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>. </p>
+
+</footer><!-- /.post-info -->                <p>C9 是一个进销存系统, 当前，它主要应用在计算机批发行业. 它的前身是C3和C8. 参考 <a class="reference external" href="http://www.yuyaoe.com/static/html/intro.html">C9 文档</a> ,可以获得更多信息</p>
+<p>C9 计划逐步开放源代码, 当然, 开放源代码不是目的, 主要的是为了C9的体系更加结构化,更加易于扩展, 同时,通过开放源代码这种外部作用力, 使代码更规范,更安全</p>
+<p>C9 的0.3 版本将是一个第三方扩展完备的版本, <a class="reference external" href="http://www.yuyaoe.com/static/html/develop/version.html">参考版本规划</a>, 我们计划通过一个开源
+的 <a class="reference external" href="http://www.yuyaoe.com/static/html/repair/index.html">返修模块文档</a> 来验证这一点</p>
+<div class="section" id="id4">
+<h2>当前</h2>
+<ul class="simple">
+<li>C9 的文档, 开源, <a class="reference external" href="https://github.com/jiangjianxiao/c9">参考</a>  <a class="reference external" href="http://www.yuyaoe.com/static/html/index.html">文档build</a></li>
+<li>C9 返修模块, 开源,正在开发中 <a class="reference external" href="https://github.com/jiangjianxiao/c9_repair">返修模块</a></li>
+<li>C9 c proxy模块, 开源 <a class="reference external" href="https://github.com/jiangjianxiao/wuproxy">proxy模块</a></li>
+<li>c9 tornado服务监控程序 <a class="reference external" href="https://github.com/jiangjianxiao/servicemonitor">tornado服务监控程序</a></li>
+</ul>
+<p>未来, 我们将逐步打碎C9, 逐步开放其销售 ...</p></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/c9-open-source-plan.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/c9-open-source-plan.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/c9-develop-summary.html" rel="bookmark"
+                           title="Permalink to C9 开发小结">C9 开发小结</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-28T11:19:00">
+                Sun 28 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>. </p>
+
+</footer><!-- /.post-info -->                <p>随着c9第一个版本的交付，虽然以后还有许多事情要做，但现在，  是有必要对c9做一个小结了。</p>
+<p>c9是一个进销存应用，是c3-c8系列的升级，c3是一个vb6桌面应用，c8是一个wcf 分布式windows forms 桌面应用，而c9,是基于extjs+python后端的一个web 应用。</p>
+<p>在开发c9之前，我有做过一个用extjs 3.4+nodejs 的原型，这个原型主要颠覆了我对extjs 和javascript速度方面的成见。原来js应用借助chrome可以这样的快.在此之前，我可是桌面应用的坚定拥护者，并尝试使用activex (我用它实现了marsx ),silverlight,flex实现富客户端解决方案。</p>
+<p>当然，这个原型也直接导致我认为nodejs现在不适合开发进销存类的数据库应用，异步写法和数据访问支持不足是主要的原因。</p>
+<p>在选定当前的技术堆栈之前，我还是试过ruby( 使用了ruby on rails/event machine/Sinatra等。直接给我的印象是这个社区太虚，太浮躁。还是python实在。</p>
+<p>最初我用了django+django restframework/django-piston的框架,但出于性能和对sqlalchemy 的需要 ...</p>
+                <a class="readmore" href="http://blog.easynew.com.cn/c9-develop-summary.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/c9-develop-summary.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+                        <a href="http://blog.easynew.com.cn/index.html">&laquo;</a>
+                Page 2 / 4
+            <a href="http://blog.easynew.com.cn/index3.html">&raquo;</a>
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

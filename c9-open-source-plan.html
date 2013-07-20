@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>C9 开放源代码计划</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://blog.easynew.com.cn/c9-open-source-plan.html" rel="bookmark"
+           title="Permalink to C9 开放源代码计划">C9 开放源代码计划</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2013-05-31T14:11:00">
+                Fri 31 May 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>. </p>
+
+</footer><!-- /.post-info -->      <p>C9 是一个进销存系统, 当前，它主要应用在计算机批发行业. 它的前身是C3和C8. 参考 <a class="reference external" href="http://www.yuyaoe.com/static/html/intro.html">C9 文档</a> ,可以获得更多信息</p>
+<p>C9 计划逐步开放源代码, 当然, 开放源代码不是目的, 主要的是为了C9的体系更加结构化,更加易于扩展, 同时,通过开放源代码这种外部作用力, 使代码更规范,更安全</p>
+<p>C9 的0.3 版本将是一个第三方扩展完备的版本, <a class="reference external" href="http://www.yuyaoe.com/static/html/develop/version.html">参考版本规划</a>, 我们计划通过一个开源
+的 <a class="reference external" href="http://www.yuyaoe.com/static/html/repair/index.html">返修模块文档</a> 来验证这一点</p>
+<div class="section" id="id4">
+<h2>当前</h2>
+<ul class="simple">
+<li>C9 的文档, 开源, <a class="reference external" href="https://github.com/jiangjianxiao/c9">参考</a>  <a class="reference external" href="http://www.yuyaoe.com/static/html/index.html">文档build</a></li>
+<li>C9 返修模块, 开源,正在开发中 <a class="reference external" href="https://github.com/jiangjianxiao/c9_repair">返修模块</a></li>
+<li>C9 c proxy模块, 开源 <a class="reference external" href="https://github.com/jiangjianxiao/wuproxy">proxy模块</a></li>
+<li>c9 tornado服务监控程序 <a class="reference external" href="https://github.com/jiangjianxiao/servicemonitor">tornado服务监控程序</a></li>
+</ul>
+<p>未来, 我们将逐步打碎C9, 逐步开放其销售,采购,库存,财务等模块, 最终到达全部开源的目的</p>
+<p>从现在开始,凡是新开发的模块, 如商城接口,taobao 接口, 移动界面等,一开始就走开源的途径</p>
+</div>
+<div class="section" id="id7">
+<h2>C9技术堆栈</h2>
+<ul class="simple">
+<li>python/pypy(在0.2版本中已支持)</li>
+<li>tornado/twisted/gevent 对于Web server 我们准备了三套方案,对于应用服务,我们准备了基于twisted和gevent的方案</li>
+<li>zeromq/pyzmq</li>
+<li>postgresql/psycopg2</li>
+<li>sqlalchemy</li>
+<li>memchached</li>
+<li>reportlab/xlwt/xhtml2pdf/xldt/python-ldap等</li>
+<li>socketio/socketjs 支持</li>
+<li>打包方案cx_freeze</li>
+<li>c/cython 部分使用</li>
+</ul>
+</div>
+
+    </div><!-- /.entry-content -->
+        <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "c9-open-source-plan.html";
+        var disqus_url = "http://blog.easynew.com.cn/c9-open-source-plan.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

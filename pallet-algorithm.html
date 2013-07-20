@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>预分托盘算法</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://blog.easynew.com.cn/pallet-algorithm.html" rel="bookmark"
+           title="Permalink to 预分托盘算法">预分托盘算法</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2008-07-15T00:00:00">
+                Tue 15 July 2008
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->      <p>根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数</p>
+<p>建立一个二维数据</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">托盘号</th>
+<th class="head">当前可用箱数</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1</td>
+<td>xx</td>
+</tr>
+<tr><td>2</td>
+<td>xx</td>
+</tr>
+<tr><td>3</td>
+<td>xx</td>
+</tr>
+</tbody>
+</table>
+<p>每取一条出货记录,就遍历这个临时表,如果发现某一托盘有可用箱数,则该记录的托盘号就是它了.</p>
+<p>当然,根据每一托盘的可用箱数,出货记录可能被分成多条,使用多个托盘</p>
+<p class="rubric">关于尾箱处理</p>
+<p>如果尾箱是拼箱的话,则取开始箱号和结束箱号等于该记录安排箱号所在的托盘号,而不是占用托盘数 joinCartonPallet 用该变量来表示</p>
+<p><strong>后面的我也记不清了, 不过语言是axapta的x++</strong></p>
+<p>班组d(散装班组)和其它班组的净重,毛重,数量算法不同,主要是要加上整箱重量和包装盒重量</p>
+<p>班组d和其他班组对尾箱的净重和毛重和数量的算法也不同 ,主要是要加上包装盒重</p>
+<p>上面两者用</p>
+<ul class="simple">
+<li>real boxWeight;</li>
+<li>real cartonWeight;</li>
+</ul>
+<p>这两个变量来区分</p>
+<p>这些用6个变量区分</p>
+<ul class="simple">
+<li>real netWeight,grossWeight,quantity;  //非尾箱</li>
+<li>real trailNetWeight,trailGrossWeight,trailQuantity; //尾箱</li>
+</ul>
+<p>判断尾箱的依据需要根据班组而定,如果班组是d并且尾盒m数,或者是其他班组但尾箱盒数有值, 或当前箱数正好是托盘剩余数+1</p>
+
+    </div><!-- /.entry-content -->
+        <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "pallet-algorithm.html";
+        var disqus_url = "http://blog.easynew.com.cn/pallet-algorithm.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

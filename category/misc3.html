@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>EasyNew - misc</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
+                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+                
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                                    <li><a href="/category/misc.html">未分类</a></li>
+                                    <li><a href="/category/c9.html">C9</a></li>
+                                    <li><a href="/about-us.html">关于我们</a></li>
+                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                                </ul></nav>
+        </header><!-- /#banner -->
+                
+            
+
+                 
+                            <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="5">
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/ubuntu-pythonpath.html" rel="bookmark"
+                           title="Permalink to ubuntu 中设置 PYTHONPATH">ubuntu 中设置 PYTHONPATH</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-08-10T00:00:00">
+                Fri 10 August 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>一开始 是通过设置环境变量来进行的，可以编辑/etc/profile或是用户目录下的.profile</p>
+<p>增加</p>
+<p>export PYTHONPAHT=/home/jjx/works/earrow:/home/jjx/works/c92</p>
+<p>然后 用source /etc/profile或source .profile生效</p>
+<p>但在sudo下无效,如 sudo python</p>
+<p>import earrow 还是错误 ，所以 改用 pth的方式 最为简单</p>
+<p>先查看python site-packages位置</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</pre></div>
+<p>然后</p>
+<blockquote>
+cd /usr/local/lib/python2.7/dist-packages
+sudo gedit ...</blockquote>
+                <a class="readmore" href="http://blog.easynew.com.cn/ubuntu-pythonpath.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/ubuntu-pythonpath.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/extjs-note.html" rel="bookmark"
+                           title="Permalink to extjs 备注">extjs 备注</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-06-17T00:00:00">
+                Sun 17 June 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <div class="section" id="form">
+<h2>设置form所有字段只读</h2>
+<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+
+  <span class="nx">setReadOnlyForAll</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Ext</span><span class="p">.</span><span class="nx">suspendLayouts</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">getForm</span><span class="p">().</span><span class="nx">getFields</span><span class="p">().</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">field</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="nx">Ext</span><span class="p">.</span><span class="nx">resumeLayouts</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="override">
+<h2>通过override 设置缺省值</h2>
+<p>血的教训, 如果你要将所有窗体都设置frame为true, 不要每个form都去设置, 而是使用</p>
+<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+        <span class="nx">bodyPadding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nx">frame</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">// or true</span>
+
+<span class="p">});</span>
+</pre></div>
+<p>extjs 4.2 海皇星主题,frame 将是很粗的一根, 而且当form被嵌入到其他容器时,除了这个很粗的框, 背景没有同容器一样, 所以在该主题中frame应该设置为false</p>
+<ol class="arabic simple">
+<li>Store datachanged 对update没有效果 ...</li></ol></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/extjs-note.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/extjs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/windows-nginx-tornado.html" rel="bookmark"
+                           title="Permalink to windows 下nginx和tornado 配置">windows 下nginx和tornado 配置</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-06-07T13:19:00">
+                Thu 07 June 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.</p>
+<p>结合nginx和tornado 还是有好处的, 主要是减轻tornado的负担,典型的如让nginx处理静态文件,让nginx处理gzip.由于tornado是单线程的,让nginx进行负载平衡也很有必要.</p>
+<p>修改 nginx/conf目录下的nginx.conf ,替换为</p>
+<div class="section" id="id1">
+<h2>说明</h2>
+<ol class="arabic simple">
+<li>worker_process 配置为1, 是因为windows下只支持一个工作进程</li>
+<li>worker_connections 1024就行，因为select有限制</li>
+</ol>
+<div class="highlight"><pre><span class="c1">#user  nobody;</span>
+
+<span class="k">worker_processes</span>  <span class="mi">1</span><span class="p">;</span>
+<span class="c1">#daemon off;</span>
+
+<span class="c1">#error_log  logs/error.log;</span>
+<span class="c1">#error_log  logs/error.log  notice;</span>
+<span class="c1">#error_log  logs/error.log  info;</span>
+
+<span class="k">pid</span>        <span class="s">logs/nginx.pid ...</span></pre></div></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/windows-nginx-tornado.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/windows-nginx-tornado.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
+                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-06-04T00:00:00">
+                Mon 04 June 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
+<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
+<blockquote>
+parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
+<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
+<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
+
+                <a class="readmore" href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/" rel="bookmark"
+                           title="Permalink to 关于我们">关于我们</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-01-01T00:00:00">
+                Sun 01 January 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript语言，并关注clojure/nodejs/go。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。</p>
+<div class="section" id="id2">
+<h2>经历</h2>
+<ul class="simple">
+<li>国内较早的bbs (activeubb)开发者（用户曾包括 当当,5dmedia, 蓝色理想，考研网，tfgc等)</li>
+<li>国内较早的内容管理系统 activecontent开发者(用户曾包括 蓝色理想,5dmedia等等），蓝色论坛历史讨论</li>
+<li>国内第一个游戏卡交易平台卡吧的开发者，开发卡易售前身方舟平台</li>
+<li>领衔开发面向it批发行业的c3进销存，为国内多家知名电脑批发商使用，当前运营升级版本c9</li>
+<li>国内首家成布检验系统开发者，拥有多家国内知名纺织印染行业客户。</li>
+<li>开发经验包括microsoft dynamics ax定制开发/pos/mrpii/b2b/仪表数据采集分析/im等等系统, 服务企业包括盛大，颐高等知名企业</li>
+</ul>
+</div>
+<div class="section" id="python">
+<h2>python 经验 ...</h2></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/silverlight-future.html" rel="bookmark"
+                           title="Permalink to 关于silverlight 前景的讨论，不吐不快">关于silverlight 前景的讨论，不吐不快</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2010-10-22T00:00:00">
+                Fri 22 October 2010
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>首先，且不讨论这个事件的本身，最近以来，我一直对ms感到失望，这是因为ms在开发技术的延续性上越来越随心所欲，当然，早期的开发者可能也经历过dao,dao direct,rdo,ado的时代，但那时的api 相对很小，学习坡度很小。而现在，自从.net 推出后 windows forms不更新了,wf 更新换代了，linq to sql 也死了，dlr也不管了。问题是这些替代者完全能胜任了吗？没有！！！！</p>
+<p>好吧，现在就讨论silverlight ,或许这个人说的本身就没有错误，silverlight 本身就不能完全的跨所有的平台，虽然它现在能在部分osx和windows 运行，但远远不是真正的跨平台。只有html5 才能真正的跨平台。但是，无论如何，silverlight现在是作为wp7的主要开发技术之一，而wp7 却是你们目前要主推的东西。你完全可以这样说，silverlight 对我们还是很重要，作为wp7的主要开发技术，我们将继续发展silverlight 。但是没有 ...</p>
+                <a class="readmore" href="http://blog.easynew.com.cn/silverlight-future.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/silverlight-future.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+                        <a href="http://blog.easynew.com.cn/category/misc2.html">&laquo;</a>
+                Page 3 / 4
+            <a href="http://blog.easynew.com.cn/category/misc4.html">&raquo;</a>
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                                                    <li><a href="http://python.org/">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
