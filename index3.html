@@ -29,6 +29,35 @@
                     <ol id="posts-list" class="hfeed" start="5">
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="http://blog.easynew.com.cn/c9-develop-summary.html" rel="bookmark"
+                           title="Permalink to C9 开发小结">C9 开发小结</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-28T11:19:00">
+                日 28 十月 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>. </p>
+
+</footer><!-- /.post-info -->                <p>随着c9第一个版本的交付，虽然以后还有许多事情要做，但现在，  是有必要对c9做一个小结了。</p>
+<p>c9是一个进销存应用，是c3-c8系列的升级，c3是一个vb6桌面应用，c8是一个wcf 分布式windows forms 桌面应用，而c9,是基于extjs+python后端的一个web 应用。</p>
+<p>在开发c9之前，我有做过一个用extjs 3.4+nodejs 的原型，这个原型主要颠覆了我对extjs 和javascript速度方面的成见。原来js应用借助chrome可以这样的快.在此之前，我可是桌面应用的坚定拥护者，并尝试使用activex (我用它实现了marsx ),silverlight,flex实现富客户端解决方案。</p>
+<p>当然，这个原型也直接导致我认为nodejs现在不适合开发进销存类的数据库应用，异步写法和数据访问支持不足是主要的原因。</p>
+<p>在选定当前的技术堆栈之前，我还是试过ruby( 使用了ruby on rails/event machine/Sinatra等。直接给我的印象是这个社区太虚，太浮躁。还是python实在。</p>
+<p>最初我用了django+django restframework/django-piston的框架,但出于性能和对sqlalchemy 的需要 ...</p>
+                <a class="readmore" href="http://blog.easynew.com.cn/c9-develop-summary.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/c9-develop-summary.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="http://blog.easynew.com.cn/python-web-sublime-text-2.html" rel="bookmark"
                            title="Permalink to 给用 Python 的 web 开发者的 Sublime Text 2 小贴士">给用 Python 的 web 开发者的 Sublime Text 2 小贴士</a></h1>
                 </header>
@@ -36,7 +65,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2012-09-16T00:00:00">
-                Sun 16 September 2012
+                日 16 九月 2012
         </abbr>
 
                 <address class="vcard author">
@@ -65,7 +94,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2012-08-22T00:00:00">
-                Wed 22 August 2012
+                三 22 八月 2012
         </abbr>
 
                 <address class="vcard author">
@@ -94,7 +123,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2012-08-10T00:00:00">
-                Fri 10 August 2012
+                五 10 八月 2012
         </abbr>
 
                 <address class="vcard author">
@@ -131,7 +160,7 @@ sudo gedit ...</blockquote>
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2012-06-17T00:00:00">
-                Sun 17 June 2012
+                日 17 六月 2012
         </abbr>
 
                 <address class="vcard author">
@@ -180,7 +209,7 @@ sudo gedit ...</blockquote>
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2012-06-07T13:19:00">
-                Thu 07 June 2012
+                四 07 六月 2012
         </abbr>
 
                 <address class="vcard author">
@@ -209,36 +238,6 @@ sudo gedit ...</blockquote>
 <span class="k">pid</span>        <span class="s">logs/nginx.pid ...</span></pre></div></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/windows-nginx-tornado.html">read more</a>
                 <p>There are <a href="http://blog.easynew.com.cn/windows-nginx-tornado.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
-                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-06-04T00:00:00">
-                Mon 04 June 2012
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
-<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
-<blockquote>
-parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
-<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
-<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
-
-                <a class="readmore" href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">

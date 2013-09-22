@@ -26,10 +26,10 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://blog.easynew.com.cn/resume.html">简历管理</a></h1> 
+                    <h1 class="entry-title"><a href="http://blog.easynew.com.cn/django-admin-linkage.html">django admin 联动</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-07-15T00:00:00">
-                Mon 15 July 2013
+        <abbr class="published" title="2013-09-22T12:19:00">
+                日 22 九月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -37,7 +37,119 @@
         </address>
         <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info --><p>这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。</p>
+</footer><!-- /.post-info --><p>在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。</p>
+<div class="section" id="id1">
+<h2>定义数据源</h2>
+<p>简单起见， 我们在settings.py定义一个LOCATION 变量</p>
+<div class="highlight"><pre><span class="n">LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;浙江&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;杭州&quot;</span><span class="p">,</span> <span class="s">&quot;宁波&quot;</span><span class="p">],</span> <span class="s">&quot;湖北&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;武汉&quot;</span><span class="p">,</span> <span class="s">&quot;xxx&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<div class="section" id="models-py-model">
+<h2>models.py 中的model 定义</h2>
+<p>这里没有为state定义choices 是因为state的选项是根据country的值变化的</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="n">COUNTRY</span> <span class="o">=</span> <span class="p">[(</span><span class="n">key</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+
+<span class="k">class</span> <span class="nc">Company</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&quot;Country&quot;</span><span class="p">),</span> <span class="n">choices</span><span class="o">=</span><span class="n">COUNTRY</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;State&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="section" id="admin-py">
+<h2>admin.py 的定义</h2>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="k">class</span> <span class="nc">CompanyAdminForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">MyChoiceField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;State&#39;</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">locations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">ins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;instance&#39;</span><span class="p">)</span>
+    <span class="nb">super</span><span class="p">(</span><span class="n">CompanyAdminForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">ins</span> <span class="ow">and</span> <span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">)]</span>
+
+<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Company</span>
+
+
+<span class="k">class</span> <span class="nc">CompanyAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">CompanyAdminForm</span>
+</pre></div>
+<p>这里， locations 函数等会将用于模板， __init__ 用来设置修改界面首次显示时 state 的选项</p>
+</div>
+<div class="section" id="templates-admin-app-company-change-form-html">
+<h2>templates/admin/app/company/change_form.html</h2>
+<p>复制原 change_form.html 内容 在合适位置加入（自行写js代码 )</p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+    <span class="kd">var</span> <span class="nx">LOCATION</span> <span class="o">=</span> <span class="p">{{</span> <span class="nx">adminform</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">locations</span> <span class="o">|</span> <span class="nx">safe</span> <span class="p">}};</span>
+
+    <span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">django</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_country&#39;</span><span class="p">).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+
+            <span class="kd">var</span> <span class="nx">country</span> <span class="o">=</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_state&#39;</span><span class="p">).</span><span class="nx">empty</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">country</span> <span class="p">){</span>
+
+                <span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">LOCATION</span><span class="p">[</span><span class="nx">country</span><span class="p">];</span>
+
+                <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+                    <span class="kd">var</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">state</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+                    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_state&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;option value=&#39;&quot;</span> <span class="o">+</span> <span class="nx">v</span> <span class="o">+</span> <span class="s2">&quot;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="nx">v</span> <span class="o">+</span> <span class="s2">&quot;&lt;/option&gt;&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+                <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_state&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;option value=&#39;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="s2">&quot;---------&quot;</span> <span class="o">+</span> <span class="s2">&quot;&lt;/option&gt;&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+
+
+
+        <span class="p">});</span>
+
+
+
+    <span class="p">});</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</pre></div>
+</div>
+<p>There are <a href="http://blog.easynew.com.cn/django-admin-linkage.html#disqus_thread">comments</a>.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/resume.html" rel="bookmark"
+                           title="Permalink to 简历管理">简历管理</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-07-15T00:00:00">
+                一 15 七月 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。</p>
 <div class="section" id="id2">
 <h2>安装</h2>
 <ol class="arabic simple">
@@ -63,100 +175,11 @@
 <li>进入主界面. 这个界面完成主要的功能</li>
 </ol>
 <ul class="simple">
-<li>按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历</li>
-<li>移动简历到新的部门 - 移动到 按钮</li>
-<li>导出简历为新的excel文件 - 导出按钮</li>
-<li>批量删除简历 - 批量删除按钮</li>
-<li>将搜索后的结果导出到excel文件 - 导出链接</li>
-<li>导入单个文件 - 导入文件链接</li>
-<li>导入选择文件夹下的文件 - 导入文件夹链接</li>
-<li>创建新简历 - 新简历链接</li>
-<li>在主界面中,点击公司或部门会显示该部门及其下级的简历, 通过选择列,可以控制输出的项目, 通过搜索,可以以搜索简历</li>
-</ul>
-<img alt="http://blog.easynew.com.cn/images/index.png" src="http://blog.easynew.com.cn/images/index.png" style="width: 800px; height: 600px;" />
-<ol class="arabic simple" start="3">
-<li>点击已存在的简历或点击新简历或选择导入文件后会转向简历页面</li>
-</ol>
-<img alt="http://blog.easynew.com.cn/images/resume.png" src="http://blog.easynew.com.cn/images/resume.png" style="width: 800px; height: 600px;" />
-<ol class="arabic simple" start="4">
-<li>部门管理界面</li>
-</ol>
-<img alt="http://blog.easynew.com.cn/images/department.png" src="http://blog.easynew.com.cn/images/department.png" style="width: 800px; height: 600px;" />
-<ol class="arabic simple" start="5">
-<li>导入文件夹界面</li>
-</ol>
-<img alt="http://blog.easynew.com.cn/images/import.png" src="http://blog.easynew.com.cn/images/import.png" style="width: 800px; height: 600px;" />
-<ol class="arabic simple" start="7">
-<li>调动历史</li>
-</ol>
-<img alt="http://blog.easynew.com.cn/images/transfer.png" src="http://blog.easynew.com.cn/images/transfer.png" style="width: 800px; height: 600px;" />
-<ol class="arabic simple" start="7">
-<li>报告</li>
-</ol>
-<img alt="http://blog.easynew.com.cn/images/report.png" src="http://blog.easynew.com.cn/images/report.png" style="width: 800px; height: 600px;" />
-</div>
-<div class="section" id="id5">
-<h2>更新日志</h2>
-<p class="rubric">2013-7-24</p>
-<ol class="arabic simple">
-<li>增加年度考核情况栏</li>
-<li>fix 履历 第六行</li>
-</ol>
-<p class="rubric">2013-7-20</p>
-<ol class="arabic simple">
-<li>增加 调动 功能</li>
-<li>fix 首页分页问题</li>
-</ol>
-<p>调动和移动到的不同： 调动会留下记录， 移动到不留下记录。 可以通过 调动历史 查看调动历史记录</p>
-<p>在调动历史页面，点击左侧的部门显示该部门及其下级部门的调出记录，点击导出，导出刷选的记录， 选择一条或多条记录，点击批量删除，删除可能错误的调出记录。 也可以使用顶部的姓名进一步过滤某员工的调出记录</p>
-<p>调出如果操作失误可以删除调出历史记录，使用移动到功能复原</p>
-<p class="rubric">2013-7-19</p>
-<ol class="arabic simple">
-<li>更新,导出到xls时图片不压线</li>
-<li>fix 保存简历后还提示需要保存问题</li>
-</ol>
-<p class="rubric">2013-7-19</p>
-<ol class="arabic simple">
-<li>增加离职功能</li>
-<li>增加报告功能</li>
-</ol>
-<p>在首页,选择用户并点击离职/在职按钮, 在职的会变为离职,并记录操作时间, 如果对已离职的记录进行操作,则会使其变为在职,并清空原离职时间</p>
-<p>点击报告, 将显示一年登记的在职简历和离职简历,并显示每月登记的在职简历和离职简历, 点击每行,会出现详细的在职清单和离职清单,点击姓名,将显示其建立</p>
-<p>在简历编辑界面,如果员工已离职,则在标题 员工名旁显示(已离职)</p>
-<p>过滤条中增加全部/离职/在职过滤, 选择列增加离职和离职时间(当前,离职用true表示离职,false表示在职)</p>
-<p class="rubric">2013-7-18</p>
-<ol class="arabic simple">
-<li>fix 选择列增加年龄</li>
-<li>外语及熟练程序 改为外语水平</li>
-<li>新建简历时部门默认为当前选择的部门</li>
-<li>表格离开时，如果数据有改变提示是否保存</li>
-<li>毕业员院校栏长度一致</li>
-<li>打印简历</li>
-<li>导入excel中的图形</li>
-<li>导出简历时同时导出图形</li>
-<li>新建或编辑简历时点击照片更改照片</li>
-<li>增加年龄区间过滤, 均可为空白, 输入后点击搜索按钮</li>
-<li>fix 左侧导出没有导出姓名问题</li>
-<li>其他调整</li>
-</ol>
-<p><strong>本次更新通过com调用excel,每次导出,导入均创建一个excel实例, 速度应该比前面版本要慢</strong></p>
-<p class="rubric">部分细节</p>
-<ol class="arabic simple">
-<li>从excel导入时，如果表一有图形，则会在resume/static/images目录下创建一个图形文件，并将路径传给建立的photo字段</li>
-<li>在新建或编辑简历时，如果选择了一个新图片，则系统会调整该图片大小并在resume/static/images目录生成一个新图形文件</li>
-<li>resume/resume.xls 为导出简历时的模板文件，该模板文件的页面设置-缩放 调整为1页宽一页高。</li>
-<li>导出简历时， 系统会将简历导出到 导出建立部门名目录</li>
-<li>当打印时，系统会根据resume/resume.xls 生成一个临时的excel文件并打印，所以如果对格式不满意，可修改resume/resume.xls 文件</li>
-<li>双面打印的设置同机器有关，需要在自己的机器上设置， 选择 resume/resume.xls 文件，选择打印- 属性-设置双面打印后，保存该文件，关闭。</li>
-</ol>
-</div>
-<p>There are <a href="http://blog.easynew.com.cn/resume.html#disqus_thread">comments</a>.</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<li>按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历 ...</li></ul></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/resume.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/resume.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -168,7 +191,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-07-10T13:56:00">
-                Wed 10 July 2013
+                三 10 七月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -206,7 +229,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-06-30T15:25:00">
-                Sun 30 June 2013
+                日 30 六月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -245,7 +268,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-06-29T13:48:00">
-                Sat 29 June 2013
+                六 29 六月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -285,7 +308,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-06-19T12:42:00">
-                Wed 19 June 2013
+                三 19 六月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -307,34 +330,6 @@
 
                 <a class="readmore" href="http://blog.easynew.com.cn/agile-pair-tdd.html">read more</a>
                 <p>There are <a href="http://blog.easynew.com.cn/agile-pair-tdd.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/resources.html" rel="bookmark"
-                           title="Permalink to 资源">资源</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-19T07:42:00">
-                Wed 19 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>此文档用来记录一些资源, 备忘用, 不定期更新</p>
-<ul class="simple">
-<li><a class="reference external" href="http://www.boarsoft.com/javascript/gridCombo/">Ext/Sencha Basic GridComboBox</a></li>
-</ul>
-
-                <a class="readmore" href="http://blog.easynew.com.cn/resources.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/resources.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">

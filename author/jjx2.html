@@ -29,6 +29,36 @@
                     <ol id="posts-list" class="hfeed" start="5">
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
+                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-06-04T00:00:00">
+                一 04 六月 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
+<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
+<blockquote>
+parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
+<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
+<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
+
+                <a class="readmore" href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html" rel="bookmark"
                            title="Permalink to extjs 4 NodeInterface destroy">extjs 4 NodeInterface destroy</a></h1>
                 </header>
@@ -36,7 +66,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-06-16T16:02:00">
-                Sun 16 June 2013
+                日 16 六月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -73,7 +103,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2012-06-17T00:00:00">
-                Sun 17 June 2012
+                日 17 六月 2012
         </abbr>
 
                 <address class="vcard author">
@@ -122,7 +152,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-06-12T04:12:00">
-                Wed 12 June 2013
+                三 12 六月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -163,7 +193,7 @@ pelican ...</pre></div>
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-06-16T22:08:00">
-                Sun 16 June 2013
+                日 16 六月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -199,7 +229,7 @@ pelican ...</pre></div>
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2012-01-01T00:00:00">
-                Sun 01 January 2012
+                日 01 一月 2012
         </abbr>
 
                 <address class="vcard author">
@@ -223,45 +253,6 @@ pelican ...</pre></div>
 <h2>python ...</h2></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/">read more</a>
                 <p>There are <a href="http://blog.easynew.com.cn/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/my-framework-viewpoint.html" rel="bookmark"
-                           title="Permalink to 我的框架观点">我的框架观点</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-30T15:25:00">
-                Sun 30 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>我对创建能二次开发的软件一直很迷恋,最早影响我的是ms office,特别是excel.</p>
-<ul class="simple">
-<li>excel堪称完美的对象模型</li>
-<li>内建的vba 开发环境和excel对象模型的完美交互.</li>
-</ul>
-<p>很多年前, c3 的模型就借鉴了excel的对象模型构建.</p>
-<p>在后来, ms 的axapta 再一次给我很大的影响. axapta 内嵌的application object tree更为完美, 语言级别的orm, 核心保密, 外围开源的模式, 完美的分布式c/s结构,方便的更新方式对我影响很大, 我花了一年左右时间创建了一个叫marsx的项目.</p>
-<ol class="arabic simple">
-<li>使用delphi 开发</li>
-<li>内嵌了paxcompiler语言,允许使用paxcompiler中的pascal语言进行开发</li>
-<li>创建了application object tree, 可以ctrl+d启动开发环境</li>
-<li>代码编译后放在服务器端数据库, 用户登录时检查更新动态下载代码达到更新效果</li>
-<li>创建了activex 控件, 解决发布的问题</li>
-<li>借助remobjects dataabstract , 实现分布式数据访问.</li>
-</ol>
-<p>marsx 在某些方面是成功的,他达到了我的一些目的: 达成软件即开发环境是可能的, 在开发时也有很好的效率, 特别是ui的定制上, 几乎是客户要什么现场就可以完成. 但主要的问题在paxcompiler ...</p>
-                <a class="readmore" href="http://blog.easynew.com.cn/my-framework-viewpoint.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/my-framework-viewpoint.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">

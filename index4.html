@@ -29,6 +29,36 @@
                     <ol id="posts-list" class="hfeed" start="5">
                         <li><article class="hentry">    
                 <header>
+                    <h1><a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
+                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-06-04T00:00:00">
+                一 04 六月 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
+<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
+<blockquote>
+parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
+<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
+<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
+
+                <a class="readmore" href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
                     <h1><a href="http://blog.easynew.com.cn/" rel="bookmark"
                            title="Permalink to 关于我们">关于我们</a></h1>
                 </header>
@@ -36,7 +66,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2012-01-01T00:00:00">
-                Sun 01 January 2012
+                日 01 一月 2012
         </abbr>
 
                 <address class="vcard author">
@@ -73,7 +103,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2010-10-22T00:00:00">
-                Fri 22 October 2010
+                五 22 十月 2010
         </abbr>
 
                 <address class="vcard author">
@@ -98,7 +128,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2008-09-09T00:00:00">
-                Tue 09 September 2008
+                二 09 九月 2008
         </abbr>
 
                 <address class="vcard author">
@@ -136,7 +166,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2008-07-15T00:00:00">
-                Tue 15 July 2008
+                二 15 七月 2008
         </abbr>
 
                 <address class="vcard author">

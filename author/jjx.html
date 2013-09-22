@@ -29,7 +29,7 @@
                     <h1 class="entry-title"><a href="http://blog.easynew.com.cn/agile-pair-tdd.html">敏捷中的结对和tdd</a></h1> 
                     <footer class="post-info">
         <abbr class="published" title="2013-06-19T12:42:00">
-                Wed 19 June 2013
+                三 19 六月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -66,7 +66,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2012-10-28T11:19:00">
-                Sun 28 October 2012
+                日 28 十月 2012
         </abbr>
 
                 <address class="vcard author">
@@ -95,7 +95,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-05-31T14:11:00">
-                Fri 31 May 2013
+                五 31 五月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -131,7 +131,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-07-10T13:56:00">
-                Wed 10 July 2013
+                三 10 七月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -169,7 +169,7 @@
                 <div class="entry-content">
                 <footer class="post-info">
         <abbr class="published" title="2013-06-29T13:48:00">
-                Sat 29 June 2013
+                六 29 六月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -202,14 +202,14 @@
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
-                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
+                    <h1><a href="http://blog.easynew.com.cn/django-admin-linkage.html" rel="bookmark"
+                           title="Permalink to django admin 联动">django admin 联动</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-        <abbr class="published" title="2012-06-04T00:00:00">
-                Mon 04 June 2012
+        <abbr class="published" title="2013-09-22T12:19:00">
+                日 22 九月 2013
         </abbr>
 
                 <address class="vcard author">
@@ -217,15 +217,21 @@
         </address>
         <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
-<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
-<blockquote>
-parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
-<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
-<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
-
-                <a class="readmore" href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+</footer><!-- /.post-info -->                <p>在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。</p>
+<div class="section" id="id1">
+<h2>定义数据源</h2>
+<p>简单起见， 我们在settings.py定义一个LOCATION 变量</p>
+<div class="highlight"><pre><span class="n">LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;浙江&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;杭州&quot;</span><span class="p">,</span> <span class="s">&quot;宁波&quot;</span><span class="p">],</span> <span class="s">&quot;湖北&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;武汉&quot;</span><span class="p">,</span> <span class="s">&quot;xxx&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<div class="section" id="models-py-model">
+<h2>models.py 中的model 定义</h2>
+<p>这里没有为state定义choices 是因为state的选项是根据country的值变化的</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="n">COUNTRY</span> <span class="o">=</span> <span class="p">[(</span><span class="n">key</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOCATION ...</span></pre></div></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/django-admin-linkage.html">read more</a>
+                <p>There are <a href="http://blog.easynew.com.cn/django-admin-linkage.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">
