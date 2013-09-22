@@ -53,7 +53,7 @@
 &lt;/div&gt;
 &lt;div class="section" id="templates-admin-app-company-change-form-html"&gt;
 &lt;h2&gt;templates/admin/app/company/change_form.html&lt;/h2&gt;
-&lt;p&gt;复制原 change_form.html 内容 在合适位置加入（自行写js代码 )&lt;/p&gt;
+&lt;p&gt;这里， app 应该替换为你自己的应用名, 在你的templates目录创建该文件，并复制django-admin的原 change_form.html 内容, 在合适位置加入（自行写js代码 )&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;script&lt;/span&gt; &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
     &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;LOCATION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{{&lt;/span&gt; &lt;span class="nx"&gt;adminform&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;locations&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nx"&gt;safe&lt;/span&gt; &lt;span class="p"&gt;}};&lt;/span&gt;
 
