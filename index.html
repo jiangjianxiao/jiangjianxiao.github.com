@@ -49,7 +49,9 @@
 <p>这里没有为state定义choices 是因为state的选项是根据country的值变化的</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
 <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
 <span class="n">COUNTRY</span> <span class="o">=</span> <span class="p">[(</span><span class="n">key</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+
 
 <span class="k">class</span> <span class="nc">Company</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">country</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&quot;Country&quot;</span><span class="p">),</span> <span class="n">choices</span><span class="o">=</span><span class="n">COUNTRY</span><span class="p">)</span>
@@ -60,24 +62,26 @@
 <h2>admin.py 的定义</h2>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
 <span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+
+
 <span class="k">class</span> <span class="nc">CompanyAdminForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
     <span class="n">state</span> <span class="o">=</span> <span class="n">MyChoiceField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;State&#39;</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">locations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">json</span>
+    <span class="k">def</span> <span class="nf">locations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">json</span>
 
-    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="n">ins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;instance&#39;</span><span class="p">)</span>
-    <span class="nb">super</span><span class="p">(</span><span class="n">CompanyAdminForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">ins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;instance&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CompanyAdminForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">ins</span> <span class="ow">and</span> <span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">:</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">ins</span> <span class="ow">and</span> <span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">)]</span>
 
-<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">Company</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Company</span>
 
 
 <span class="k">class</span> <span class="nc">CompanyAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
