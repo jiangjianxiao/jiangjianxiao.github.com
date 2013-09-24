@@ -876,7 +876,7 @@ sudo gedit my.pth&lt;/blockquote&gt;
 parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;p&gt;但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.&lt;/p&gt;
 &lt;p&gt;回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid&lt;/p&gt;
-</summary></entry><entry><title>关于我们</title><link href="http://blog.easynew.com.cn/" rel="alternate"></link><updated>2012-01-01T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:blog.easynew.com.cn,2012-01-01:</id><summary type="html">&lt;p&gt;拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript/objective-c语言，并关注clojure/nodejs/go。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。&lt;/p&gt;
+</summary></entry><entry><title>关于我们</title><link href="http://blog.easynew.com.cn/" rel="alternate"></link><updated>2012-01-01T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:blog.easynew.com.cn,2012-01-01:</id><summary type="html">&lt;p&gt;拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript，并关注clojure/nodejs/go/objective-c语言。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。&lt;/p&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;经历&lt;/h2&gt;
 &lt;ul class="simple"&gt;
