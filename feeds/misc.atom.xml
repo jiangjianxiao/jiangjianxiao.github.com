@@ -152,6 +152,11 @@
 &lt;/div&gt;
 &lt;div class="section" id="id5"&gt;
 &lt;h2&gt;更新日志&lt;/h2&gt;
+&lt;p class="rubric"&gt;2013-11-13&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;补充用身份证号来确定简历唯一性, 影响导入和导出&lt;/li&gt;
+&lt;li&gt;增加刷新年龄功能&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p class="rubric"&gt;2013-7-24&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;增加年度考核情况栏&lt;/li&gt;
@@ -203,11 +208,6 @@
 &lt;li&gt;导出简历时， 系统会将简历导出到 导出建立部门名目录&lt;/li&gt;
 &lt;li&gt;当打印时，系统会根据resume/resume.xls 生成一个临时的excel文件并打印，所以如果对格式不满意，可修改resume/resume.xls 文件&lt;/li&gt;
 &lt;li&gt;双面打印的设置同机器有关，需要在自己的机器上设置， 选择 resume/resume.xls 文件，选择打印- 属性-设置双面打印后，保存该文件，关闭。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class="rubric"&gt;2013-11-13&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;补充用身份证号来确定简历唯一性, 影响导入和导出&lt;/li&gt;
-&lt;li&gt;增加刷新年龄功能&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </summary></entry><entry><title>cefpython 当前的两个问题</title><link href="http://blog.easynew.com.cn/cefpython_issues.html" rel="alternate"></link><updated>2013-07-10T13:56:00+08:00</updated><author><name>jjx</name></author><id>tag:blog.easynew.com.cn,2013-07-10:cefpython_issues.html</id><summary type="html">&lt;p&gt;最近, 使用cefpython 写 &lt;a class="reference external" href="http://www.yarder.co"&gt;yarder.co&lt;/a&gt; 的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.&lt;/p&gt;
