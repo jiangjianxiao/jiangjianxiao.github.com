@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>EasyNew - misc</title>
-        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
-                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
-                
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css" />
+        <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+
         <!--[if IE]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -15,29 +15,134 @@
         <header id="banner" class="body">
                 <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
                 <nav><ul>
-                                    <li><a href="/category/misc.html">未分类</a></li>
-                                    <li><a href="/category/c9.html">C9</a></li>
-                                    <li><a href="/about-us.html">关于我们</a></li>
-                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
-                                                                </ul></nav>
+                    <li><a href="/category/misc.html">未分类</a></li>
+                    <li><a href="/category/c9.html">C9</a></li>
+                    <li><a href="/about-us.html">关于我们</a></li>
+                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                </ul></nav>
         </header><!-- /#banner -->
-                
-            
 
-                            <aside id="featured" class="body">
+            <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://blog.easynew.com.cn/django-admin-linkage.html">django admin 联动</a></h1> 
-                    <footer class="post-info">
-        <abbr class="published" title="2013-09-22T12:19:00">
-                Sun 22 September 2013
+                    <h1 class="entry-title"><a href="http://blog.easynew.com.cn/jvm-interactive-note.html">jvm 互操作笔记</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-05-09T09:25:00">
+                Published: 五 09 五月 2014
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info --><p>在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。</p>
+</footer><!-- /.post-info --><p>当前, 使用java很多时候不可避免, 比方说以下场景</p>
+<ol class="arabic simple">
+<li>excel 导出需要更多的控制 ,xlwt/xlrd 无法实现类似data validation using dropdown list之类的特性, 有个包支持但格式限制在2007</li>
+<li>taobao 消息通知, 目前只提供java/c# sdk</li>
+<li>大数据</li>
+</ol>
+<p>交互的手段很多</p>
+<ol class="arabic simple">
+<li>在python内部使用jpype/pyjnius 这样 的桥接工具调用</li>
+<li>通过 jython, 然后在用消息队列或是pyro这样的支持jython/ironpython/python这样的包交互或者进程交互</li>
+<li>直接java/groovy写, 然后通过消息队列或者进程交互</li>
+</ol>
+<p>目前, 尝试的工具有</p>
+<ul class="simple">
+<li>pyjnius 调用 poi</li>
+<li>jython + jzmq</li>
+<li>java + jzmq</li>
+</ul>
+<p>都是可以运作的, 不过前两个选项都存在一些缺点</p>
+<p>pyjnius 问题</p>
+<ol class="arabic simple">
+<li>由于python是多进程部署, 由于java的内存占用, 这不是一个好主意, 会导致内存浪费的比较严重!</li>
+<li>包本身问题,  比方说pyjnus 将字符串转换成byte array有问题, 不能转换大于127的字符, jython 没有问题, 参考  <a class="reference external" href="https://github.com/kivy/pyjnius/issues/93">https://github.com/kivy/pyjnius/issues/93</a></li>
+</ol>
+<p>jython 主要问题是性能和发展不力. 当然, 如果在这个场景, 主要用jzmq转发请求, 性能不是主要问题.  当然,  最理想的方式就是3.</p>
+<p>下面是用jython转发taobao消息服务例子, 很简单是吗</p>
+<div class="highlight"><pre><span class="kn">from</span>  <span class="nn">com.taobao.api.internal.tmc</span> <span class="kn">import</span> <span class="n">TmcClient</span><span class="p">,</span> <span class="n">Message</span><span class="p">,</span> <span class="n">MessageHandler</span><span class="p">,</span> <span class="n">MessageStatus</span>
+<span class="kn">from</span> <span class="nn">org.zeromq</span> <span class="kn">import</span> <span class="n">ZMQ</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">TmcClient</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span><span class="s">&quot;default&quot;</span><span class="p">)</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">ZMQ</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">socket</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">PUSH</span><span class="p">)</span>
+    <span class="n">socket</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s">&quot;tcp://*:5555&quot;</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">MessageHandlerImpl</span><span class="p">(</span><span class="n">MessageHandler</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">def</span> <span class="nf">onMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;{</span><span class="se">\&quot;</span><span class="s">topic</span><span class="se">\&quot;</span><span class="s">: </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">, </span><span class="se">\&quot;</span><span class="s">content</span><span class="se">\&quot;</span><span class="s">:</span><span class="si">%s</span><span class="s">}&quot;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">message</span><span class="o">.</span><span class="n">getTopic</span><span class="p">(),</span> <span class="n">message</span><span class="o">.</span><span class="n">getContent</span><span class="p">()))</span>
+
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">status</span><span class="o">.</span><span class="n">fail</span><span class="p">()</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">setMessageHandler</span><span class="p">(</span><span class="n">MessageHandlerImpl</span><span class="p">())</span>
+
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+<p>由于定位在交互, 所以在jvm, 不会写大规模,系统的代码(同时也要避免这种情况), 同时为避免动态/静态语言转变的思维压力,降低学习成本. 使用groovy, 退化一些性能换取效率会更好. groovy的gdk能省下使用第叁方包的很多时间</p>
+<div class="section" id="pyjnius">
+<h2>pyjnius</h2>
+<p>github: <a class="reference external" href="https://github.com/kivy/pyjnius">https://github.com/kivy/pyjnius</a></p>
+<p>windows 下编译</p>
+<ol class="arabic simple">
+<li>windows 下目前版本用vc编译有问题, 使用mingw编译 setup.py install --compiler=mingw32</li>
+<li>事先需要设置JAVA_HOME</li>
+<li>需要将 %JAVA_HOME%jrebinclient 加入到路径变量, 用server会有问题</li>
+</ol>
+<p>poi</p>
+<p>jnius.ByteArray.tostring 没有问题, 是poi workbook.getBytes()有问题, 无法获得全部数据</p>
+<div class="highlight"><pre><span class="n">ms</span> <span class="o">=</span> <span class="n">ByteArrayOutputStream</span><span class="o">()</span>
+<span class="n">wb</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">ms</span><span class="o">)</span>
+<span class="n">ms</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">()</span> <span class="err">#</span> <span class="err">正确</span>
+</pre></div>
+</div>
+<div class="section" id="jzmq">
+<h2>jzmq</h2>
+<p>提示: java.lang.UnsatisfiedLinkError: java.lang.UnsatisfiedLinkError: no jzmq in java.library.path</p>
+<p>这种方法没有用</p>
+<div class="highlight"><pre>   <span class="kn">from</span> <span class="nn">java.lang</span> <span class="kn">import</span> <span class="n">System</span>
+   <span class="n">System</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s">&quot;java.library.path&quot;</span><span class="p">,</span> <span class="s">&quot;/usr/local/lib&quot;</span><span class="p">)</span>
+   <span class="k">print</span> <span class="n">System</span><span class="o">.</span><span class="n">getProperty</span><span class="p">(</span><span class="s">&quot;java.library.path&quot;</span><span class="p">)</span>
+
+<span class="err">或</span> <span class="o">-</span><span class="n">Djava</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;/usr/loca/lib&quot;</span>
+
+<span class="err">或</span> <span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span>
+
+<span class="n">libjzqm</span><span class="o">.</span><span class="n">so</span>  <span class="err">在</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="p">,</span>  <span class="n">zmq</span><span class="o">.</span><span class="n">jar</span> <span class="err">在</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">java</span>
+</pre></div>
+</div>
+<p>There are <a href="http://blog.easynew.com.cn/jvm-interactive-note.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/django-admin-linkage.html" rel="bookmark"
+                           title="Permalink to django admin 联动">django admin 联动</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-09-22T12:19:00">
+                Published: 日 22 九月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。</p>
 <div class="section" id="id1">
 <h2>定义数据源</h2>
 <p>简单起见， 我们在settings.py定义一个LOCATION 变量</p>
@@ -51,110 +156,27 @@
 <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext</span> <span class="k">as</span> <span class="n">_</span>
 
-<span class="n">COUNTRY</span> <span class="o">=</span> <span class="p">[(</span><span class="n">key</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+<span class="n">COUNTRY ...</span></pre></div></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/django-admin-linkage.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/django-admin-linkage.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
-
-<span class="k">class</span> <span class="nc">Company</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">country</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&quot;Country&quot;</span><span class="p">),</span> <span class="n">choices</span><span class="o">=</span><span class="n">COUNTRY</span><span class="p">)</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;State&#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="section" id="admin-py">
-<h2>admin.py 的定义</h2>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
-<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
-<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
-<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext</span> <span class="k">as</span> <span class="n">_</span>
-
-
-<span class="k">class</span> <span class="nc">CompanyAdminForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;State&#39;</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">locations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">json</span>
-
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">ins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;instance&#39;</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CompanyAdminForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="n">ins</span> <span class="ow">and</span> <span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">:</span>
-            <span class="n">state</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">)]</span>
-
-    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">Company</span>
-
-
-<span class="k">class</span> <span class="nc">CompanyAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
-    <span class="n">form</span> <span class="o">=</span> <span class="n">CompanyAdminForm</span>
-</pre></div>
-<p>这里， locations 函数等会将用于模板， __init__ 用来设置修改界面首次显示时 state 的选项</p>
-</div>
-<div class="section" id="templates-admin-app-company-change-form-html">
-<h2>templates/admin/app/company/change_form.html</h2>
-<p>这里， app 应该替换为你自己的应用名, 在你的templates目录创建该文件，并复制django-admin的原 change_form.html 内容, 在合适位置加入（自行写js代码 )</p>
-<div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
-    <span class="kd">var</span> <span class="nx">LOCATION</span> <span class="o">=</span> <span class="p">{{</span> <span class="nx">adminform</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">locations</span> <span class="o">|</span> <span class="nx">safe</span> <span class="p">}};</span>
-
-    <span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">django</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">;</span>
-    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_country&#39;</span><span class="p">).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-
-            <span class="kd">var</span> <span class="nx">country</span> <span class="o">=</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
-            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_state&#39;</span><span class="p">).</span><span class="nx">empty</span><span class="p">();</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">country</span> <span class="p">){</span>
-
-                <span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">LOCATION</span><span class="p">[</span><span class="nx">country</span><span class="p">];</span>
-
-                <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
-                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-                    <span class="kd">var</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">state</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-                    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_state&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;option value=&#39;&quot;</span> <span class="o">+</span> <span class="nx">v</span> <span class="o">+</span> <span class="s2">&quot;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="nx">v</span> <span class="o">+</span> <span class="s2">&quot;&lt;/option&gt;&quot;</span><span class="p">);</span>
-                <span class="p">}</span>
-
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-
-                <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_state&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;option value=&#39;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="s2">&quot;---------&quot;</span> <span class="o">+</span> <span class="s2">&quot;&lt;/option&gt;&quot;</span><span class="p">);</span>
-            <span class="p">}</span>
-
-
-
-        <span class="p">});</span>
-
-
-
-    <span class="p">});</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-</pre></div>
-</div>
-<p>There are <a href="http://blog.easynew.com.cn/django-admin-linkage.html#disqus_thread">comments</a>.</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
-
-                 
-                        <li><article class="hentry">    
+            <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/resume.html" rel="bookmark"
                            title="Permalink to 简历管理">简历管理</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2013-07-15T00:00:00">
-                Mon 15 July 2013
+                Published: 一 15 七月 2013
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
 </footer><!-- /.post-info -->                <p>这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。</p>
 <div class="section" id="id2">
@@ -177,34 +199,32 @@
 <ol class="arabic simple">
 <li>如果是第一次使用, 会让你输入公司和下级部门(这里部门也可以当子公司概念使用). 后期,可以通过部门维护来维护公司和部门数据. (简称有两个用途,1 是在填写excel简历时,填写者可能写公司缩写, 二是系统在显示时使用简称避免界面上可能的换行)</li>
 </ol>
-<img alt="http://blog.easynew.com.cn/images/quick_start.png" src="http://blog.easynew.com.cn/images/quick_start.png" style="width: 800px; height: 600px;" />
+<img alt="" src="http://blog.easynew.com.cn/images/quick_start.png" style="width: 800px; height: 600px;" />
 <ol class="arabic simple" start="2">
 <li>进入主界面. 这个界面完成主要的功能</li>
 </ol>
 <ul class="simple">
 <li>按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历 ...</li></ul></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/resume.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/resume.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://blog.easynew.com.cn/resume.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
 
-                 
-                        <li><article class="hentry">    
+            <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/cefpython_issues.html" rel="bookmark"
                            title="Permalink to cefpython 当前的两个问题">cefpython 当前的两个问题</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2013-07-10T13:56:00">
-                Wed 10 July 2013
+                Published: 三 10 七月 2013
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
 </footer><!-- /.post-info -->                <p>最近, 使用cefpython 写 <a class="reference external" href="http://www.yarder.co">yarder.co</a> 的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.</p>
 <p>首先是 当js调用python时, python的异常不会传播到javascript. 这个问题参考 <a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=11">Throw JS / Python exceptions according to execution context</a></p>
@@ -222,27 +242,25 @@
 </pre></div>
 <div class="highlight"><pre><span class="kd">var ...</span></pre></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/cefpython_issues.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/cefpython_issues.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://blog.easynew.com.cn/cefpython_issues.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
 
-                 
-                        <li><article class="hentry">    
+            <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/my-framework-viewpoint.html" rel="bookmark"
                            title="Permalink to 我的框架观点">我的框架观点</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2013-06-30T15:25:00">
-                Sun 30 June 2013
+                Published: 日 30 六月 2013
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
 </footer><!-- /.post-info -->                <p>我对创建能二次开发的软件一直很迷恋,最早影响我的是ms office,特别是excel.</p>
 <ul class="simple">
@@ -261,27 +279,25 @@
 </ol>
 <p>marsx 在某些方面是成功的,他达到了我的一些目的: 达成软件即开发环境是可能的, 在开发时也有很好的效率, 特别是ui的定制上, 几乎是客户要什么现场就可以完成. 但主要的问题在paxcompiler ...</p>
                 <a class="readmore" href="http://blog.easynew.com.cn/my-framework-viewpoint.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/my-framework-viewpoint.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://blog.easynew.com.cn/my-framework-viewpoint.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
 
-                 
-                        <li><article class="hentry">    
+            <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/clojure-note.html" rel="bookmark"
                            title="Permalink to clojure 学习笔记">clojure 学习笔记</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2013-06-29T13:48:00">
-                Sat 29 June 2013
+                Published: 六 29 六月 2013
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
 </footer><!-- /.post-info -->                <p>学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).</p>
 <p>lisp的基础思想是简单的，但lisp语言是复杂的!</p>
@@ -301,67 +317,32 @@
 # 的使用。 #{1 2 3 } 表示set, #&quot;\W+&quot; 表示正则, #(&gt; (count %) 2) 表示匿名函数， #_宏表示忽略下一个clojure形式.
 * repl ...</pre></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/clojure-note.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/clojure-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://blog.easynew.com.cn/clojure-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/agile-pair-tdd.html" rel="bookmark"
-                           title="Permalink to 敏捷中的结对和tdd">敏捷中的结对和tdd</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-19T12:42:00">
-                Wed 19 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>今天我转了两篇文章, 都是抨击敏捷开发的, 都深合我意. 所以不得不多说几句.</p>
-<ul class="simple">
-<li><a class="reference external" href="http://www.yuyaoe.com/topic/jump/125">结对编程, 我的噩梦</a></li>
-<li><a class="reference external" href="http://www.yuyaoe.com/topic/jump/126">半年来的工作感受</a></li>
-</ul>
-<p>先说结对, 我绝对是属于内向类型的, 当然喜欢安静的解决问题, 同作者一样,我更倾向通过代码评估来交流. 另外,两个大男人坐了一起结对,令人感觉好不自然,太基了!</p>
-<p><strong>如果同美女结对,我会取消我的上一句话</strong></p>
-<p>至于第二篇, 可能有些人就以为作者又在摆酷了, 但我想是因为作者没有说的更深入, 他的意思被误解了.</p>
-<p>tdd, 与其说是一种测试方法, 我更倾向于认定他是一种开发方式, 这种方式, 融合在你的编码过程中. 在dbanotes上我的评论就是: 如果一件事情最初需要三个过程, 则tdd的测试代码会忠实的反映这三个过程. 但后期, 有人可以用更简捷的一个过程实现, 或是二个过程实现,或是更改了其中一个过程的返回方式(当然,这样也会影响下一个结果的接收方式), 但最终结果还是正确的. 性能也好了,代码也更好了. 但是, 如果他不修改最初的tdd测试代码(很大可能不是他写的),则测试不会通过.</p>
-<p>当tdd测试代码几倍于实际的代码时, 这就是作者抱怨的问题. 也是一种阻碍生产力的体现.</p>
-<p>我同作者的看法一样, 测试代码更应该关心结果而不是关心过程, 这才是测试的所在!</p>
-
-                <a class="readmore" href="http://blog.easynew.com.cn/agile-pair-tdd.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/agile-pair-tdd.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            </ol><!-- /#posts-list -->
-                            <p class="paginator">
-        Page 1 / 4
-            <a href="http://blog.easynew.com.cn/category/misc2.html">&raquo;</a>
-    </p>
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
-                        <div class="blogroll">
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+    Page 1 / 4
+        <a href="http://blog.easynew.com.cn/category/misc2.html">&raquo;</a>
+</p>
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
-                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
-                                                    <li><a href="http://python.org/">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
-                                                </ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                        </ul>
                 </div><!-- /.blogroll -->
-                                <div class="social">
+                <div class="social">
                         <h2>social</h2>
                         <ul>
                             <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
-                            
-                                                </ul>
+
+                        </ul>
                 </div><!-- /.social -->
-                </section><!-- /#extras -->
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
@@ -376,7 +357,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

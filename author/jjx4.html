@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>EasyNew - jjx</title>
-        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
-                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
-                
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css" />
+        <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+
         <!--[if IE]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -15,128 +15,31 @@
         <header id="banner" class="body">
                 <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
                 <nav><ul>
-                                    <li><a href="/category/misc.html">未分类</a></li>
-                                    <li><a href="/category/c9.html">C9</a></li>
-                                    <li><a href="/about-us.html">关于我们</a></li>
-                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
-                                                                </ul></nav>
+                    <li><a href="/category/misc.html">未分类</a></li>
+                    <li><a href="/category/c9.html">C9</a></li>
+                    <li><a href="/about-us.html">关于我们</a></li>
+                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                </ul></nav>
         </header><!-- /#banner -->
-                
-            
 
-                 
-                            <section id="content" class="body">
+                <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="5">
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/silverlight-future.html" rel="bookmark"
-                           title="Permalink to 关于silverlight 前景的讨论，不吐不快">关于silverlight 前景的讨论，不吐不快</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2010-10-22T00:00:00">
-                Fri 22 October 2010
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>首先，且不讨论这个事件的本身，最近以来，我一直对ms感到失望，这是因为ms在开发技术的延续性上越来越随心所欲，当然，早期的开发者可能也经历过dao,dao direct,rdo,ado的时代，但那时的api 相对很小，学习坡度很小。而现在，自从.net 推出后 windows forms不更新了,wf 更新换代了，linq to sql 也死了，dlr也不管了。问题是这些替代者完全能胜任了吗？没有！！！！</p>
-<p>好吧，现在就讨论silverlight ,或许这个人说的本身就没有错误，silverlight 本身就不能完全的跨所有的平台，虽然它现在能在部分osx和windows 运行，但远远不是真正的跨平台。只有html5 才能真正的跨平台。但是，无论如何，silverlight现在是作为wp7的主要开发技术之一，而wp7 却是你们目前要主推的东西。你完全可以这样说，silverlight 对我们还是很重要，作为wp7的主要开发技术，我们将继续发展silverlight 。但是没有 ...</p>
-                <a class="readmore" href="http://blog.easynew.com.cn/silverlight-future.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/silverlight-future.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/tornado-status-check.html" rel="bookmark"
-                           title="Permalink to tornado 服务监测">tornado 服务监测</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-14T10:16:00">
-                Fri 14 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <div class="section" id="id1">
-<h2>真正的原因</h2>
-<p>下面的都不用看了， 真正的原因应该就是， 我在tornado处理DELETE请求时有一行不应该存在的代码ctx.term(), 结果导致当DELETE请求完成时,如果还有通过该ctx(ctx是单实例的)发出的还未完成的请求(该时段并发高时可能存在)直接就接收不到回复的消息，导致zmq req/rep模式违例(发送无接收)。而tornado+pyzmq时tornado的eventloop由 pyzmq代理的。结果就是tornado后端直接无法访问。造成这些请求和以后向该后端发出的请求都无法得到结果。</p>
-<p>同tornado windows下的表现应该无关，等待这几天验证， 但应该不会差了。</p>
-<p>下面的就不删除了，就当作思考的过程！</p>
-</div>
-<div class="section" id="id2">
-<h2>概述</h2>
-<p>ok , 我有在windows 下部署c9. 当前其架构大体是 nginx -&gt; tornado(多个进程) -&gt; proxy - application server(多个进程).  tornado部分是一个简单的restful framework, 主要就是将nginx请求转发给proxy,然后将proxy返回的结果显示给用户. tornado部分不包括任何业务逻辑. application server 是真正的业务逻辑点. proxy则是tornado和application server 之间的桥梁, 也不包括任何业务逻辑 ...</p></div>
-                <a class="readmore" href="http://blog.easynew.com.cn/tornado-status-check.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/tornado-status-check.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/ubuntu-pythonpath.html" rel="bookmark"
-                           title="Permalink to ubuntu 中设置 PYTHONPATH">ubuntu 中设置 PYTHONPATH</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-08-10T00:00:00">
-                Fri 10 August 2012
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>一开始 是通过设置环境变量来进行的，可以编辑/etc/profile或是用户目录下的.profile</p>
-<p>增加</p>
-<p>export PYTHONPAHT=/home/jjx/works/earrow:/home/jjx/works/c92</p>
-<p>然后 用source /etc/profile或source .profile生效</p>
-<p>但在sudo下无效,如 sudo python</p>
-<p>import earrow 还是错误 ，所以 改用 pth的方式 最为简单</p>
-<p>先查看python site-packages位置</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
-</pre></div>
-<p>然后</p>
-<blockquote>
-cd /usr/local/lib/python2.7/dist-packages
-sudo gedit ...</blockquote>
-                <a class="readmore" href="http://blog.easynew.com.cn/ubuntu-pythonpath.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/ubuntu-pythonpath.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
+            <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/windows-nginx-tornado.html" rel="bookmark"
                            title="Permalink to windows 下nginx和tornado 配置">windows 下nginx和tornado 配置</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2012-06-07T13:19:00">
-                Thu 07 June 2012
+                Published: 四 07 六月 2012
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
 </footer><!-- /.post-info -->                <p>在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.</p>
 <p>结合nginx和tornado 还是有好处的, 主要是减轻tornado的负担,典型的如让nginx处理静态文件,让nginx处理gzip.由于tornado是单线程的,让nginx进行负载平衡也很有必要.</p>
@@ -158,27 +61,111 @@ sudo gedit ...</blockquote>
 
 <span class="k">pid</span>        <span class="s">logs/nginx.pid ...</span></pre></div></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/windows-nginx-tornado.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/windows-nginx-tornado.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://blog.easynew.com.cn/windows-nginx-tornado.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
 
-                 
-                        <li><article class="hentry">    
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
+                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-06-04T00:00:00">
+                Published: 一 04 六月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
+<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
+<blockquote>
+parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
+<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
+<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
+
+                <a class="readmore" href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/" rel="bookmark"
+                           title="Permalink to 关于我们">关于我们</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-01-01T00:00:00">
+                Published: 日 01 一月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript，并关注clojure/nodejs/go/objective-c语言。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。</p>
+<div class="section" id="id2">
+<h2>经历</h2>
+<ul class="simple">
+<li>国内较早的bbs (activeubb)开发者（用户曾包括 当当,5dmedia, 蓝色理想，考研网，tfgc等)</li>
+<li>国内较早的内容管理系统 activecontent开发者(用户曾包括 蓝色理想,5dmedia等等），蓝色论坛历史讨论</li>
+<li>国内第一个游戏卡交易平台卡吧的开发者，开发卡易售前身方舟平台</li>
+<li>开发进销存 c9</li>
+<li>国内首家成布检验系统开发者，拥有多家国内知名纺织印染行业客户。</li>
+<li>开发经验包括microsoft dynamics ax定制开发/pos/mrpii/b2b/仪表数据采集分析/im等等系统, 服务企业包括盛大，颐高等知名企业</li>
+</ul>
+</div>
+<div class="section" id="python">
+<h2>python 经验 ...</h2></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/silverlight-future.html" rel="bookmark"
+                           title="Permalink to 关于silverlight 前景的讨论，不吐不快">关于silverlight 前景的讨论，不吐不快</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-10-22T00:00:00">
+                Published: 五 22 十月 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>首先，且不讨论这个事件的本身，最近以来，我一直对ms感到失望，这是因为ms在开发技术的延续性上越来越随心所欲，当然，早期的开发者可能也经历过dao,dao direct,rdo,ado的时代，但那时的api 相对很小，学习坡度很小。而现在，自从.net 推出后 windows forms不更新了,wf 更新换代了，linq to sql 也死了，dlr也不管了。问题是这些替代者完全能胜任了吗？没有！！！！</p>
+<p>好吧，现在就讨论silverlight ,或许这个人说的本身就没有错误，silverlight 本身就不能完全的跨所有的平台，虽然它现在能在部分osx和windows 运行，但远远不是真正的跨平台。只有html5 才能真正的跨平台。但是，无论如何，silverlight现在是作为wp7的主要开发技术之一，而wp7 却是你们目前要主推的东西。你完全可以这样说，silverlight 对我们还是很重要，作为wp7的主要开发技术，我们将继续发展silverlight 。但是没有 ...</p>
+                <a class="readmore" href="http://blog.easynew.com.cn/silverlight-future.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/silverlight-future.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/ymt-b2b-logic.html" rel="bookmark"
                            title="Permalink to 亿脉通 b2b 业务逻辑描述">亿脉通 b2b 业务逻辑描述</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2008-09-09T00:00:00">
-                Tue 09 September 2008
+                Published: 二 09 九月 2008
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
 </footer><!-- /.post-info -->                <p>做亿脉通时写的</p>
 <div class="section" id="id1">
@@ -196,32 +183,94 @@ sudo gedit ...</blockquote>
 <li>两位一级,最大5级</li>
 <li>86 第一级,全国,一个 ...</li></ol></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/ymt-b2b-logic.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/ymt-b2b-logic.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://blog.easynew.com.cn/ymt-b2b-logic.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            </ol><!-- /#posts-list -->
-                            <p class="paginator">
-                        <a href="http://blog.easynew.com.cn/author/jjx3.html">&laquo;</a>
-                Page 4 / 4
-    </p>
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
-                        <div class="blogroll">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/pallet-algorithm.html" rel="bookmark"
+                           title="Permalink to 预分托盘算法">预分托盘算法</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2008-07-15T00:00:00">
+                Published: 二 15 七月 2008
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数</p>
+<p>建立一个二维数据</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">托盘号</th>
+<th class="head">当前可用箱数</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1</td>
+<td>xx</td>
+</tr>
+<tr><td>2</td>
+<td>xx</td>
+</tr>
+<tr><td>3</td>
+<td>xx</td>
+</tr>
+</tbody>
+</table>
+<p>每取一条出货记录,就遍历这个临时表,如果发现某一托盘有可用箱数,则该记录的托盘号就是它了.</p>
+<p>当然,根据每一托盘的可用箱数,出货记录可能被分成多条,使用多个托盘</p>
+<p class="rubric">关于尾箱处理</p>
+<p>如果尾箱是拼箱的话,则取开始箱号和结束箱号等于该记录安排箱号所在的托盘号,而不是占用托盘数 joinCartonPallet 用该变量来表示</p>
+<p><strong>后面的我也记不清了, 不过语言是axapta的x++</strong></p>
+<p>班组d(散装班组)和其它班组的净重,毛重,数量算法不同,主要是要加上整箱重量和包装盒重量</p>
+<p>班组d和其他班组对尾箱的净重和毛重和数量的算法也不同 ,主要是要加上包装盒重</p>
+<p>上面两者用</p>
+<ul class="simple">
+<li>real boxWeight;</li>
+<li>real cartonWeight;</li>
+</ul>
+<p>这两个变量来区分</p>
+<p>这些用6个变量区分</p>
+<ul class="simple">
+<li>real netWeight,grossWeight,quantity;  //非尾箱</li>
+<li>real trailNetWeight ...</li></ul>
+                <a class="readmore" href="http://blog.easynew.com.cn/pallet-algorithm.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/pallet-algorithm.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="http://blog.easynew.com.cn/author/jjx3.html">&laquo;</a>
+    Page 4 / 4
+</p>
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
-                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
-                                                    <li><a href="http://python.org/">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
-                                                </ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                        </ul>
                 </div><!-- /.blogroll -->
-                                <div class="social">
+                <div class="social">
                         <h2>social</h2>
                         <ul>
                             <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
-                            
-                                                </ul>
+
+                        </ul>
                 </div><!-- /.social -->
-                </section><!-- /#extras -->
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
@@ -236,7 +285,7 @@ sudo gedit ...</blockquote>
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

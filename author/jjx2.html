@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>EasyNew - jjx</title>
-        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css">
-                <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
-                
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css" />
+        <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+
         <!--[if IE]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -15,64 +15,124 @@
         <header id="banner" class="body">
                 <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
                 <nav><ul>
-                                    <li><a href="/category/misc.html">未分类</a></li>
-                                    <li><a href="/category/c9.html">C9</a></li>
-                                    <li><a href="/about-us.html">关于我们</a></li>
-                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
-                                                                </ul></nav>
+                    <li><a href="/category/misc.html">未分类</a></li>
+                    <li><a href="/category/c9.html">C9</a></li>
+                    <li><a href="/about-us.html">关于我们</a></li>
+                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                </ul></nav>
         </header><!-- /#banner -->
-                
-            
 
-                 
-                            <section id="content" class="body">
+                <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="5">
-                        <li><article class="hentry">    
+            <li><article class="hentry">
                 <header>
-                    <h1><a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
-                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
+                    <h1><a href="http://blog.easynew.com.cn/agile-pair-tdd.html" rel="bookmark"
+                           title="Permalink to 敏捷中的结对和tdd">敏捷中的结对和tdd</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-06-04T00:00:00">
-                Mon 04 June 2012
+<footer class="post-info">
+        <abbr class="published" title="2013-06-19T12:42:00">
+                Published: 三 19 六月 2013
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
-<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
-<blockquote>
-parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
-<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
-<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
+</footer><!-- /.post-info -->                <p>今天我转了两篇文章, 都是抨击敏捷开发的, 都深合我意. 所以不得不多说几句.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.yuyaoe.com/topic/jump/125">结对编程, 我的噩梦</a></li>
+<li><a class="reference external" href="http://www.yuyaoe.com/topic/jump/126">半年来的工作感受</a></li>
+</ul>
+<p>先说结对, 我绝对是属于内向类型的, 当然喜欢安静的解决问题, 同作者一样,我更倾向通过代码评估来交流. 另外,两个大男人坐了一起结对,令人感觉好不自然,太基了!</p>
+<p><strong>如果同美女结对,我会取消我的上一句话</strong></p>
+<p>至于第二篇, 可能有些人就以为作者又在摆酷了, 但我想是因为作者没有说的更深入, 他的意思被误解了.</p>
+<p>tdd, 与其说是一种测试方法, 我更倾向于认定他是一种开发方式, 这种方式, 融合在你的编码过程中. 在dbanotes上我的评论就是: 如果一件事情最初需要三个过程, 则tdd的测试代码会忠实的反映这三个过程. 但后期, 有人可以用更简捷的一个过程实现, 或是二个过程实现,或是更改了其中一个过程的返回方式(当然,这样也会影响下一个结果的接收方式), 但最终结果还是正确的. 性能也好了,代码也更好了. 但是, 如果他不修改最初的tdd测试代码(很大可能不是他写的),则测试不会通过.</p>
+<p>当tdd测试代码几倍于实际的代码时, 这就是作者抱怨的问题. 也是一种阻碍生产力的体现.</p>
+<p>我同作者的看法一样, 测试代码更应该关心结果而不是关心过程, 这才是测试的所在!</p>
 
-                <a class="readmore" href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <a class="readmore" href="http://blog.easynew.com.cn/agile-pair-tdd.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/agile-pair-tdd.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
 
-                 
-                        <li><article class="hentry">    
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/resources.html" rel="bookmark"
+                           title="Permalink to 资源">资源</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-19T07:42:00">
+                Published: 三 19 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>此文档用来记录一些资源, 备忘用, 不定期更新</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.boarsoft.com/javascript/gridCombo/">Ext/Sencha Basic GridComboBox</a></li>
+</ul>
+
+                <a class="readmore" href="http://blog.easynew.com.cn/resources.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/resources.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/google-docs-note.html" rel="bookmark"
+                           title="Permalink to 整理google docs上的资料, 记录一些有意思的东西">整理google docs上的资料, 记录一些有意思的东西</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-16T22:08:00">
+                Published: 日 16 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了</p>
+<div class="section" id="id1">
+<h2>一些有意思的想法</h2>
+<p>框架设计其实是一个哲学概念,每个成功的框架总是有一套自己的处世哲学,然后在以后一以贯之,比方说大家熟悉的spring,就是以ioc,接口编程贯彻始末.</p>
+<p>不在烦恼架构问题, 对我而言,这就是生产力</p>
+<p>面向对象设计的问题在于使用者必须了解整个对象的体系结构，面向对象设计往往通过template method 达到代码重用，但由于设计改变，开发者不得不引入更多的中间方法。随着对象体系的复杂度增大，整个结构会越来越难以维护。由于更改结构对下层使用者的影响不可估计，也导致改变代码是困难的。</p>
+<p>所以在使用template method时，不要让继承大于3级以上， 一般都是Base/Abstract/具体的类。 多使用策略模式，利用接口和委托减少复杂度。</p>
+<p>看到n年(2007)前写的公司经营设想, 不由的脸红, 不过里面有很多点都是对的, 如</p>
+<ul class="simple">
+<li>对于每个要我们做软件的企业,我们将争取他们为以后的后续服务提供费用</li>
+<li>saas 将是未来软件主要存在的形式,是我们今后的努力方向</li>
+</ul>
+<p>错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制 ...</p></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/google-docs-note.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/google-docs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html" rel="bookmark"
                            title="Permalink to extjs 4 NodeInterface destroy">extjs 4 NodeInterface destroy</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2013-06-16T16:02:00">
-                Sun 16 June 2013
+                Published: 日 16 六月 2013
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
 </footer><!-- /.post-info -->                <p>extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。</p>
 <p>当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack</p>
@@ -89,76 +149,55 @@ parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
 <p>这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 <a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235">NodeInterface destroy with callback?</a>，无人理睬。</p>
 <p>当然 ...</p>
                 <a class="readmore" href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
 
-                 
-                        <li><article class="hentry">    
+            <li><article class="hentry">
                 <header>
-                    <h1><a href="http://blog.easynew.com.cn/extjs-note.html" rel="bookmark"
-                           title="Permalink to extjs 备注">extjs 备注</a></h1>
+                    <h1><a href="http://blog.easynew.com.cn/tornado-status-check.html" rel="bookmark"
+                           title="Permalink to tornado 服务监测">tornado 服务监测</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-06-17T00:00:00">
-                Sun 17 June 2012
+<footer class="post-info">
+        <abbr class="published" title="2013-06-14T10:16:00">
+                Published: 五 14 六月 2013
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info -->                <div class="section" id="form">
-<h2>设置form所有字段只读</h2>
-<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
-
-  <span class="nx">setReadOnlyForAll</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">Ext</span><span class="p">.</span><span class="nx">suspendLayouts</span><span class="p">();</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">getForm</span><span class="p">().</span><span class="nx">getFields</span><span class="p">().</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">field</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">);</span>
-    <span class="p">});</span>
-    <span class="nx">Ext</span><span class="p">.</span><span class="nx">resumeLayouts</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-</pre></div>
+</footer><!-- /.post-info -->                <div class="section" id="id1">
+<h2>真正的原因</h2>
+<p>下面的都不用看了， 真正的原因应该就是， 我在tornado处理DELETE请求时有一行不应该存在的代码ctx.term(), 结果导致当DELETE请求完成时,如果还有通过该ctx(ctx是单实例的)发出的还未完成的请求(该时段并发高时可能存在)直接就接收不到回复的消息，导致zmq req/rep模式违例(发送无接收)。而tornado+pyzmq时tornado的eventloop由 pyzmq代理的。结果就是tornado后端直接无法访问。造成这些请求和以后向该后端发出的请求都无法得到结果。</p>
+<p>同tornado windows下的表现应该无关，等待这几天验证， 但应该不会差了。</p>
+<p>下面的就不删除了，就当作思考的过程！</p>
 </div>
-<div class="section" id="override">
-<h2>通过override 设置缺省值</h2>
-<p>血的教训, 如果你要将所有窗体都设置frame为true, 不要每个form都去设置, 而是使用</p>
-<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
-        <span class="nx">bodyPadding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="nx">frame</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">// or true</span>
-
-<span class="p">});</span>
-</pre></div>
-<p>extjs 4.2 海皇星主题,frame 将是很粗的一根, 而且当form被嵌入到其他容器时,除了这个很粗的框, 背景没有同容器一样, 所以在该主题中frame应该设置为false</p>
-<ol class="arabic simple">
-<li>Store datachanged 对update没有效果 ...</li></ol></div>
-                <a class="readmore" href="http://blog.easynew.com.cn/extjs-note.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/extjs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<div class="section" id="id2">
+<h2>概述</h2>
+<p>ok , 我有在windows 下部署c9. 当前其架构大体是 nginx -&gt; tornado(多个进程) -&gt; proxy - application server(多个进程).  tornado部分是一个简单的restful framework, 主要就是将nginx请求转发给proxy,然后将proxy返回的结果显示给用户. tornado部分不包括任何业务逻辑. application server 是真正的业务逻辑点. proxy则是tornado和application server 之间的桥梁, 也不包括任何业务逻辑 ...</p></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/tornado-status-check.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/tornado-status-check.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
 
-                 
-                        <li><article class="hentry">    
+            <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/first-blog.html" rel="bookmark"
                            title="Permalink to ok, 这是我第一篇 pelican blog">ok, 这是我第一篇 pelican blog</a></h1>
                 </header>
-                
+
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2013-06-12T04:12:00">
-                Wed 12 June 2013
+                Published: 三 12 六月 2013
         </abbr>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
 </footer><!-- /.post-info -->                <div class="section" id="id1">
 <h2>自定义菜单</h2>
@@ -179,106 +218,33 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
 <pre class="literal-block">
 pelican ...</pre></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/first-blog.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/first-blog.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+<p>There are <a href="http://blog.easynew.com.cn/first-blog.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/google-docs-note.html" rel="bookmark"
-                           title="Permalink to 整理google docs上的资料, 记录一些有意思的东西">整理google docs上的资料, 记录一些有意思的东西</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-06-16T22:08:00">
-                Sun 16 June 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了</p>
-<div class="section" id="id1">
-<h2>一些有意思的想法</h2>
-<p>框架设计其实是一个哲学概念,每个成功的框架总是有一套自己的处世哲学,然后在以后一以贯之,比方说大家熟悉的spring,就是以ioc,接口编程贯彻始末.</p>
-<p>不在烦恼架构问题, 对我而言,这就是生产力</p>
-<p>面向对象设计的问题在于使用者必须了解整个对象的体系结构，面向对象设计往往通过template method 达到代码重用，但由于设计改变，开发者不得不引入更多的中间方法。随着对象体系的复杂度增大，整个结构会越来越难以维护。由于更改结构对下层使用者的影响不可估计，也导致改变代码是困难的。</p>
-<p>所以在使用template method时，不要让继承大于3级以上， 一般都是Base/Abstract/具体的类。 多使用策略模式，利用接口和委托减少复杂度。</p>
-<p>看到n年(2007)前写的公司经营设想, 不由的脸红, 不过里面有很多点都是对的, 如</p>
-<ul class="simple">
-<li>对于每个要我们做软件的企业,我们将争取他们为以后的后续服务提供费用</li>
-<li>saas 将是未来软件主要存在的形式,是我们今后的努力方向</li>
-</ul>
-<p>错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制 ...</p></div>
-                <a class="readmore" href="http://blog.easynew.com.cn/google-docs-note.html">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/google-docs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/" rel="bookmark"
-                           title="Permalink to 关于我们">关于我们</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-01-01T00:00:00">
-                Sun 01 January 2012
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-        <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript，并关注clojure/nodejs/go/objective-c语言。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。</p>
-<div class="section" id="id2">
-<h2>经历</h2>
-<ul class="simple">
-<li>国内较早的bbs (activeubb)开发者（用户曾包括 当当,5dmedia, 蓝色理想，考研网，tfgc等)</li>
-<li>国内较早的内容管理系统 activecontent开发者(用户曾包括 蓝色理想,5dmedia等等），蓝色论坛历史讨论</li>
-<li>国内第一个游戏卡交易平台卡吧的开发者，开发卡易售前身方舟平台</li>
-<li>开发进销存 c9</li>
-<li>国内首家成布检验系统开发者，拥有多家国内知名纺织印染行业客户。</li>
-<li>开发经验包括microsoft dynamics ax定制开发/pos/mrpii/b2b/仪表数据采集分析/im等等系统, 服务企业包括盛大，颐高等知名企业</li>
-</ul>
-</div>
-<div class="section" id="python">
-<h2>python 经验 ...</h2></div>
-                <a class="readmore" href="http://blog.easynew.com.cn/">read more</a>
-                <p>There are <a href="http://blog.easynew.com.cn/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            </ol><!-- /#posts-list -->
-                            <p class="paginator">
-                        <a href="http://blog.easynew.com.cn/author/jjx.html">&laquo;</a>
-                Page 2 / 4
-            <a href="http://blog.easynew.com.cn/author/jjx3.html">&raquo;</a>
-    </p>
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
-                        <div class="blogroll">
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="http://blog.easynew.com.cn/author/jjx.html">&laquo;</a>
+    Page 2 / 4
+        <a href="http://blog.easynew.com.cn/author/jjx3.html">&raquo;</a>
+</p>
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
-                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
-                                                    <li><a href="http://python.org/">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                                                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
-                                                </ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                        </ul>
                 </div><!-- /.blogroll -->
-                                <div class="social">
+                <div class="social">
                         <h2>social</h2>
                         <ul>
                             <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
-                            
-                                                </ul>
+
+                        </ul>
                 </div><!-- /.social -->
-                </section><!-- /#extras -->
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
@@ -293,7 +259,7 @@ pelican ...</pre></div>
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
