@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>jython27 beta 3</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css" />
+        <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                    <li><a href="/category/misc.html">未分类</a></li>
+                    <li><a href="/category/c9.html">C9</a></li>
+                    <li><a href="/about-us.html">关于我们</a></li>
+                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://blog.easynew.com.cn/jython-27-beta3.html" rel="bookmark"
+           title="Permalink to jython27 beta 3">jython27 beta 3</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-09T17:28:00">
+                Published: 五 09 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/jython.html">jython</a>. </p>
+
+</footer><!-- /.post-info -->      <p>最近 jython 发布了 2.7 beta2 ,  这里想说的是即将到来的beta3.</p>
+<p>Jim Baker  在jython-dev上的邮件说明 beta3 主要是合并socket-reboot分支的, 这个 分支主要 是Design of a reworked implementation of socket, ssl, and select modules for Jython, using Netty 4.</p>
+<p>并且这个版本 easy_install/pip将能重新工作在jython 2.7中</p>
+<p>但我的尝试是运行ez_setup.py时的这个 错误</p>
+<div class="highlight"><pre><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+</pre></div>
+<p>引发 IOError, google以下, 好象有人报告这个错误, 不过同我这里还不一样  <a class="reference external" href="http://bugs.jython.org/issue1944">http://bugs.jython.org/issue1944</a>, 即 LC_ALL=&quot;en_US.UTF-8&quot; ./jython -c 'open(&quot;/dev/null&quot;, &quot;w&quot;)'  同样还是报错, 测试了jython 2.5也是如此</p>
+<p>在sqlalchemy 0.86的代码 中, 包含了另外一个版本 的ez_setup 可以完成 setuptools的安装</p>
+<p>pip 需要使用 <a class="reference external" href="https://github.com/jimbaker/pip">https://github.com/jimbaker/pip</a>)</p>
+<p>性能, 还是很慢, 无法忍受</p>
+<p>看到日志提示: You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.</p>
+<p>放了 Javassist.jar 在classpath ,不过这个应该对下面的db访问没有多大关系</p>
+<div class="highlight"><pre><span class="c">#encoding=utf-8</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="k">if</span>  <span class="s">&#39;__pypy__&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">builtin_module_names</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">psycopg2cffi</span> <span class="kn">import</span> <span class="n">compat</span>
+    <span class="n">compat</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span><span class="p">,</span> <span class="n">scoped_session</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;java&#39;</span><span class="p">):</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">&#39;postgresql+zxjdbc://postgres:123456@localhost/c9&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">&#39;postgresql://postgres:123456@localhost/c9&#39;</span><span class="p">)</span>
+<span class="n">Session</span> <span class="o">=</span> <span class="n">scoped_session</span><span class="p">(</span><span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">db</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;select * from users;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">_count</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">_count</span><span class="p">):</span>
+    <span class="n">test</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;timing&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">_start</span>
+</pre></div>
+<p>这段代码测试 jython/pypy/python的表现</p>
+<p>pypy  timing 2.4122531414
+python timing 1.4104578495
+jython timing 14.6050000191 且不说启动脚本 用了10多秒</p>
+<p>用类似的操作单独测试 zxjdbc, 表现也好不了多少</p>
+<p>timing 10.6180000305</p>
+<p>类似的查询用groovy 跑, 2.108, 比cpython差, 说明对于依赖c 扩展(比方这里主要就是psycopg2 + libpq)的一些 操作, python的性能问题对实际表现影响不大</p>
+<p>至于pypy只要不断的提高 查询次数 , 性能就会逐渐拉平cpython并且最终超越. 对于 对c 扩展支持不佳的pypy来说,算是不错的了</p>
+<p>而jython 则是无法忍受, 所以不能在实际项目中写大量的jython代码, 起码同groovy持平或差一点才能考虑</p>
+
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'easynew';
+        var disqus_identifier = 'jython-27-beta3.html';
+        var disqus_url = 'http://blog.easynew.com.cn/jython-27-beta3.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

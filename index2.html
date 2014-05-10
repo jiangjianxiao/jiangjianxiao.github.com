@@ -26,6 +26,44 @@
                     <ol id="posts-list" class="hfeed" start="5">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="http://blog.easynew.com.cn/clojure-note.html" rel="bookmark"
+                           title="Permalink to clojure 学习笔记">clojure 学习笔记</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-29T13:48:00">
+                Published: 六 29 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).</p>
+<p>lisp的基础思想是简单的，但lisp语言是复杂的!</p>
+<p>clojure可能是jvm中实现最好的动态语言了, groovy已经沦为java的小弟, 它很少有自己的库(gradle这样的工具不算), jython的更新迟缓, jruby一般就是兼容使用ruby的库,很少有原生为jruby开发的库. 而clojure的库,则是发挥了clojure的特点, 比方说korma 就是一个很吸引人的东西.</p>
+<div class="section" id="lisp">
+<h2>lisp基本点</h2>
+<ol class="arabic simple">
+<li>当对一个列表求值时, 第一个是函数, 其他是参数, 用`阻止对列表求值</li>
+<li>lisp 没有ast这样的过程. 代码就是ast</li>
+</ol>
+</div>
+<div class="section" id="id1">
+<h2>我所讨厌的东西</h2>
+<p>太多了, clojure中充满了各种符号的滥用和一件事情多种做法! 我讨厌一种事情有多种做法，很多时候，它意味着总有一些方法不是最佳的，你总是需要做选择，我讨厌做选择！</p>
+<p>各种符号的滥用解很大程度上是需要改善lisp的括号使用， 符号使用列表:</p>
+<pre class="literal-block">
+# 的使用。 #{1 2 3 } 表示set, #&quot;\W+&quot; 表示正则, #(&gt; (count %) 2) 表示匿名函数， #_宏表示忽略下一个clojure形式.
+* repl ...</pre></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/clojure-note.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/clojure-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="http://blog.easynew.com.cn/agile-pair-tdd.html" rel="bookmark"
                            title="Permalink to 敏捷中的结对和tdd">敏捷中的结对和tdd</a></h1>
                 </header>
@@ -181,49 +219,10 @@
                 <a class="readmore" href="http://blog.easynew.com.cn/tornado-status-check.html">read more</a>
 <p>There are <a href="http://blog.easynew.com.cn/tornado-status-check.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/first-blog.html" rel="bookmark"
-                           title="Permalink to ok, 这是我第一篇 pelican blog">ok, 这是我第一篇 pelican blog</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-06-12T04:12:00">
-                Published: 三 12 六月 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <div class="section" id="id1">
-<h2>自定义菜单</h2>
-<p>通过以下三个选项自定义菜单</p>
-<div class="highlight"><pre><span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">((</span><span class="s">&#39;未分类&#39;</span><span class="p">,</span> <span class="s">&#39;category/misc.html&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;关于我们&#39;</span><span class="p">,</span> <span class="s">&#39;about-us.html&#39;</span><span class="p">),</span> <span class="p">)</span>
-</pre></div>
-<p>建议你建两个同级目录，比方说就是jiangjianxiao.github.com和blog, blog用来存放pelican建立的站点, jiangjianxiao.github.com 就是pelican的原始内容</p>
-<p>修改 pelicanconf.py, 增加:</p>
-<pre class="literal-block">
-OUTPUT_PATH = '../jiangjianxao.github.com'
-</pre>
-<p>pelican-plugins 建议用submodule的方法获取</p>
-<p>git submodule git://github.com/getpelican/pelican-plugins.git</p>
-<p>然后在其他机器就是git submodule init/git submodule update了</p>
-<p>我的publish.sh:</p>
-<pre class="literal-block">
-pelican ...</pre></div>
-                <a class="readmore" href="http://blog.easynew.com.cn/first-blog.html">read more</a>
-<p>There are <a href="http://blog.easynew.com.cn/first-blog.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
         <a href="http://blog.easynew.com.cn/index.html">&laquo;</a>
-    Page 2 / 4
+    Page 2 / 5
         <a href="http://blog.easynew.com.cn/index3.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->

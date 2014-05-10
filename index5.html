@@ -21,11 +21,74 @@
                     <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-<ul>
-    <li><a href="http://blog.easynew.com.cn/category/c9.html">c9</a></li>
-    <li><a href="http://blog.easynew.com.cn/category/jython.html">jython</a></li>
-    <li><a href="http://blog.easynew.com.cn/category/misc.html">misc</a></li>
+
+                <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="5">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/pallet-algorithm.html" rel="bookmark"
+                           title="Permalink to 预分托盘算法">预分托盘算法</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2008-07-15T00:00:00">
+                Published: 二 15 七月 2008
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数</p>
+<p>建立一个二维数据</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">托盘号</th>
+<th class="head">当前可用箱数</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1</td>
+<td>xx</td>
+</tr>
+<tr><td>2</td>
+<td>xx</td>
+</tr>
+<tr><td>3</td>
+<td>xx</td>
+</tr>
+</tbody>
+</table>
+<p>每取一条出货记录,就遍历这个临时表,如果发现某一托盘有可用箱数,则该记录的托盘号就是它了.</p>
+<p>当然,根据每一托盘的可用箱数,出货记录可能被分成多条,使用多个托盘</p>
+<p class="rubric">关于尾箱处理</p>
+<p>如果尾箱是拼箱的话,则取开始箱号和结束箱号等于该记录安排箱号所在的托盘号,而不是占用托盘数 joinCartonPallet 用该变量来表示</p>
+<p><strong>后面的我也记不清了, 不过语言是axapta的x++</strong></p>
+<p>班组d(散装班组)和其它班组的净重,毛重,数量算法不同,主要是要加上整箱重量和包装盒重量</p>
+<p>班组d和其他班组对尾箱的净重和毛重和数量的算法也不同 ,主要是要加上包装盒重</p>
+<p>上面两者用</p>
+<ul class="simple">
+<li>real boxWeight;</li>
+<li>real cartonWeight;</li>
 </ul>
+<p>这两个变量来区分</p>
+<p>这些用6个变量区分</p>
+<ul class="simple">
+<li>real netWeight,grossWeight,quantity;  //非尾箱</li>
+<li>real trailNetWeight ...</li></ul>
+                <a class="readmore" href="http://blog.easynew.com.cn/pallet-algorithm.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/pallet-algorithm.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+<p class="paginator">
+        <a href="http://blog.easynew.com.cn/index4.html">&laquo;</a>
+    Page 5 / 5
+</p>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

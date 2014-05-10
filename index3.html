@@ -26,6 +26,45 @@
                     <ol id="posts-list" class="hfeed" start="5">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="http://blog.easynew.com.cn/first-blog.html" rel="bookmark"
+                           title="Permalink to ok, 这是我第一篇 pelican blog">ok, 这是我第一篇 pelican blog</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-12T04:12:00">
+                Published: 三 12 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <div class="section" id="id1">
+<h2>自定义菜单</h2>
+<p>通过以下三个选项自定义菜单</p>
+<div class="highlight"><pre><span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">((</span><span class="s">&#39;未分类&#39;</span><span class="p">,</span> <span class="s">&#39;category/misc.html&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;关于我们&#39;</span><span class="p">,</span> <span class="s">&#39;about-us.html&#39;</span><span class="p">),</span> <span class="p">)</span>
+</pre></div>
+<p>建议你建两个同级目录，比方说就是jiangjianxiao.github.com和blog, blog用来存放pelican建立的站点, jiangjianxiao.github.com 就是pelican的原始内容</p>
+<p>修改 pelicanconf.py, 增加:</p>
+<pre class="literal-block">
+OUTPUT_PATH = '../jiangjianxao.github.com'
+</pre>
+<p>pelican-plugins 建议用submodule的方法获取</p>
+<p>git submodule git://github.com/getpelican/pelican-plugins.git</p>
+<p>然后在其他机器就是git submodule init/git submodule update了</p>
+<p>我的publish.sh:</p>
+<pre class="literal-block">
+pelican ...</pre></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/first-blog.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/first-blog.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="http://blog.easynew.com.cn/c9-open-source-plan.html" rel="bookmark"
                            title="Permalink to C9 开放源代码计划">C9 开放源代码计划</a></h1>
                 </header>
@@ -173,57 +212,10 @@ sudo gedit ...</blockquote>
                 <a class="readmore" href="http://blog.easynew.com.cn/ubuntu-pythonpath.html">read more</a>
 <p>There are <a href="http://blog.easynew.com.cn/ubuntu-pythonpath.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/extjs-note.html" rel="bookmark"
-                           title="Permalink to extjs 备注">extjs 备注</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-06-17T00:00:00">
-                Published: 日 17 六月 2012
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <div class="section" id="form">
-<h2>设置form所有字段只读</h2>
-<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
-
-  <span class="nx">setReadOnlyForAll</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">Ext</span><span class="p">.</span><span class="nx">suspendLayouts</span><span class="p">();</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">getForm</span><span class="p">().</span><span class="nx">getFields</span><span class="p">().</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">field</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">);</span>
-    <span class="p">});</span>
-    <span class="nx">Ext</span><span class="p">.</span><span class="nx">resumeLayouts</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-</pre></div>
-</div>
-<div class="section" id="override">
-<h2>通过override 设置缺省值</h2>
-<p>血的教训, 如果你要将所有窗体都设置frame为true, 不要每个form都去设置, 而是使用</p>
-<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
-        <span class="nx">bodyPadding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="nx">frame</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">// or true</span>
-
-<span class="p">});</span>
-</pre></div>
-<p>extjs 4.2 海皇星主题,frame 将是很粗的一根, 而且当form被嵌入到其他容器时,除了这个很粗的框, 背景没有同容器一样, 所以在该主题中frame应该设置为false</p>
-<ol class="arabic simple">
-<li>Store datachanged 对update没有效果 ...</li></ol></div>
-                <a class="readmore" href="http://blog.easynew.com.cn/extjs-note.html">read more</a>
-<p>There are <a href="http://blog.easynew.com.cn/extjs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
         <a href="http://blog.easynew.com.cn/index2.html">&laquo;</a>
-    Page 3 / 4
+    Page 3 / 5
         <a href="http://blog.easynew.com.cn/index4.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->

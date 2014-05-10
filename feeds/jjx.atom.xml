@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>EasyNew</title><link href="http://blog.easynew.com.cn/" rel="alternate"></link><link href="http://blog.easynew.com.cn/feeds/jjx.atom.xml" rel="self"></link><id>http://blog.easynew.com.cn/</id><updated>2014-05-09T09:25:00+08:00</updated><entry><title>jvm 互操作笔记</title><link href="http://blog.easynew.com.cn/jvm-interactive-note.html" rel="alternate"></link><updated>2014-05-09T09:25:00+08:00</updated><author><name>jjx</name></author><id>tag:blog.easynew.com.cn,2014-05-09:jvm-interactive-note.html</id><summary type="html">&lt;p&gt;当前, 使用java很多时候不可避免, 比方说以下场景&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>EasyNew</title><link href="http://blog.easynew.com.cn/" rel="alternate"></link><link href="http://blog.easynew.com.cn/feeds/jjx.atom.xml" rel="self"></link><id>http://blog.easynew.com.cn/</id><updated>2014-05-09T17:28:00+08:00</updated><entry><title>jython27 beta 3</title><link href="http://blog.easynew.com.cn/jython-27-beta3.html" rel="alternate"></link><updated>2014-05-09T17:28:00+08:00</updated><author><name>jjx</name></author><id>tag:blog.easynew.com.cn,2014-05-09:jython-27-beta3.html</id><summary type="html">&lt;p&gt;最近 jython 发布了 2.7 beta2 ,  这里想说的是即将到来的beta3.&lt;/p&gt;
+&lt;p&gt;Jim Baker  在jython-dev上的邮件说明 beta3 主要是合并socket-reboot分支的, 这个 分支主要 是Design of a reworked implementation of socket, ssl, and select modules for Jython, using Netty 4.&lt;/p&gt;
+&lt;p&gt;并且这个版本 easy_install/pip将能重新工作在jython 2.7中&lt;/p&gt;
+&lt;p&gt;但我的尝试是运行ez_setup.py时的这个 错误&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;devnull&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;引发 IOError, google以下, 好象有人报告这个错误, 不过同我这里还不一样  &lt;a class="reference external" href="http://bugs.jython.org/issue1944"&gt;http://bugs.jython.org/issue1944&lt;/a&gt;, 即 LC_ALL=&amp;quot;en_US.UTF-8&amp;quot; ./jython -c 'open(&amp;quot;/dev/null&amp;quot;, &amp;quot;w&amp;quot;)'  同样还是报错, 测试了jython 2.5也是如此&lt;/p&gt;
+&lt;p&gt;在sqlalchemy 0.86的代码 中, 包含了另外一个版本 的ez_setup 可以完成 setuptools的安装&lt;/p&gt;
+&lt;p&gt;pip 需要使用 &lt;a class="reference external" href="https://github.com/jimbaker/pip"&gt;https://github.com/jimbaker/pip&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;性能, 还是很慢, 无法忍受&lt;/p&gt;
+&lt;p&gt;看到日志提示: You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.&lt;/p&gt;
+&lt;p&gt;放了 Javassist.jar 在classpath ,不过这个应该对下面的db访问没有多大关系&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#encoding=utf-8&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt;  &lt;span class="s"&gt;&amp;#39;__pypy__&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;builtin_module_names&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;psycopg2cffi&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;compat&lt;/span&gt;
+    &lt;span class="n"&gt;compat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy.ext.declarative&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;declarative_base&lt;/span&gt;
+&lt;span class="n"&gt;Base&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;declarative_base&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy.orm&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;sessionmaker&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scoped_session&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;platform&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;java&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;postgresql+zxjdbc://postgres:123456@localhost/c9&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;postgresql://postgres:123456@localhost/c9&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scoped_session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sessionmaker&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;select * from users;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fetchall&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;_start&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;_count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_count&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;timing&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;_start&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这段代码测试 jython/pypy/python的表现&lt;/p&gt;
+&lt;p&gt;pypy  timing 2.4122531414
+python timing 1.4104578495
+jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
+&lt;p&gt;用类似的操作单独测试 zxjdbc, 表现也好不了多少&lt;/p&gt;
+&lt;p&gt;timing 10.6180000305&lt;/p&gt;
+&lt;p&gt;类似的查询用groovy 跑, 2.108, 比cpython差, 说明对于依赖c 扩展(比方这里主要就是psycopg2 + libpq)的一些 操作, python的性能问题对实际表现影响不大&lt;/p&gt;
+&lt;p&gt;至于pypy只要不断的提高 查询次数 , 性能就会逐渐拉平cpython并且最终超越. 对于 对c 扩展支持不佳的pypy来说,算是不错的了&lt;/p&gt;
+&lt;p&gt;而jython 则是无法忍受, 所以不能在实际项目中写大量的jython代码, 起码同groovy持平或差一点才能考虑&lt;/p&gt;
+</summary></entry><entry><title>jvm 互操作笔记</title><link href="http://blog.easynew.com.cn/jvm-interactive-note.html" rel="alternate"></link><updated>2014-05-09T09:25:00+08:00</updated><author><name>jjx</name></author><id>tag:blog.easynew.com.cn,2014-05-09:jvm-interactive-note.html</id><summary type="html">&lt;p&gt;当前, 使用java很多时候不可避免, 比方说以下场景&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;excel 导出需要更多的控制 ,xlwt/xlrd 无法实现类似data validation using dropdown list之类的特性, 有个包支持但格式限制在2007&lt;/li&gt;
 &lt;li&gt;taobao 消息通知, 目前只提供java/c# sdk&lt;/li&gt;
@@ -64,7 +114,7 @@
 &lt;p&gt;jnius.ByteArray.tostring 没有问题, 是poi workbook.getBytes()有问题, 无法获得全部数据&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ByteArrayOutputStream&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;wb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;write&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toByteArray&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;正确&lt;/span&gt;
+&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toByteArray&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;正确&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="jzmq"&gt;
@@ -74,6 +124,7 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;   &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;java.lang&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;System&lt;/span&gt;
    &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setProperty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;java.library.path&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/usr/local/lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getProperty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;java.library.path&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
 
 &lt;span class="err"&gt;或&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Djava&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/usr/loca/lib&amp;quot;&lt;/span&gt;
 

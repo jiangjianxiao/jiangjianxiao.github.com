@@ -105,7 +105,7 @@
 <p>jnius.ByteArray.tostring 没有问题, 是poi workbook.getBytes()有问题, 无法获得全部数据</p>
 <div class="highlight"><pre><span class="n">ms</span> <span class="o">=</span> <span class="n">ByteArrayOutputStream</span><span class="o">()</span>
 <span class="n">wb</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">ms</span><span class="o">)</span>
-<span class="n">ms</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">()</span> <span class="err">#</span> <span class="err">正确</span>
+<span class="n">ms</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">()</span>  <span class="err">#</span> <span class="err">正确</span>
 </pre></div>
 </div>
 <div class="section" id="jzmq">
@@ -115,6 +115,7 @@
 <div class="highlight"><pre>   <span class="kn">from</span> <span class="nn">java.lang</span> <span class="kn">import</span> <span class="n">System</span>
    <span class="n">System</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s">&quot;java.library.path&quot;</span><span class="p">,</span> <span class="s">&quot;/usr/local/lib&quot;</span><span class="p">)</span>
    <span class="k">print</span> <span class="n">System</span><span class="o">.</span><span class="n">getProperty</span><span class="p">(</span><span class="s">&quot;java.library.path&quot;</span><span class="p">)</span>
+
 
 <span class="err">或</span> <span class="o">-</span><span class="n">Djava</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;/usr/loca/lib&quot;</span>
 

@@ -5,30 +5,37 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.easynew.com.cn/index.html</loc>
-<lastmod>2014-05-09T10:47:46-00:00</lastmod>
+<lastmod>2014-05-10T12:27:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.easynew.com.cn/archives.html</loc>
-<lastmod>2014-05-09T10:47:46-00:00</lastmod>
+<lastmod>2014-05-10T12:27:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.easynew.com.cn/tags.html</loc>
-<lastmod>2014-05-09T10:47:46-00:00</lastmod>
+<lastmod>2014-05-10T12:27:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.easynew.com.cn/categories.html</loc>
-<lastmod>2014-05-09T10:47:46-00:00</lastmod>
+<lastmod>2014-05-10T12:27:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.easynew.com.cn/jython-27-beta3.html</loc>
+<lastmod>2014-05-09T17:28:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>
@@ -201,21 +208,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.easynew.com.cn/category/c9.html</loc>
-<lastmod>2014-05-09T10:47:46-00:00</lastmod>
+<lastmod>2014-05-10T12:27:47-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.easynew.com.cn/category/jython.html</loc>
+<lastmod>2014-05-10T12:27:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.easynew.com.cn/category/misc.html</loc>
-<lastmod>2014-05-09T10:47:46-00:00</lastmod>
+<lastmod>2014-05-10T12:27:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.easynew.com.cn/author/jjx.html</loc>
-<lastmod>2014-05-09T10:47:46-00:00</lastmod>
+<lastmod>2014-05-10T12:27:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
