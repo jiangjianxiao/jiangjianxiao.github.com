@@ -16,14 +16,48 @@
                 <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
                 <nav><ul>
                     <li><a href="/category/misc.html">未分类</a></li>
-                    <li><a href="/category/c9.html">C9</a></li>
                     <li><a href="/about-us.html">关于我们</a></li>
-                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
                 <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="5">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/ymt-b2b-logic.html" rel="bookmark"
+                           title="Permalink to 亿脉通 b2b 业务逻辑描述">亿脉通 b2b 业务逻辑描述</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2008-09-09T00:00:00+08:00">
+                Published: 二 09 九月 2008
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <p>做亿脉通时写的</p>
+<div class="section" id="id1">
+<h2>代理和分销</h2>
+<p>这里试图把这两个单词给明确化,在b2b系统中,代理是指由厂商授权的,在某一地区销售某类产品的权力. 代理可能是独家的,也可能是多家的,总代则是意味着在全国均有销售权力,通常,代理需要有严格的区域约束.每个大区域,如省形成一个代理树,不允许不同的树或树的不同级次进行互通,对于一个产品类别,总的来说是一棵大树,也可以分割为多棵小树
+独家的代理最简单. 非独家的代理,即某一区域允许多家代理时,通常是划分下级区域给不同的代理必须明白的说明,该公司的代理区域. 一个公司可能拥有多个区域的销售.</p>
+<p>公司/代理的类别/允许销售的区域(浙江或是宁波杭州两地区,只需要使用代理区域的顶级代码)</p>
+<p>分销是指拥有代理的公司将权力下放给其他公司的行为,这意味着创建一个树,这个树需要有上面的约束, 一个地区可以有多个分销,授权者可以将某一个或多个分销设置为分销认证
+分销认证将会在系统中被使用,当用户请求绑定一个上家时,系统将查看该上家的代理产品是否已经在该区域上级(但还是隶属于该上家的客户)已有分销认证商家,如果有,则对用户隐藏该产品,并出现该商家的信息以便用户绑定.</p>
+</div>
+<div class="section" id="id2">
+<h2>区域</h2>
+<p>使用 <a class="reference external" href="http://www.stats.gov.cn/tjbz/xzqhdm/t20080215_402462675.htm">国标编码</a></p>
+<ol class="arabic simple">
+<li>两位一级,最大5级</li>
+<li>86 第一级,全国,一个 ...</li></ol></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/ymt-b2b-logic.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/ymt-b2b-logic.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
             <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/pallet-algorithm.html" rel="bookmark"
@@ -32,7 +66,7 @@
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2008-07-15T00:00:00">
+        <abbr class="published" title="2008-07-15T00:00:00+08:00">
                 Published: 二 15 七月 2008
         </abbr>
 
@@ -85,10 +119,12 @@
                 <a class="readmore" href="http://blog.easynew.com.cn/pallet-algorithm.html">read more</a>
 <p>There are <a href="http://blog.easynew.com.cn/pallet-algorithm.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
+                </ol><!-- /#posts-list -->
 <p class="paginator">
         <a href="http://blog.easynew.com.cn/index4.html">&laquo;</a>
     Page 5 / 5
 </p>
+                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
@@ -96,7 +132,6 @@
                             <li><a href="http://getpelican.com/">Pelican</a></li>
                             <li><a href="http://python.org/">Python.org</a></li>
                             <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
                         </ul>
                 </div><!-- /.blogroll -->
                 <div class="social">

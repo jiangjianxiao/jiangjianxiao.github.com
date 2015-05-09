@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>资源</title>
+        <title>尝试在ubuntu/os x上使用c#</title>
         <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css" />
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
@@ -23,14 +23,14 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="http://blog.easynew.com.cn/resources.html" rel="bookmark"
-           title="Permalink to 资源">资源</a></h1>
+        <a href="http://blog.easynew.com.cn/ubuntu_os_x_c_sharp.html" rel="bookmark"
+           title="Permalink to 尝试在ubuntu/os x上使用c#">尝试在ubuntu/os x上使用c#</a></h1>
     </header>
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2013-06-19T07:42:00+08:00">
-                Published: 三 19 六月 2013
+        <abbr class="published" title="2015-05-09T20:34:00+08:00">
+                Published: 六 09 五月 2015
         </abbr>
 
         <address class="vcard author">
@@ -38,10 +38,27 @@
         </address>
 <p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info -->      <p>此文档用来记录一些资源, 备忘用, 不定期更新</p>
+</footer><!-- /.post-info -->      <p>最近微软的举动还是挺让人心动的, 但 <a class="reference external" href="https://github.com/dotnet/coreclr">https://github.com/dotnet/coreclr</a> 中的dnx 部分, 除了使用mono的运行时, 使用coreclr 在os x/ubuntu 上都没有能跑起来.</p>
+<p>最近的一个问题是cpython 的pyopenxl , 导出excel 的write_only优化, 存在着以下问题</p>
 <ul class="simple">
-<li><a class="reference external" href="http://www.boarsoft.com/javascript/gridCombo/">Ext/Sencha Basic GridComboBox</a></li>
+<li>datavalidate list 在write_only=True时无效</li>
+<li>save_virtual_workbook 在write_only=True下无效</li>
 </ul>
+<p>但是不启用write_only, 26000多条记录导出在有datevalidate 的情况下跑出20多秒, 无法接受</p>
+<p>使用pypy 则会降低到7到5秒, 但目前pypy访问db的性能还是比cpython慢一倍, 无法在正式环境中接受使用它</p>
+<p>所以, 有一个想法是想使用mono, 初步的测试是</p>
+<ul class="simple">
+<li>netmq</li>
+<li>aspose cells</li>
+<li>json.net</li>
+<li>dapper</li>
+</ul>
+<p>python 通过 zmq 向 .net 的netmq rep发起请求, 初步测试结果如下</p>
+<ul class="simple">
+<li>导出26000条带data validate 的excel 冷启动为2秒左右, 第二次为1.3秒左右, 文件大小为1.5 m, 比pyopenxl 的小很多</li>
+<li>使用npgsql 插入26000条记录, 约26秒, 相当1秒1000条, 比cpython的约33秒也有一定的进步</li>
+</ul>
+<p>所以有个初步的设想是写个简单c#的服务端, 提供excel的导入导出服务, 两者使用zmq req/rep 协议,josn字符串传递, 二进制使用base64编码传递</p>
 
     </div><!-- /.entry-content -->
     <div class="comments">
@@ -49,8 +66,8 @@
       <div id="disqus_thread"></div>
       <script type="text/javascript">
         var disqus_shortname = 'easynew';
-        var disqus_identifier = 'resources.html';
-        var disqus_url = 'http://blog.easynew.com.cn/resources.html';
+        var disqus_identifier = 'ubuntu_os_x_c_sharp.html';
+        var disqus_url = 'http://blog.easynew.com.cn/ubuntu_os_x_c_sharp.html';
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//easynew.disqus.com/embed.js';

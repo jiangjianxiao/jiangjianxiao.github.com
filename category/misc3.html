@@ -16,14 +16,49 @@
                 <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
                 <nav><ul>
                     <li><a href="/category/misc.html">未分类</a></li>
-                    <li><a href="/category/c9.html">C9</a></li>
                     <li><a href="/about-us.html">关于我们</a></li>
-                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
                 <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="5">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/first-blog.html" rel="bookmark"
+                           title="Permalink to ok, 这是我第一篇 pelican blog">ok, 这是我第一篇 pelican blog</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-12T04:12:00+08:00">
+                Published: 三 12 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <div class="section" id="id1">
+<h2>自定义菜单</h2>
+<p>通过以下三个选项自定义菜单</p>
+<div class="highlight"><pre><span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">((</span><span class="s">&#39;未分类&#39;</span><span class="p">,</span> <span class="s">&#39;category/misc.html&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;关于我们&#39;</span><span class="p">,</span> <span class="s">&#39;about-us.html&#39;</span><span class="p">),</span> <span class="p">)</span>
+</pre></div>
+<p>建议你建两个同级目录，比方说就是jiangjianxiao.github.com和blog, blog用来存放pelican建立的站点, jiangjianxiao.github.com 就是pelican的原始内容</p>
+<p>修改 pelicanconf.py, 增加:</p>
+<pre class="literal-block">
+OUTPUT_PATH = '../jiangjianxao.github.com'
+</pre>
+<p>pelican-plugins 建议用submodule的方法获取</p>
+<p>git submodule add git://github.com/getpelican/pelican-plugins.git</p>
+<p>然后在其他机器就是git submodule init/git submodule update了</p>
+<p>我的publish.sh ...</p></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/first-blog.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/first-blog.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
             <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/python-web-sublime-text-2.html" rel="bookmark"
@@ -32,7 +67,7 @@
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2012-09-16T00:00:00">
+        <abbr class="published" title="2012-09-16T00:00:00+08:00">
                 Published: 日 16 九月 2012
         </abbr>
 
@@ -59,7 +94,7 @@
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2012-08-22T00:00:00">
+        <abbr class="published" title="2012-08-22T00:00:00+08:00">
                 Published: 三 22 八月 2012
         </abbr>
 
@@ -86,7 +121,7 @@
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2012-08-10T00:00:00">
+        <abbr class="published" title="2012-08-10T00:00:00+08:00">
                 Published: 五 10 八月 2012
         </abbr>
 
@@ -121,7 +156,7 @@ sudo gedit ...</blockquote>
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2012-06-17T00:00:00">
+        <abbr class="published" title="2012-06-17T00:00:00+08:00">
                 Published: 日 17 六月 2012
         </abbr>
 
@@ -168,7 +203,7 @@ sudo gedit ...</blockquote>
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2012-06-07T13:19:00">
+        <abbr class="published" title="2012-06-07T13:19:00+08:00">
                 Published: 四 07 六月 2012
         </abbr>
 
@@ -199,34 +234,6 @@ sudo gedit ...</blockquote>
                 <a class="readmore" href="http://blog.easynew.com.cn/windows-nginx-tornado.html">read more</a>
 <p>There are <a href="http://blog.easynew.com.cn/windows-nginx-tornado.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
-                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-06-04T00:00:00">
-                Published: 一 04 六月 2012
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
-<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
-<blockquote>
-parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
-<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
-<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
-
-                <a class="readmore" href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
-<p>There are <a href="http://blog.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
         <a href="http://blog.easynew.com.cn/category/misc2.html">&laquo;</a>
@@ -241,7 +248,6 @@ parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
                             <li><a href="http://getpelican.com/">Pelican</a></li>
                             <li><a href="http://python.org/">Python.org</a></li>
                             <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
                         </ul>
                 </div><!-- /.blogroll -->
                 <div class="social">

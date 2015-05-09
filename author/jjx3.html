@@ -16,14 +16,42 @@
                 <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
                 <nav><ul>
                     <li><a href="/category/misc.html">未分类</a></li>
-                    <li><a href="/category/c9.html">C9</a></li>
                     <li><a href="/about-us.html">关于我们</a></li>
-                    <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
                 <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="5">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/tornado-status-check.html" rel="bookmark"
+                           title="Permalink to tornado 服务监测">tornado 服务监测</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-14T10:16:00+08:00">
+                Published: 五 14 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->                <div class="section" id="id1">
+<h2>真正的原因</h2>
+<p>下面的都不用看了， 真正的原因应该就是， 我在tornado处理DELETE请求时有一行不应该存在的代码ctx.term(), 结果导致当DELETE请求完成时,如果还有通过该ctx(ctx是单实例的)发出的还未完成的请求(该时段并发高时可能存在)直接就接收不到回复的消息，导致zmq req/rep模式违例(发送无接收)。而tornado+pyzmq时tornado的eventloop由 pyzmq代理的。结果就是tornado后端直接无法访问。造成这些请求和以后向该后端发出的请求都无法得到结果。</p>
+<p>同tornado windows下的表现应该无关，等待这几天验证， 但应该不会差了。</p>
+<p>下面的就不删除了，就当作思考的过程！</p>
+</div>
+<div class="section" id="id2">
+<h2>概述</h2>
+<p>ok , 我有在windows 下部署c9. 当前其架构大体是 nginx -&gt; tornado(多个进程) -&gt; proxy - application server(多个进程).  tornado部分是一个简单的restful framework, 主要就是将nginx请求转发给proxy,然后将proxy返回的结果显示给用户. tornado部分不包括任何业务逻辑. application server 是真正的业务逻辑点. proxy则是tornado和application server 之间的桥梁, 也不包括任何业务逻辑 ...</p></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/tornado-status-check.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/tornado-status-check.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
             <li><article class="hentry">
                 <header>
                     <h1><a href="http://blog.easynew.com.cn/first-blog.html" rel="bookmark"
@@ -32,7 +60,7 @@
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2013-06-12T04:12:00">
+        <abbr class="published" title="2013-06-12T04:12:00+08:00">
                 Published: 三 12 六月 2013
         </abbr>
 
@@ -54,11 +82,9 @@
 OUTPUT_PATH = '../jiangjianxao.github.com'
 </pre>
 <p>pelican-plugins 建议用submodule的方法获取</p>
-<p>git submodule git://github.com/getpelican/pelican-plugins.git</p>
+<p>git submodule add git://github.com/getpelican/pelican-plugins.git</p>
 <p>然后在其他机器就是git submodule init/git submodule update了</p>
-<p>我的publish.sh:</p>
-<pre class="literal-block">
-pelican ...</pre></div>
+<p>我的publish.sh ...</p></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/first-blog.html">read more</a>
 <p>There are <a href="http://blog.easynew.com.cn/first-blog.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -71,7 +97,7 @@ pelican ...</pre></div>
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2013-05-31T14:11:00">
+        <abbr class="published" title="2013-05-31T14:11:00+08:00">
                 Published: 五 31 五月 2013
         </abbr>
 
@@ -105,7 +131,7 @@ pelican ...</pre></div>
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2012-10-28T11:19:00">
+        <abbr class="published" title="2012-10-28T11:19:00+08:00">
                 Published: 日 28 十月 2012
         </abbr>
 
@@ -132,7 +158,7 @@ pelican ...</pre></div>
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2012-09-16T00:00:00">
+        <abbr class="published" title="2012-09-16T00:00:00+08:00">
                 Published: 日 16 九月 2012
         </abbr>
 
@@ -159,7 +185,7 @@ pelican ...</pre></div>
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2012-08-22T00:00:00">
+        <abbr class="published" title="2012-08-22T00:00:00+08:00">
                 Published: 三 22 八月 2012
         </abbr>
 
@@ -177,41 +203,6 @@ pelican ...</pre></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/no_attribute_sa_instance_state.html">read more</a>
 <p>There are <a href="http://blog.easynew.com.cn/no_attribute_sa_instance_state.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/ubuntu-pythonpath.html" rel="bookmark"
-                           title="Permalink to ubuntu 中设置 PYTHONPATH">ubuntu 中设置 PYTHONPATH</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-08-10T00:00:00">
-                Published: 五 10 八月 2012
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>一开始 是通过设置环境变量来进行的，可以编辑/etc/profile或是用户目录下的.profile</p>
-<p>增加</p>
-<p>export PYTHONPAHT=/home/jjx/works/earrow:/home/jjx/works/c92</p>
-<p>然后 用source /etc/profile或source .profile生效</p>
-<p>但在sudo下无效,如 sudo python</p>
-<p>import earrow 还是错误 ，所以 改用 pth的方式 最为简单</p>
-<p>先查看python site-packages位置</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
-</pre></div>
-<p>然后</p>
-<blockquote>
-cd /usr/local/lib/python2.7/dist-packages
-sudo gedit ...</blockquote>
-                <a class="readmore" href="http://blog.easynew.com.cn/ubuntu-pythonpath.html">read more</a>
-<p>There are <a href="http://blog.easynew.com.cn/ubuntu-pythonpath.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
         <a href="http://blog.easynew.com.cn/author/jjx2.html">&laquo;</a>
@@ -226,7 +217,6 @@ sudo gedit ...</blockquote>
                             <li><a href="http://getpelican.com/">Pelican</a></li>
                             <li><a href="http://python.org/">Python.org</a></li>
                             <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="http://www.yuyaoe.com">余姚程序员社区</a></li>
                         </ul>
                 </div><!-- /.blogroll -->
                 <div class="social">
