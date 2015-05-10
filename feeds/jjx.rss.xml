@@ -29,13 +29,16 @@
 &lt;/div&gt;
 &lt;div class="section" id="mono"&gt;
 &lt;h2&gt;mono 安装&lt;/h2&gt;
-&lt;p&gt;sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+&lt;p&gt;ubuntu 安装和更新已经非常方便了&lt;/p&gt;
+&lt;blockquote&gt;
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 echo &amp;quot;deb &lt;a class="reference external" href="http://download.mono-project.com/repo/debian"&gt;http://download.mono-project.com/repo/debian&lt;/a&gt; wheezy main&amp;quot; | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
-sudo apt-get update&lt;/p&gt;
+sudo apt-get update&lt;/blockquote&gt;
 &lt;p&gt;如果是 ubuntu 12.04 tls 不敢升级&lt;/p&gt;
-&lt;p&gt;echo &amp;quot;deb &lt;a class="reference external" href="http://download.mono-project.com/repo/debian"&gt;http://download.mono-project.com/repo/debian&lt;/a&gt; wheezy-libtiff-compat main&amp;quot; | sudo tee -a /etc/apt/sources.list.d/mono-xamarin.list&lt;/p&gt;
-&lt;p&gt;apt-get update&lt;/p&gt;
-&lt;p&gt;apt-get install mono-complete&lt;/p&gt;
+&lt;blockquote&gt;
+echo &amp;quot;deb &lt;a class="reference external" href="http://download.mono-project.com/repo/debian"&gt;http://download.mono-project.com/repo/debian&lt;/a&gt; wheezy-libtiff-compat main&amp;quot; | sudo tee -a /etc/apt/sources.list.d/mono-xamarin.list
+apt-get update
+apt-get install mono-complete&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;mono 调试&lt;/h2&gt;
@@ -50,21 +53,20 @@ sudo apt-get update&lt;/p&gt;
 &lt;li&gt;packages.config nuget包文件&lt;/li&gt;
 &lt;li&gt;packages nuget 包文件&lt;/li&gt;
 &lt;li&gt;csproj/sln 项目文件&lt;/li&gt;
-&lt;li&gt;.cs&lt;/li&gt;
-&lt;li&gt;Properties/.cs&lt;/li&gt;
+&lt;li&gt;*.cs&lt;/li&gt;
+&lt;li&gt;Properties/*.cs&lt;/li&gt;
 &lt;li&gt;packages.config/app.config&lt;/li&gt;
-&lt;li&gt;.settings/.json visual studio code 配置文件&lt;/li&gt;
+&lt;li&gt;.settings/*.json visual studio code 配置文件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;.gitignore&lt;/dt&gt;
-&lt;dd&gt;Thumbs.db
+&lt;p&gt;.gitignore&lt;/p&gt;
+&lt;blockquote&gt;
+Thumbs.db
 *.dll
 .DS_Store
 packages
 bin
 obj
-*.userprefs&lt;/dd&gt;
-&lt;/dl&gt;
+*.userprefs&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id3"&gt;
 &lt;h2&gt;编辑器&lt;/h2&gt;
