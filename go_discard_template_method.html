@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Go 扔掉template method</title>
+        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css" />
+        <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                    <li><a href="/category/misc.html">未分类</a></li>
+                    <li><a href="/about-us.html">关于我们</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://blog.easynew.com.cn/go_discard_template_method.html" rel="bookmark"
+           title="Permalink to Go 扔掉template method">Go 扔掉template method</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-05-14T11:43:00+08:00">
+                Published: 四 14 五月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->      <p>在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是</p>
+<ul class="simple">
+<li>定义一个接口 如BaseService</li>
+<li>创建一个类实现该接口, 该类通常为抽象类, 完成程序的主要骨架, 将变动的方法抽象出来, 让子类继承实现</li>
+</ul>
+<p>在go中, 这种方式行不通</p>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+
+<span class="kd">type</span> <span class="nx">BaseService</span> <span class="kd">interface</span><span class="p">{</span>
+   <span class="nx">Invoke</span><span class="p">(</span><span class="nx">request</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span>
+<span class="p">}</span>
+
+
+<span class="kd">type</span> <span class="nx">DefaultBaseService</span> <span class="kd">struct</span> <span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">DefaultBaseService</span><span class="p">)</span> <span class="nx">Invoke</span><span class="p">(</span><span class="nx">request</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span> <span class="kd">interface</span><span class="p">{}){</span>
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">ReadId</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">DefaultBaseService</span><span class="p">)</span> <span class="nx">ReadId</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nb">println</span><span class="p">(</span><span class="s">&quot;DefaultBaseService&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="kd">type</span> <span class="nx">UserService</span> <span class="kd">struct</span> <span class="p">{</span>
+   <span class="nx">DefaultBaseService</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">UserService</span><span class="p">)</span> <span class="nx">ReadId</span><span class="p">(){</span>
+    <span class="nb">println</span><span class="p">(</span><span class="s">&quot;UserService&quot;</span><span class="p">)</span>
+
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">(){</span>
+
+    <span class="kd">var</span> <span class="nx">user_service</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">UserService</span><span class="p">{}</span>
+    <span class="nx">user_service</span><span class="p">.</span><span class="nx">Invoke</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span> <span class="c1">// 调用的还是DefaultBaseService方法</span>
+    <span class="nx">user_service</span><span class="p">.</span><span class="nx">ReadId</span><span class="p">()</span> <span class="c1">// 调用的才是user_service</span>
+
+<span class="p">}</span>
+</pre></div>
+
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'easynew';
+        var disqus_identifier = 'go_discard_template_method.html';
+        var disqus_url = 'http://blog.easynew.com.cn/go_discard_template_method.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

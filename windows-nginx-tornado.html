@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -36,7 +36,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->      <p>在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.</p>
 <p>结合nginx和tornado 还是有好处的, 主要是减轻tornado的负担,典型的如让nginx处理静态文件,让nginx处理gzip.由于tornado是单线程的,让nginx进行负载平衡也很有必要.</p>
@@ -47,7 +47,7 @@
 <li>worker_process 配置为1, 是因为windows下只支持一个工作进程</li>
 <li>worker_connections 1024就行，因为select有限制</li>
 </ol>
-<div class="highlight"><pre><span class="c1">#user  nobody;</span>
+<div class="highlight"><pre><span></span><span class="c1">#user  nobody;</span>
 
 <span class="k">worker_processes</span>  <span class="mi">1</span><span class="p">;</span>
 <span class="c1">#daemon off;</span>
@@ -212,7 +212,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

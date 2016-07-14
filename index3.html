@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -24,6 +24,41 @@
                     <ol id="posts-list" class="hfeed" start="5">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html" rel="bookmark"
+                           title="Permalink to extjs 4 NodeInterface destroy">extjs 4 NodeInterface destroy</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-16T16:02:00+08:00">
+                Published: 日 16 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。</p>
+<p>当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack</p>
+<div class="highlight"><pre><span></span><span class="nx">Ext</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">proxy</span><span class="p">.</span><span class="nx">Server</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+  <span class="nx">setException</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">response</span><span class="p">){</span>
+      <span class="nx">operation</span><span class="p">.</span><span class="nx">setException</span><span class="p">({</span>
+          <span class="nx">status</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
+          <span class="nx">statusText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">,</span>
+          <span class="nx">responseText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">responseText</span> <span class="c1">//&lt;--Added this line!</span>
+      <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+<p>这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 <a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235">NodeInterface destroy with callback?</a>，无人理睬。</p>
+<p>当然 ...</p>
+                <a class="readmore" href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="http://blog.easynew.com.cn/tornado-status-check.html" rel="bookmark"
                            title="Permalink to tornado 服务监测">tornado 服务监测</a></h1>
                 </header>
@@ -37,7 +72,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <div class="section" id="id1">
 <h2>真正的原因</h2>
@@ -67,14 +102,14 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <div class="section" id="id1">
 <h2>自定义菜单</h2>
 <p>通过以下三个选项自定义菜单</p>
-<div class="highlight"><pre><span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<div class="highlight"><pre><span></span><span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
 <span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">((</span><span class="s">&#39;未分类&#39;</span><span class="p">,</span> <span class="s">&#39;category/misc.html&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;关于我们&#39;</span><span class="p">,</span> <span class="s">&#39;about-us.html&#39;</span><span class="p">),</span> <span class="p">)</span>
+<span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;未分类&#39;</span><span class="p">,</span> <span class="s1">&#39;category/misc.html&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;关于我们&#39;</span><span class="p">,</span> <span class="s1">&#39;about-us.html&#39;</span><span class="p">),</span> <span class="p">)</span>
 </pre></div>
 <p>建议你建两个同级目录，比方说就是jiangjianxiao.github.com和blog, blog用来存放pelican建立的站点, jiangjianxiao.github.com 就是pelican的原始内容</p>
 <p>修改 pelicanconf.py, 增加:</p>
@@ -104,7 +139,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>.</p>
 
 </footer><!-- /.post-info -->                <p>C9 是一个进销存系统, 当前，它主要应用在计算机批发行业. 它的前身是C3和C8. 参考 <a class="reference external" href="http://www.yuyaoe.com/static/html/intro.html">C9 文档</a> ,可以获得更多信息</p>
 <p>C9 计划逐步开放源代码, 当然, 开放源代码不是目的, 主要的是为了C9的体系更加结构化,更加易于扩展, 同时,通过开放源代码这种外部作用力, 使代码更规范,更安全</p>
@@ -138,7 +173,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>.</p>
 
 </footer><!-- /.post-info -->                <p>随着c9第一个版本的交付，虽然以后还有许多事情要做，但现在，  是有必要对c9做一个小结了。</p>
 <p>c9是一个进销存应用，是c3-c8系列的升级，c3是一个vb6桌面应用，c8是一个wcf 分布式windows forms 桌面应用，而c9,是基于extjs+python后端的一个web 应用。</p>
@@ -165,7 +200,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <p>原文：<a class="reference external" href="http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/">http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/</a></p>
 <p>译者： <a class="reference external" href="http://zhuang13.de/">TheLover_Z</a></p>
@@ -175,33 +210,6 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
 <p>我以前是 Eclipse 的死党。虽然 Sublime 并没有像 Eclipse ...</p>
                 <a class="readmore" href="http://blog.easynew.com.cn/python-web-sublime-text-2.html">read more</a>
 <p>There are <a href="http://blog.easynew.com.cn/python-web-sublime-text-2.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/no_attribute_sa_instance_state.html" rel="bookmark"
-                           title="Permalink to AttributeError: 'NoneType' object has no attribute '_sa_instance_state'">AttributeError: 'NoneType' object has no attribute '_sa_instance_state'</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-08-22T00:00:00+08:00">
-                Published: 三 22 八月 2012
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>当对sqlalchemy的一些 返回进行pickle处理时会出现如标题的错误，原因是这些返回的类型是sqlalchemy.orm.collections.InstrumentedList</p>
-<p>简单的处理将是将其转换为列表，如</p>
-<div class="highlight"><pre><span class="n">users</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Role</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">users</span><span class="p">)</span>
-<span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">users</span><span class="p">))</span>
-</pre></div>
-
-                <a class="readmore" href="http://blog.easynew.com.cn/no_attribute_sa_instance_state.html">read more</a>
-<p>There are <a href="http://blog.easynew.com.cn/no_attribute_sa_instance_state.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
@@ -241,7 +249,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -36,7 +36,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/c9.html">c9</a>.</p>
 
 </footer><!-- /.post-info -->      <p>随着c9第一个版本的交付，虽然以后还有许多事情要做，但现在，  是有必要对c9做一个小结了。</p>
 <p>c9是一个进销存应用，是c3-c8系列的升级，c3是一个vb6桌面应用，c8是一个wcf 分布式windows forms 桌面应用，而c9,是基于extjs+python后端的一个web 应用。</p>
@@ -71,8 +71,8 @@
 <li>tornado 异步，而不是django或是你希望使用gevent+flask/bottle奇迹般的将同步变成异步。后两者都不可靠,django优化手段有限，通常就是芹菜，而gevent太多magic，不可琢磨   。而torando有点像twisted,你一开始就知道，哇，我只有一个进程，没有多线程，诸塞了怎么办？一开始你必须有对策！</li>
 </ul>
 <p>这个系统完全是用sublime text2开发，基本上属于没有测试就上线的，对于c#/java之类的开发者，没有编译，没有编辑器的检查， 你有底吗？事实上，开始一两天的两个错误对数据造成影响的错误，都无法用编译检查的，都是输入错误，但代码是合法的，   如</p>
-<div class="highlight"><pre><span class="n">update_on_hand_on_road</span>      <span class="c">#应该是update_on_hand</span>
-<span class="n">payable</span> <span class="o">=</span> <span class="n">receivable</span> <span class="ow">or</span> <span class="mi">0</span>   <span class="c">#应该是payable = payable or 0</span>
+<div class="highlight"><pre><span></span><span class="n">update_on_hand_on_road</span>      <span class="c1">#应该是update_on_hand</span>
+<span class="n">payable</span> <span class="o">=</span> <span class="n">receivable</span> <span class="ow">or</span> <span class="mi">0</span>   <span class="c1">#应该是payable = payable or 0</span>
 </pre></div>
 <p>数据库应用最好还是用动态语言写，这是我最近的心得，c9用python做，很贴心。 特别是做了marsx,marsx使用了paxcompiler来做应用开发，但paxcompiler实现的还是静态的pascal语言，marsx做出来后，在上面做了几个软件后，我就后悔了。</p>
 <p>还在想...</p>
@@ -127,7 +127,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

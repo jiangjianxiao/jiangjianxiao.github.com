@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -36,13 +36,13 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/jython.html">jython</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/jython.html">jython</a>.</p>
 
 </footer><!-- /.post-info -->      <p>最近 jython 发布了 2.7 beta2 ,  这里想说的是即将到来的beta3.</p>
 <p>Jim Baker  在jython-dev上的邮件说明 beta3 主要是合并socket-reboot分支的, 这个 分支主要 是Design of a reworked implementation of socket, ssl, and select modules for Jython, using Netty 4.</p>
 <p>并且这个版本 easy_install/pip将能重新工作在jython 2.7中</p>
 <p>但我的尝试是运行ez_setup.py时的这个 错误</p>
-<div class="highlight"><pre><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
 </pre></div>
 <p>引发 IOError, google以下, 好象有人报告这个错误, 不过同我这里还不一样  <a class="reference external" href="http://bugs.jython.org/issue1944">http://bugs.jython.org/issue1944</a>, 即 LC_ALL=&quot;en_US.UTF-8&quot; ./jython -c 'open(&quot;/dev/null&quot;, &quot;w&quot;)'  同样还是报错, 测试了jython 2.5也是如此</p>
 <p>在sqlalchemy 0.86的代码 中, 包含了另外一个版本 的ez_setup 可以完成 setuptools的安装</p>
@@ -50,10 +50,10 @@
 <p>性能, 还是很慢, 无法忍受</p>
 <p>看到日志提示: You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.</p>
 <p>放了 Javassist.jar 在classpath ,不过这个应该对下面的db访问没有多大关系</p>
-<div class="highlight"><pre><span class="c">#encoding=utf-8</span>
+<div class="highlight"><pre><span></span><span class="c1">#encoding=utf-8</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
-<span class="k">if</span>  <span class="s">&#39;__pypy__&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">builtin_module_names</span><span class="p">:</span>
+<span class="k">if</span>  <span class="s1">&#39;__pypy__&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">builtin_module_names</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">psycopg2cffi</span> <span class="kn">import</span> <span class="n">compat</span>
     <span class="n">compat</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
@@ -63,21 +63,21 @@
 <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span><span class="p">,</span> <span class="n">scoped_session</span>
 
-<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;java&#39;</span><span class="p">):</span>
-    <span class="n">db</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">&#39;postgresql+zxjdbc://postgres:123456@localhost/c9&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;java&#39;</span><span class="p">):</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql+zxjdbc://postgres:123456@localhost/c9&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">db</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">&#39;postgresql://postgres:123456@localhost/c9&#39;</span><span class="p">)</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://postgres:123456@localhost/c9&#39;</span><span class="p">)</span>
 <span class="n">Session</span> <span class="o">=</span> <span class="n">scoped_session</span><span class="p">(</span><span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">db</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
     <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
-    <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;select * from users;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;select * from users;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
     <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <span class="n">_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">_count</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">_count</span><span class="p">):</span>
     <span class="n">test</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">&#39;timing&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">_start</span>
+<span class="k">print</span> <span class="s1">&#39;timing&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">_start</span>
 </pre></div>
 <p>这段代码测试 jython/pypy/python的表现</p>
 <p>pypy  timing 2.4122531414
@@ -139,7 +139,7 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒</p>
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -36,19 +36,19 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->      <p>在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。</p>
 <div class="section" id="id1">
 <h2>定义数据源</h2>
 <p>简单起见， 我们在settings.py定义一个LOCATION 变量</p>
-<div class="highlight"><pre><span class="n">LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;浙江&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;杭州&quot;</span><span class="p">,</span> <span class="s">&quot;宁波&quot;</span><span class="p">],</span> <span class="s">&quot;湖北&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;武汉&quot;</span><span class="p">,</span> <span class="s">&quot;xxx&quot;</span><span class="p">]}</span>
+<div class="highlight"><pre><span></span><span class="n">LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;浙江&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;杭州&quot;</span><span class="p">,</span> <span class="s2">&quot;宁波&quot;</span><span class="p">],</span> <span class="s2">&quot;湖北&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;武汉&quot;</span><span class="p">,</span> <span class="s2">&quot;xxx&quot;</span><span class="p">]}</span>
 </pre></div>
 </div>
 <div class="section" id="models-py-model">
 <h2>models.py 中的model 定义</h2>
 <p>这里没有为state定义choices 是因为state的选项是根据country的值变化的</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
 <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext</span> <span class="k">as</span> <span class="n">_</span>
 
@@ -56,20 +56,20 @@
 
 
 <span class="k">class</span> <span class="nc">Company</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">country</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&quot;Country&quot;</span><span class="p">),</span> <span class="n">choices</span><span class="o">=</span><span class="n">COUNTRY</span><span class="p">)</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;State&#39;</span><span class="p">))</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Country&quot;</span><span class="p">),</span> <span class="n">choices</span><span class="o">=</span><span class="n">COUNTRY</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;State&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="section" id="admin-py">
 <h2>admin.py 的定义</h2>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
 <span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
 <span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext</span> <span class="k">as</span> <span class="n">_</span>
 
 
 <span class="k">class</span> <span class="nc">CompanyAdminForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;State&#39;</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;State&#39;</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">locations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">json</span>
@@ -77,9 +77,9 @@
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">ins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;instance&#39;</span><span class="p">)</span>
+        <span class="n">ins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;instance&#39;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">CompanyAdminForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">ins</span> <span class="ow">and</span> <span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">:</span>
             <span class="n">state</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">LOCATION</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ins</span><span class="o">.</span><span class="n">country</span><span class="p">)]</span>
@@ -96,7 +96,7 @@
 <div class="section" id="templates-admin-app-company-change-form-html">
 <h2>templates/admin/app/company/change_form.html</h2>
 <p>这里， app 应该替换为你自己的应用名, 在你的templates目录创建该文件，并复制django-admin的原 change_form.html 内容, 在合适位置加入（自行写js代码 )</p>
-<div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
     <span class="kd">var</span> <span class="nx">LOCATION</span> <span class="o">=</span> <span class="p">{{</span> <span class="nx">adminform</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">locations</span> <span class="o">|</span> <span class="nx">safe</span> <span class="p">}};</span>
 
     <span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">django</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">;</span>
@@ -182,7 +182,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -22,7 +22,77 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://blog.easynew.com.cn/ubuntu_os_x_c_sharp.html">尝试在ubuntu/os x上使用c#</a></h1>
+                    <h1 class="entry-title"><a href="http://blog.easynew.com.cn/go_discard_template_method.html">Go 扔掉template method</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-05-14T11:43:00+08:00">
+                Published: 四 14 五月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info --><p>在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是</p>
+<ul class="simple">
+<li>定义一个接口 如BaseService</li>
+<li>创建一个类实现该接口, 该类通常为抽象类, 完成程序的主要骨架, 将变动的方法抽象出来, 让子类继承实现</li>
+</ul>
+<p>在go中, 这种方式行不通</p>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+
+<span class="kd">type</span> <span class="nx">BaseService</span> <span class="kd">interface</span><span class="p">{</span>
+   <span class="nx">Invoke</span><span class="p">(</span><span class="nx">request</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span>
+<span class="p">}</span>
+
+
+<span class="kd">type</span> <span class="nx">DefaultBaseService</span> <span class="kd">struct</span> <span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">DefaultBaseService</span><span class="p">)</span> <span class="nx">Invoke</span><span class="p">(</span><span class="nx">request</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span> <span class="kd">interface</span><span class="p">{}){</span>
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">ReadId</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">DefaultBaseService</span><span class="p">)</span> <span class="nx">ReadId</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nb">println</span><span class="p">(</span><span class="s">&quot;DefaultBaseService&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="kd">type</span> <span class="nx">UserService</span> <span class="kd">struct</span> <span class="p">{</span>
+   <span class="nx">DefaultBaseService</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">UserService</span><span class="p">)</span> <span class="nx">ReadId</span><span class="p">(){</span>
+    <span class="nb">println</span><span class="p">(</span><span class="s">&quot;UserService&quot;</span><span class="p">)</span>
+
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">(){</span>
+
+    <span class="kd">var</span> <span class="nx">user_service</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">UserService</span><span class="p">{}</span>
+    <span class="nx">user_service</span><span class="p">.</span><span class="nx">Invoke</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span> <span class="c1">// 调用的还是DefaultBaseService方法</span>
+    <span class="nx">user_service</span><span class="p">.</span><span class="nx">ReadId</span><span class="p">()</span> <span class="c1">// 调用的才是user_service</span>
+
+<span class="p">}</span>
+</pre></div>
+<p>There are <a href="http://blog.easynew.com.cn/go_discard_template_method.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://blog.easynew.com.cn/ubuntu_os_x_c_sharp.html" rel="bookmark"
+                           title="Permalink to 尝试在ubuntu/os x上使用c#">尝试在ubuntu/os x上使用c#</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-05-09T20:34:00+08:00">
                 Published: 六 09 五月 2015
@@ -31,9 +101,9 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
-</footer><!-- /.post-info --><p>最近微软的举动还是挺让人心动的, 但 <a class="reference external" href="https://github.com/dotnet/coreclr">https://github.com/dotnet/coreclr</a> 中的dnx 部分, 除了使用mono的运行时, 使用coreclr 在os x/ubuntu 上都没有能跑起来.</p>
+</footer><!-- /.post-info -->                <p>最近微软的举动还是挺让人心动的, 但 <a class="reference external" href="https://github.com/dotnet/coreclr">https://github.com/dotnet/coreclr</a> 中的dnx 部分, 除了使用mono的运行时, 使用coreclr 在os x/ubuntu 上都没有能跑起来.</p>
 <p>最近的一个问题是cpython 的pyopenxl , 导出excel 的write_only优化, 存在着以下问题</p>
 <ul class="simple">
 <li>datavalidate list 在write_only=True时无效</li>
@@ -49,125 +119,10 @@
 <li>dapper</li>
 <li>npgsql</li>
 </ul>
-<p>python 通过 pyzmq 向 .net 的netmq rep发起请求, 初步测试结果如下</p>
-<ul class="simple">
-<li>导出26000条带data validate 的excel 冷启动为2秒左右, 第二次为1.3秒左右, 文件大小为1.5 m, 比pyopenxl 的小很多</li>
-<li>使用npgsql 插入26000条记录, 约26秒, 相当1秒1000条, 比cpython的约33秒也有一定的进步</li>
-</ul>
-<p>所以有个初步的设想是写个简单c#的服务端, 提供excel的导入导出服务, 两者使用zmq req/rep 协议,josn字符串传递, 二进制使用base64编码传递(cpython 2.7的字符串实际上是字节数组, 同.net 的字符串是不一样的)</p>
-<div class="section" id="id1">
-<h2>几个问题</h2>
-<ul class="simple">
-<li>当dapper 的command timeout 设置似乎无效, 建立连接字符串的 CommandTimeout=60;有效, 待继续排查</li>
-</ul>
-</div>
-<div class="section" id="mono">
-<h2>mono 安装</h2>
-<p>ubuntu 安装和更新已经非常方便了</p>
-<blockquote>
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-echo &quot;deb <a class="reference external" href="http://download.mono-project.com/repo/debian">http://download.mono-project.com/repo/debian</a> wheezy main&quot; | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
-sudo apt-get update</blockquote>
-<p>如果是 ubuntu 12.04 tls 不敢升级</p>
-<blockquote>
-echo &quot;deb <a class="reference external" href="http://download.mono-project.com/repo/debian">http://download.mono-project.com/repo/debian</a> wheezy-libtiff-compat main&quot; | sudo tee -a /etc/apt/sources.list.d/mono-xamarin.list
-apt-get update
-apt-get install mono-complete</blockquote>
-</div>
-<div class="section" id="id2">
-<h2>mono 调试</h2>
-<p>sdb <a class="reference external" href="https://github.com/mono/sdb">https://github.com/mono/sdb</a></p>
-</div>
-<div class="section" id="nuget">
-<h2>nuget</h2>
-<p>ubuntu 用apt-get install nuget</p>
-<p>nuget install 安装包, 在 packages.config 所在目录安装, 并用OutputDirectory 指定packages目录 nuget install -OutputDirectory packages</p>
-<p>重要文件</p>
-<ul class="simple">
-<li>packages.config nuget包文件</li>
-<li>packages nuget 包文件</li>
-<li>csproj/sln 项目文件</li>
-<li>*.cs</li>
-<li>Properties/*.cs</li>
-<li>packages.config/app.config</li>
-<li>.settings/*.json visual studio code 配置文件</li>
-</ul>
-<p>.gitignore</p>
-<blockquote>
-Thumbs.db
-*.dll
-.DS_Store
-packages
-bin
-obj
-*.userprefs</blockquote>
-</div>
-<div class="section" id="id3">
-<h2>编辑器</h2>
-<p>可以使用 visual studio code和ximarin studio</p>
-<p>这里做的笔记是visual studio code 的</p>
-<p>使用visual studio code 可参考这个链接 <a class="reference external" href="https://code.visualstudio.com/Docs/ASPnet5">https://code.visualstudio.com/Docs/ASPnet5</a></p>
-<ul class="simple">
-<li>npm install -g yo grunt-cli generator-aspnet bower</li>
-<li>yo aspnet 生成空白项目</li>
-</ul>
-<div class="section" id="shift-cmd-b">
-<h3>编译 用 shift+cmd+b</h3>
-<p>cmd+p, configure task runner, 实际修改的是.settings/tasks.json</p>
-<p>将默认的任务修改成如下内容：</p>
-<div class="highlight"><pre><span class="p">{</span>
-<span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-<span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;xbuild&quot;</span><span class="p">,</span>
-<span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ExcelService.sln&quot;</span><span class="p">]</span>
-
-<span class="p">}</span>
-</pre></div>
-<p>也可以直接在项目目录下用xbuild 编译</p>
-</div>
-<div class="section" id="debug">
-<h3>debug</h3>
-<p>cmd+p, debug:configure, 实际修改的是.settings/launch.json。</p>
-<div class="highlight"><pre><span class="p">{</span>
-    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-    <span class="err">//</span> <span class="err">List</span> <span class="err">of</span> <span class="err">configurations.</span> <span class="err">Add</span> <span class="err">new</span> <span class="err">configurations</span> <span class="err">or</span> <span class="err">edit</span> <span class="err">existing</span> <span class="err">ones.</span>
-    <span class="err">//</span> <span class="err">ONLY</span> <span class="nt">&quot;node&quot;</span> <span class="err">and</span> <span class="s2">&quot;mono&quot;</span> <span class="err">are</span> <span class="err">supported</span><span class="p">,</span> <span class="err">change</span> <span class="nt">&quot;type&quot;</span> <span class="err">to</span> <span class="err">switch.</span>
-    <span class="s2">&quot;configurations&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="err">//</span> <span class="err">Name</span> <span class="err">of</span> <span class="err">configuration;</span> <span class="err">appears</span> <span class="err">in</span> <span class="err">the</span> <span class="err">launch</span> <span class="err">configuration</span> <span class="err">drop</span> <span class="err">down</span> <span class="err">menu.</span>
-            <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Launch ExecelService&quot;</span><span class="p">,</span>
-            <span class="err">//</span> <span class="err">Type</span> <span class="err">of</span> <span class="err">configuration.</span> <span class="err">Possible</span> <span class="err">values:</span> <span class="nt">&quot;node&quot;</span><span class="p">,</span> <span class="nt">&quot;mono&quot;</span><span class="err">.</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mono&quot;</span><span class="p">,</span>
-            <span class="err">//</span> <span class="err">Workspace</span> <span class="err">relative</span> <span class="err">or</span> <span class="err">absolute</span> <span class="err">path</span> <span class="err">to</span> <span class="err">the</span> <span class="err">program.</span>
-            <span class="nt">&quot;program&quot;</span><span class="p">:</span> <span class="s2">&quot;bin/Debug/ExcelService.exe&quot;</span><span class="p">,</span> <span class="err">//要调试的可执行文件位置</span>
-            <span class="err">//</span> <span class="err">Automatically</span> <span class="err">stop</span> <span class="err">program</span> <span class="err">after</span> <span class="err">launch.</span>
-            <span class="nt">&quot;stopOnEntry&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="err">//</span> <span class="err">Command</span> <span class="err">line</span> <span class="err">arguments</span> <span class="err">passed</span> <span class="err">to</span> <span class="err">the</span> <span class="err">program.</span>
-            <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="err">//</span> <span class="err">Workspace</span> <span class="err">relative</span> <span class="err">or</span> <span class="err">absolute</span> <span class="err">path</span> <span class="err">to</span> <span class="err">the</span> <span class="err">working</span> <span class="err">directory</span> <span class="err">of</span> <span class="err">the</span> <span class="err">program</span> <span class="err">being</span> <span class="err">debugged.</span> <span class="err">Default</span> <span class="err">is</span> <span class="err">the</span> <span class="err">current</span> <span class="err">workspace.</span>
-            <span class="nt">&quot;cwd&quot;</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span>
-            <span class="err">//</span> <span class="err">Workspace</span> <span class="err">relative</span> <span class="err">or</span> <span class="err">absolute</span> <span class="err">path</span> <span class="err">to</span> <span class="err">the</span> <span class="err">runtime</span> <span class="err">executable</span> <span class="err">to</span> <span class="err">be</span> <span class="err">used.</span> <span class="err">Default</span> <span class="err">is</span> <span class="err">the</span> <span class="err">runtime</span> <span class="err">executable</span> <span class="err">on</span> <span class="err">the</span> <span class="err">PATH.</span>
-            <span class="nt">&quot;runtimeExecutable&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="err">//</span> <span class="err">Environment</span> <span class="err">variables</span> <span class="err">passed</span> <span class="err">to</span> <span class="err">the</span> <span class="err">program.</span>
-            <span class="nt">&quot;env&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="id4">
-<h2>参考</h2>
-<p><a class="reference external" href="http://www.cnblogs.com/dudu/p/mac-coreclr-helloworld.html">http://www.cnblogs.com/dudu/p/mac-coreclr-helloworld.html</a></p>
-<p><a class="reference external" href="http://www.cnblogs.com/murongxiaopifu/p/4489024.html">http://www.cnblogs.com/murongxiaopifu/p/4489024.html</a></p>
-<p>性能评测, mono 版本比较老, 但大体性能同java差距不能说很大了</p>
-<p><a class="reference external" href="http://benchmarksgame.alioth.debian.org/u64q/benchmark.php?test=all&amp;lang=csharp&amp;lang2=java&amp;data=u64q">http://benchmarksgame.alioth.debian.org/u64q/benchmark.php?test=all&amp;lang=csharp&amp;lang2=java&amp;data=u64q</a></p>
-</div>
-<p>There are <a href="http://blog.easynew.com.cn/ubuntu_os_x_c_sharp.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>python 通过 pyzmq 向 .net ...</p>
+                <a class="readmore" href="http://blog.easynew.com.cn/ubuntu_os_x_c_sharp.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/ubuntu_os_x_c_sharp.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -184,13 +139,13 @@ obj
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/jython.html">jython</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/jython.html">jython</a>.</p>
 
 </footer><!-- /.post-info -->                <p>最近 jython 发布了 2.7 beta2 ,  这里想说的是即将到来的beta3.</p>
 <p>Jim Baker  在jython-dev上的邮件说明 beta3 主要是合并socket-reboot分支的, 这个 分支主要 是Design of a reworked implementation of socket, ssl, and select modules for Jython, using Netty 4.</p>
 <p>并且这个版本 easy_install/pip将能重新工作在jython 2.7中</p>
 <p>但我的尝试是运行ez_setup.py时的这个 错误</p>
-<div class="highlight"><pre><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
 </pre></div>
 <p>引发 IOError, google以下, 好象有人报告这个错误, 不过同我这里还不一样  <a class="reference external" href="http://bugs.jython.org/issue1944">http://bugs.jython ...</a></p>
                 <a class="readmore" href="http://blog.easynew.com.cn/jython-27-beta3.html">read more</a>
@@ -212,7 +167,7 @@ obj
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <p>当前, 使用java很多时候不可避免, 比方说以下场景</p>
 <ol class="arabic simple">
@@ -256,19 +211,19 @@ obj
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <p>在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。</p>
 <div class="section" id="id1">
 <h2>定义数据源</h2>
 <p>简单起见， 我们在settings.py定义一个LOCATION 变量</p>
-<div class="highlight"><pre><span class="n">LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;浙江&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;杭州&quot;</span><span class="p">,</span> <span class="s">&quot;宁波&quot;</span><span class="p">],</span> <span class="s">&quot;湖北&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;武汉&quot;</span><span class="p">,</span> <span class="s">&quot;xxx&quot;</span><span class="p">]}</span>
+<div class="highlight"><pre><span></span><span class="n">LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;浙江&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;杭州&quot;</span><span class="p">,</span> <span class="s2">&quot;宁波&quot;</span><span class="p">],</span> <span class="s2">&quot;湖北&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;武汉&quot;</span><span class="p">,</span> <span class="s2">&quot;xxx&quot;</span><span class="p">]}</span>
 </pre></div>
 </div>
 <div class="section" id="models-py-model">
 <h2>models.py 中的model 定义</h2>
 <p>这里没有为state定义choices 是因为state的选项是根据country的值变化的</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
 <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext</span> <span class="k">as</span> <span class="n">_</span>
 
@@ -292,7 +247,7 @@ obj
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <p>这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。</p>
 <div class="section" id="id2">
@@ -323,42 +278,6 @@ obj
 <li>按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历 ...</li></ul></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/resume.html">read more</a>
 <p>There are <a href="http://blog.easynew.com.cn/resume.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/cefpython_issues.html" rel="bookmark"
-                           title="Permalink to cefpython 当前的两个问题">cefpython 当前的两个问题</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-07-10T13:56:00+08:00">
-                Published: 三 10 七月 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>最近, 使用cefpython 写 <a class="reference external" href="http://www.yarder.co">yarder.co</a> 的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.</p>
-<p>首先是 当js调用python时, python的异常不会传播到javascript. 这个问题参考 <a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=11">Throw JS / Python exceptions according to execution context</a></p>
-<p>所以,当前你的处理方式应该是在python内部处理异常,并返回一个是否成功的状态给js!</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="k">try</span><span class="p">:</span>
-
-                <span class="c">#你的代码</span>
-
-                <span class="k">return</span> <span class="p">{</span><span class="s">&quot;success&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="n">xxxx</span> <span class="p">}</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="c"># log excpeiton</span>
-                <span class="k">return</span> <span class="p">{</span><span class="s">&quot;success&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&quot;error&quot;</span><span class="p">:</span> <span class="n">ex</span><span class="o">.</span><span class="n">message</span><span class="p">}</span>
-</pre></div>
-<div class="highlight"><pre><span class="kd">var ...</span></pre></div>
-                <a class="readmore" href="http://blog.easynew.com.cn/cefpython_issues.html">read more</a>
-<p>There are <a href="http://blog.easynew.com.cn/cefpython_issues.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
@@ -397,7 +316,7 @@ obj
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

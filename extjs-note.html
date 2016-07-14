@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -36,11 +36,11 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->      <div class="section" id="form">
 <h2>设置form所有字段只读</h2>
-<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
 
   <span class="nx">setReadOnlyForAll</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">Ext</span><span class="p">.</span><span class="nx">suspendLayouts</span><span class="p">();</span>
@@ -55,7 +55,7 @@
 <div class="section" id="override">
 <h2>通过override 设置缺省值</h2>
 <p>血的教训, 如果你要将所有窗体都设置frame为true, 不要每个form都去设置, 而是使用</p>
-<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
         <span class="nx">bodyPadding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
         <span class="nx">frame</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">// or true</span>
 
@@ -68,7 +68,7 @@
 <li>form对record的绑定不行,loadRecord/updateRecord需要手动调用,所以很多时候只能通过form.form.findField().setValue完成更新,设计问题</li>
 <li>调用model.destroy() 可以使用success,failure回调,参数是当前model和operation, 典型代码应该是这样</li>
 </ol>
-<div class="highlight"><pre><span class="nx">_sel</span><span class="p">.</span><span class="nx">destroy</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><span class="nx">_sel</span><span class="p">.</span><span class="nx">destroy</span><span class="p">({</span>
 
         <span class="nx">success</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">rec</span><span class="p">,</span><span class="nx">operation</span><span class="p">){</span>
         <span class="nx">grid</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">_sel</span><span class="p">);</span>
@@ -89,7 +89,7 @@
 <li>isLoaded为false</li>
 </ol>
 <p>所以,建议传递loaded:true到root来达到按需加载的效果</p>
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;Ext.tree.Panel&#39;</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;Ext.tree.Panel&#39;</span><span class="p">,</span> <span class="p">{</span>
         <span class="nx">rootVisible</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
                 <span class="nx">loaded</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -159,7 +159,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

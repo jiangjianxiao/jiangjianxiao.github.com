@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -36,11 +36,11 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->      <p>extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。</p>
 <p>当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack</p>
-<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">proxy</span><span class="p">.</span><span class="nx">Server</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><span class="nx">Ext</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">proxy</span><span class="p">.</span><span class="nx">Server</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
   <span class="nx">setException</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">response</span><span class="p">){</span>
       <span class="nx">operation</span><span class="p">.</span><span class="nx">setException</span><span class="p">({</span>
           <span class="nx">status</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
@@ -52,10 +52,10 @@
 </pre></div>
 <p>这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 <a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235">NodeInterface destroy with callback?</a>，无人理睬。</p>
 <p>当然，贴子中 model.superclass.destroy.call(model, {callback: myCallback}}); 现在也不能用了，因为它在</p>
-<div class="highlight"><pre><span class="nx">store</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;bulkremove&#39;</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span> <span class="p">[</span><span class="nx">me</span><span class="p">],</span> <span class="p">[</span><span class="nx">store</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">me</span><span class="p">)],</span> <span class="kc">false</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="nx">store</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">&#39;bulkremove&#39;</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span> <span class="p">[</span><span class="nx">me</span><span class="p">],</span> <span class="p">[</span><span class="nx">store</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">me</span><span class="p">)],</span> <span class="kc">false</span><span class="p">);</span>
 </pre></div>
 <p>报错, TreeStore没有indexOf方法，所以，思路只有复制该方法，去除该行</p>
-<div class="highlight"><pre><span class="kd">function</span> <span class="nx">node_destroy</span><span class="p">(</span><span class="nx">me</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">node_destroy</span><span class="p">(</span><span class="nx">me</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
 
       <span class="nx">options</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">apply</span><span class="p">({</span>
           <span class="nx">records</span><span class="o">:</span> <span class="p">[</span><span class="nx">me</span><span class="p">],</span>
@@ -119,7 +119,7 @@
   <span class="p">}</span>
 </pre></div>
 <p>然后这样调用</p>
-<div class="highlight"><pre><span class="nx">node_destroy</span><span class="p">(</span><span class="nx">rec</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="nx">node_destroy</span><span class="p">(</span><span class="nx">rec</span><span class="p">,</span> <span class="p">{</span>
         <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
 
                 <span class="nx">record</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
@@ -186,7 +186,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

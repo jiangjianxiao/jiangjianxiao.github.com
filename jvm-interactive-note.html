@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -36,7 +36,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->      <p>当前, 使用java很多时候不可避免, 比方说以下场景</p>
 <ol class="arabic simple">
@@ -64,20 +64,20 @@
 </ol>
 <p>jython 主要问题是性能和发展不力. 当然, 如果在这个场景, 主要用jzmq转发请求, 性能不是主要问题.  当然,  最理想的方式就是3.</p>
 <p>下面是用jython转发taobao消息服务例子, 很简单是吗</p>
-<div class="highlight"><pre><span class="kn">from</span>  <span class="nn">com.taobao.api.internal.tmc</span> <span class="kn">import</span> <span class="n">TmcClient</span><span class="p">,</span> <span class="n">Message</span><span class="p">,</span> <span class="n">MessageHandler</span><span class="p">,</span> <span class="n">MessageStatus</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span>  <span class="nn">com.taobao.api.internal.tmc</span> <span class="kn">import</span> <span class="n">TmcClient</span><span class="p">,</span> <span class="n">Message</span><span class="p">,</span> <span class="n">MessageHandler</span><span class="p">,</span> <span class="n">MessageStatus</span>
 <span class="kn">from</span> <span class="nn">org.zeromq</span> <span class="kn">import</span> <span class="n">ZMQ</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">TmcClient</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span><span class="s">&quot;default&quot;</span><span class="p">)</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">TmcClient</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
     <span class="n">context</span> <span class="o">=</span> <span class="n">ZMQ</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">socket</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">PUSH</span><span class="p">)</span>
-    <span class="n">socket</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s">&quot;tcp://*:5555&quot;</span><span class="p">)</span>
+    <span class="n">socket</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;tcp://*:5555&quot;</span><span class="p">)</span>
     <span class="k">class</span> <span class="nc">MessageHandlerImpl</span><span class="p">(</span><span class="n">MessageHandler</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="k">pass</span>
         <span class="k">def</span> <span class="nf">onMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;{</span><span class="se">\&quot;</span><span class="s">topic</span><span class="se">\&quot;</span><span class="s">: </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">, </span><span class="se">\&quot;</span><span class="s">content</span><span class="se">\&quot;</span><span class="s">:</span><span class="si">%s</span><span class="s">}&quot;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">message</span><span class="o">.</span><span class="n">getTopic</span><span class="p">(),</span> <span class="n">message</span><span class="o">.</span><span class="n">getContent</span><span class="p">()))</span>
+                <span class="n">socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">topic</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">content</span><span class="se">\&quot;</span><span class="s2">:</span><span class="si">%s</span><span class="s2">}&quot;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">message</span><span class="o">.</span><span class="n">getTopic</span><span class="p">(),</span> <span class="n">message</span><span class="o">.</span><span class="n">getContent</span><span class="p">()))</span>
 
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">status</span><span class="o">.</span><span class="n">fail</span><span class="p">()</span>
@@ -86,7 +86,7 @@
     <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 <p>由于定位在交互, 所以在jvm, 不会写大规模,系统的代码(同时也要避免这种情况), 同时为避免动态/静态语言转变的思维压力,降低学习成本. 使用groovy, 退化一些性能换取效率会更好. groovy的gdk能省下使用第叁方包的很多时间</p>
@@ -101,7 +101,7 @@
 </ol>
 <p>poi</p>
 <p>jnius.ByteArray.tostring 没有问题, 是poi workbook.getBytes()有问题, 无法获得全部数据</p>
-<div class="highlight"><pre><span class="n">ms</span> <span class="o">=</span> <span class="n">ByteArrayOutputStream</span><span class="o">()</span>
+<div class="highlight"><pre><span></span><span class="n">ms</span> <span class="o">=</span> <span class="n">ByteArrayOutputStream</span><span class="o">()</span>
 <span class="n">wb</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">ms</span><span class="o">)</span>
 <span class="n">ms</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">()</span>  <span class="err">#</span> <span class="n">正确</span>
 </pre></div>
@@ -110,12 +110,12 @@
 <h2>jzmq</h2>
 <p>提示: java.lang.UnsatisfiedLinkError: java.lang.UnsatisfiedLinkError: no jzmq in java.library.path</p>
 <p>这种方法没有用</p>
-<div class="highlight"><pre>   <span class="kn">from</span> <span class="nn">java.lang</span> <span class="kn">import</span> <span class="n">System</span>
-   <span class="n">System</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s">&quot;java.library.path&quot;</span><span class="p">,</span> <span class="s">&quot;/usr/local/lib&quot;</span><span class="p">)</span>
-   <span class="k">print</span> <span class="n">System</span><span class="o">.</span><span class="n">getProperty</span><span class="p">(</span><span class="s">&quot;java.library.path&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>   <span class="kn">from</span> <span class="nn">java.lang</span> <span class="kn">import</span> <span class="n">System</span>
+   <span class="n">System</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;java.library.path&quot;</span><span class="p">,</span> <span class="s2">&quot;/usr/local/lib&quot;</span><span class="p">)</span>
+   <span class="k">print</span> <span class="n">System</span><span class="o">.</span><span class="n">getProperty</span><span class="p">(</span><span class="s2">&quot;java.library.path&quot;</span><span class="p">)</span>
 
 
-<span class="err">或</span> <span class="o">-</span><span class="n">Djava</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;/usr/loca/lib&quot;</span>
+<span class="err">或</span> <span class="o">-</span><span class="n">Djava</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/usr/loca/lib&quot;</span>
 
 <span class="err">或</span> <span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span>
 
@@ -173,7 +173,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

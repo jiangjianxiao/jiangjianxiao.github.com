@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -36,7 +36,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->      <p>最近微软的举动还是挺让人心动的, 但 <a class="reference external" href="https://github.com/dotnet/coreclr">https://github.com/dotnet/coreclr</a> 中的dnx 部分, 除了使用mono的运行时, 使用coreclr 在os x/ubuntu 上都没有能跑起来.</p>
 <p>最近的一个问题是cpython 的pyopenxl , 导出excel 的write_only优化, 存在着以下问题</p>
@@ -61,6 +61,14 @@
 </ul>
 <p>所以有个初步的设想是写个简单c#的服务端, 提供excel的导入导出服务, 两者使用zmq req/rep 协议,josn字符串传递, 二进制使用base64编码传递(cpython 2.7的字符串实际上是字节数组, 同.net 的字符串是不一样的)</p>
 <div class="section" id="id1">
+<h2>我的决策</h2>
+<ul class="simple">
+<li>局限服务端编程</li>
+<li>不用asp.net mvc/wcf/remoting/wpf等</li>
+<li>不用 entity framework</li>
+</ul>
+</div>
+<div class="section" id="id2">
 <h2>几个问题</h2>
 <ul class="simple">
 <li>当dapper 的command timeout 设置似乎无效, 建立连接字符串的 CommandTimeout=60;有效, 待继续排查</li>
@@ -79,9 +87,30 @@ echo &quot;deb <a class="reference external" href="http://download.mono-project.
 apt-get update
 apt-get install mono-complete</blockquote>
 </div>
-<div class="section" id="id2">
+<div class="section" id="id3">
 <h2>mono 调试</h2>
 <p>sdb <a class="reference external" href="https://github.com/mono/sdb">https://github.com/mono/sdb</a></p>
+<p>可以使用</p>
+<div class="highlight"><pre><span></span><span class="k">using</span> <span class="nn">System.Diagnostics</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Program</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="k">static</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">){</span>
+
+        <span class="n">Debugger</span><span class="p">.</span><span class="n">Break</span><span class="p">();</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>sdb &quot;run demo.exe&quot;</p>
+<p>可用</p>
+<ul class="simple">
+<li>r demo.exe 运行demo.exe</li>
+<li>src 查看源代码</li>
+<li>step 向下执行</li>
+<li>frame</li>
+<li>quit 等等</li>
+</ul>
 </div>
 <div class="section" id="nuget">
 <h2>nuget</h2>
@@ -107,7 +136,7 @@ bin
 obj
 *.userprefs</blockquote>
 </div>
-<div class="section" id="id3">
+<div class="section" id="id4">
 <h2>编辑器</h2>
 <p>可以使用 visual studio code和ximarin studio</p>
 <p>这里做的笔记是visual studio code 的</p>
@@ -120,7 +149,7 @@ obj
 <h3>编译 用 shift+cmd+b</h3>
 <p>cmd+p, configure task runner, 实际修改的是.settings/tasks.json</p>
 <p>将默认的任务修改成如下内容：</p>
-<div class="highlight"><pre><span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
 <span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;xbuild&quot;</span><span class="p">,</span>
 <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ExcelService.sln&quot;</span><span class="p">]</span>
@@ -132,7 +161,7 @@ obj
 <div class="section" id="debug">
 <h3>debug</h3>
 <p>cmd+p, debug:configure, 实际修改的是.settings/launch.json。</p>
-<div class="highlight"><pre><span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
     <span class="err">//</span> <span class="err">List</span> <span class="err">of</span> <span class="err">configurations.</span> <span class="err">Add</span> <span class="err">new</span> <span class="err">configurations</span> <span class="err">or</span> <span class="err">edit</span> <span class="err">existing</span> <span class="err">ones.</span>
     <span class="err">//</span> <span class="err">ONLY</span> <span class="nt">&quot;node&quot;</span> <span class="err">and</span> <span class="s2">&quot;mono&quot;</span> <span class="err">are</span> <span class="err">supported</span><span class="p">,</span> <span class="err">change</span> <span class="nt">&quot;type&quot;</span> <span class="err">to</span> <span class="err">switch.</span>
@@ -160,7 +189,7 @@ obj
 </pre></div>
 </div>
 </div>
-<div class="section" id="id4">
+<div class="section" id="id5">
 <h2>参考</h2>
 <p><a class="reference external" href="http://www.cnblogs.com/dudu/p/mac-coreclr-helloworld.html">http://www.cnblogs.com/dudu/p/mac-coreclr-helloworld.html</a></p>
 <p><a class="reference external" href="http://www.cnblogs.com/murongxiaopifu/p/4489024.html">http://www.cnblogs.com/murongxiaopifu/p/4489024.html</a></p>
@@ -218,7 +247,7 @@ obj
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

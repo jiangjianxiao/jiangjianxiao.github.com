@@ -7,7 +7,7 @@
         <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -24,6 +24,42 @@
                     <ol id="posts-list" class="hfeed" start="5">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="http://blog.easynew.com.cn/cefpython_issues.html" rel="bookmark"
+                           title="Permalink to cefpython 当前的两个问题">cefpython 当前的两个问题</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-07-10T13:56:00+08:00">
+                Published: 三 10 七月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>最近, 使用cefpython 写 <a class="reference external" href="http://www.yarder.co">yarder.co</a> 的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.</p>
+<p>首先是 当js调用python时, python的异常不会传播到javascript. 这个问题参考 <a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=11">Throw JS / Python exceptions according to execution context</a></p>
+<p>所以,当前你的处理方式应该是在python内部处理异常,并返回一个是否成功的状态给js!</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+                <span class="c1">#你的代码</span>
+
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">xxxx</span> <span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="c1"># log excpeiton</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">ex</span><span class="o">.</span><span class="n">message</span><span class="p">}</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="kd">var ...</span></pre></div>
+                <a class="readmore" href="http://blog.easynew.com.cn/cefpython_issues.html">read more</a>
+<p>There are <a href="http://blog.easynew.com.cn/cefpython_issues.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="http://blog.easynew.com.cn/my-framework-viewpoint.html" rel="bookmark"
                            title="Permalink to 我的框架观点">我的框架观点</a></h1>
                 </header>
@@ -37,7 +73,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <p>我对创建能二次开发的软件一直很迷恋,最早影响我的是ms office,特别是excel.</p>
 <ul class="simple">
@@ -74,7 +110,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <p>学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).</p>
 <p>lisp的基础思想是简单的，但lisp语言是复杂的!</p>
@@ -112,7 +148,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <p>今天我转了两篇文章, 都是抨击敏捷开发的, 都深合我意. 所以不得不多说几句.</p>
 <ul class="simple">
@@ -145,7 +181,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <p>此文档用来记录一些资源, 备忘用, 不定期更新</p>
 <ul class="simple">
@@ -171,7 +207,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
+<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->                <p>google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了</p>
 <div class="section" id="id1">
@@ -188,41 +224,6 @@
 <p>错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制 ...</p></div>
                 <a class="readmore" href="http://blog.easynew.com.cn/google-docs-note.html">read more</a>
 <p>There are <a href="http://blog.easynew.com.cn/google-docs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html" rel="bookmark"
-                           title="Permalink to extjs 4 NodeInterface destroy">extjs 4 NodeInterface destroy</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-06-16T16:02:00+08:00">
-                Published: 日 16 六月 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。</p>
-<p>当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack</p>
-<div class="highlight"><pre><span class="nx">Ext</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">proxy</span><span class="p">.</span><span class="nx">Server</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
-  <span class="nx">setException</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">response</span><span class="p">){</span>
-      <span class="nx">operation</span><span class="p">.</span><span class="nx">setException</span><span class="p">({</span>
-          <span class="nx">status</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
-          <span class="nx">statusText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">,</span>
-          <span class="nx">responseText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">responseText</span> <span class="c1">//&lt;--Added this line!</span>
-      <span class="p">});</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-</pre></div>
-<p>这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 <a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235">NodeInterface destroy with callback?</a>，无人理睬。</p>
-<p>当然 ...</p>
-                <a class="readmore" href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html">read more</a>
-<p>There are <a href="http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
@@ -262,7 +263,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
