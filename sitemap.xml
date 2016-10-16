@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.easynew.com.cn/</loc>
-<lastmod>2016-10-16T16:21:52-00:00</lastmod>
+<lastmod>2016-10-16T16:52:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.easynew.com.cn/archives.html</loc>
-<lastmod>2016-10-16T16:21:52-00:00</lastmod>
+<lastmod>2016-10-16T16:52:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.easynew.com.cn/tags.html</loc>
-<lastmod>2016-10-16T16:21:52-00:00</lastmod>
+<lastmod>2016-10-16T16:52:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.easynew.com.cn/categories.html</loc>
-<lastmod>2016-10-16T16:21:52-00:00</lastmod>
+<lastmod>2016-10-16T16:52:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -123,29 +123,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.easynew.com.cn/tornado-status-check.html</loc>
-<lastmod>2013-06-14T10:16:00+08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
-</url>
-
-<url>
 <loc>http://www.easynew.com.cn/first-blog.html</loc>
 <lastmod>2013-06-12T04:12:00+08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
-</url>
-
-<url>
-<loc>http://www.easynew.com.cn/c9-open-source-plan.html</loc>
-<lastmod>2013-05-31T14:11:00+08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
-</url>
-
-<url>
-<loc>http://www.easynew.com.cn/c9-develop-summary.html</loc>
-<lastmod>2012-10-28T11:19:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
@@ -218,13 +197,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2008-07-15T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
-</url>
-
-<url>
-<loc>http://www.easynew.com.cn/category/c9.html</loc>
-<lastmod>2013-05-31T14:11:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
 </url>
 
 <url>

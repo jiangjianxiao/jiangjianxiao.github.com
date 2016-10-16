@@ -11,7 +11,7 @@
 &lt;p&gt;性能, 还是很慢, 无法忍受&lt;/p&gt;
 &lt;p&gt;看到日志提示: You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.&lt;/p&gt;
 &lt;p&gt;放了 Javassist.jar 在classpath ,不过这个应该对下面的db访问没有多大关系&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#encoding=utf-8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# encoding=utf-8&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 &lt;span class="k"&gt;if&lt;/span&gt;  &lt;span class="s1"&gt;&amp;#39;__pypy__&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;builtin_module_names&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;

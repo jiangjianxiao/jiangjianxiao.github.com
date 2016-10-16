@@ -38,7 +38,7 @@
         </address>
 <p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
 
-</footer><!-- /.post-info -->      <p>最近, 使用cefpython 写 <a class="reference external" href="http://www.yarder.co">yarder.co</a> 的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.</p>
+</footer><!-- /.post-info -->      <p>最近, 使用cefpython 写 yarder.co  的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.</p>
 <p>首先是 当js调用python时, python的异常不会传播到javascript. 这个问题参考 <a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=11">Throw JS / Python exceptions according to execution context</a></p>
 <p>所以,当前你的处理方式应该是在python内部处理异常,并返回一个是否成功的状态给js!</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

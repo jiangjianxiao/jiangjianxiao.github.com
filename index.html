@@ -279,9 +279,489 @@
                 <a class="readmore" href="http://www.easynew.com.cn/resume.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/resume.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/cefpython_issues.html" rel="bookmark"
+                           title="Permalink to cefpython 当前的两个问题">cefpython 当前的两个问题</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-07-10T13:56:00+08:00">
+                Published: 三 10 七月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>最近, 使用cefpython 写 yarder.co  的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.</p>
+<p>首先是 当js调用python时, python的异常不会传播到javascript. 这个问题参考 <a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=11">Throw JS / Python exceptions according to execution context</a></p>
+<p>所以,当前你的处理方式应该是在python内部处理异常,并返回一个是否成功的状态给js!</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+                <span class="c1">#你的代码</span>
+
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">xxxx</span> <span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="c1"># log excpeiton</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">ex</span><span class="o">.</span><span class="n">message</span><span class="p">}</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="kd">var ...</span></pre></div>
+                <a class="readmore" href="http://www.easynew.com.cn/cefpython_issues.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/cefpython_issues.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/my-framework-viewpoint.html" rel="bookmark"
+                           title="Permalink to 我的框架观点">我的框架观点</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-30T15:25:00+08:00">
+                Published: 日 30 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>我对创建能二次开发的软件一直很迷恋,最早影响我的是ms office,特别是excel.</p>
+<ul class="simple">
+<li>excel堪称完美的对象模型</li>
+<li>内建的vba 开发环境和excel对象模型的完美交互.</li>
+</ul>
+<p>很多年前, c3 的模型就借鉴了excel的对象模型构建.</p>
+<p>在后来, ms 的axapta 再一次给我很大的影响. axapta 内嵌的application object tree更为完美, 语言级别的orm, 核心保密, 外围开源的模式, 完美的分布式c/s结构,方便的更新方式对我影响很大, 我花了一年左右时间创建了一个叫marsx的项目.</p>
+<ol class="arabic simple">
+<li>使用delphi 开发</li>
+<li>内嵌了paxcompiler语言,允许使用paxcompiler中的pascal语言进行开发</li>
+<li>创建了application object tree, 可以ctrl+d启动开发环境</li>
+<li>代码编译后放在服务器端数据库, 用户登录时检查更新动态下载代码达到更新效果</li>
+<li>创建了activex 控件, 解决发布的问题</li>
+<li>借助remobjects dataabstract , 实现分布式数据访问.</li>
+</ol>
+<p>marsx 在某些方面是成功的,他达到了我的一些目的: 达成软件即开发环境是可能的, 在开发时也有很好的效率, 特别是ui的定制上, 几乎是客户要什么现场就可以完成. 但主要的问题在paxcompiler ...</p>
+                <a class="readmore" href="http://www.easynew.com.cn/my-framework-viewpoint.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/my-framework-viewpoint.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/clojure-note.html" rel="bookmark"
+                           title="Permalink to clojure 学习笔记">clojure 学习笔记</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-29T13:48:00+08:00">
+                Published: 六 29 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).</p>
+<p>lisp的基础思想是简单的，但lisp语言是复杂的!</p>
+<p>clojure可能是jvm中实现最好的动态语言了, groovy已经沦为java的小弟, 它很少有自己的库(gradle这样的工具不算), jython的更新迟缓, jruby一般就是兼容使用ruby的库,很少有原生为jruby开发的库. 而clojure的库,则是发挥了clojure的特点, 比方说korma 就是一个很吸引人的东西.</p>
+<div class="section" id="lisp">
+<h2>lisp基本点</h2>
+<ol class="arabic simple">
+<li>当对一个列表求值时, 第一个是函数, 其他是参数, 用`阻止对列表求值</li>
+<li>lisp 没有ast这样的过程. 代码就是ast</li>
+</ol>
+</div>
+<div class="section" id="id1">
+<h2>我所讨厌的东西</h2>
+<p>太多了, clojure中充满了各种符号的滥用和一件事情多种做法! 我讨厌一种事情有多种做法，很多时候，它意味着总有一些方法不是最佳的，你总是需要做选择，我讨厌做选择！</p>
+<p>各种符号的滥用解很大程度上是需要改善lisp的括号使用， 符号使用列表:</p>
+<pre class="literal-block">
+# 的使用。 #{1 2 3 } 表示set, #&quot;\W+&quot; 表示正则, #(&gt; (count %) 2) 表示匿名函数， #_宏表示忽略下一个clojure形式.
+* repl ...</pre></div>
+                <a class="readmore" href="http://www.easynew.com.cn/clojure-note.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/clojure-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/agile-pair-tdd.html" rel="bookmark"
+                           title="Permalink to 敏捷中的结对和tdd">敏捷中的结对和tdd</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-19T12:42:00+08:00">
+                Published: 三 19 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>今天我转了两篇文章, 都是抨击敏捷开发的, 都深合我意. 所以不得不多说几句.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://kb.cnblogs.com/page/543318/">结对编程, 我的噩梦</a></li>
+<li><a class="reference external" href="http://blog.jobbole.com/41665/">半年来的工作感受</a></li>
+</ul>
+<p>先说结对, 我绝对是属于内向类型的, 当然喜欢安静的解决问题, 同作者一样,我更倾向通过代码评估来交流. 另外,两个大男人坐了一起结对,令人感觉好不自然,太基了!</p>
+<p><strong>如果同美女结对,我会取消我的上一句话</strong></p>
+<p>至于第二篇, 可能有些人就以为作者又在摆酷了, 但我想是因为作者没有说的更深入, 他的意思被误解了.</p>
+<p>tdd, 与其说是一种测试方法, 我更倾向于认定他是一种开发方式, 这种方式, 融合在你的编码过程中. 在dbanotes上我的评论就是: 如果一件事情最初需要三个过程, 则tdd的测试代码会忠实的反映这三个过程. 但后期, 有人可以用更简捷的一个过程实现, 或是二个过程实现,或是更改了其中一个过程的返回方式(当然,这样也会影响下一个结果的接收方式), 但最终结果还是正确的. 性能也好了,代码也更好了. 但是, 如果他不修改最初的tdd测试代码(很大可能不是他写的),则测试不会通过.</p>
+<p>当tdd测试代码几倍于实际的代码时, 这就是作者抱怨的问题. 也是一种阻碍生产力的体现.</p>
+<p>我同作者的看法一样, 测试代码更应该关心结果而不是关心过程, 这才是测试的所在!</p>
+
+                <a class="readmore" href="http://www.easynew.com.cn/agile-pair-tdd.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/agile-pair-tdd.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/resources.html" rel="bookmark"
+                           title="Permalink to 资源">资源</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-19T07:42:00+08:00">
+                Published: 三 19 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>此文档用来记录一些资源, 备忘用, 不定期更新</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.boarsoft.com/javascript/gridCombo/">Ext/Sencha Basic GridComboBox</a></li>
+</ul>
+
+                <a class="readmore" href="http://www.easynew.com.cn/resources.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/resources.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/google-docs-note.html" rel="bookmark"
+                           title="Permalink to 整理google docs上的资料, 记录一些有意思的东西">整理google docs上的资料, 记录一些有意思的东西</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-16T22:08:00+08:00">
+                Published: 日 16 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了</p>
+<div class="section" id="id1">
+<h2>一些有意思的想法</h2>
+<p>框架设计其实是一个哲学概念,每个成功的框架总是有一套自己的处世哲学,然后在以后一以贯之,比方说大家熟悉的spring,就是以ioc,接口编程贯彻始末.</p>
+<p>不在烦恼架构问题, 对我而言,这就是生产力</p>
+<p>面向对象设计的问题在于使用者必须了解整个对象的体系结构，面向对象设计往往通过template method 达到代码重用，但由于设计改变，开发者不得不引入更多的中间方法。随着对象体系的复杂度增大，整个结构会越来越难以维护。由于更改结构对下层使用者的影响不可估计，也导致改变代码是困难的。</p>
+<p>所以在使用template method时，不要让继承大于3级以上， 一般都是Base/Abstract/具体的类。 多使用策略模式，利用接口和委托减少复杂度。</p>
+<p>看到n年(2007)前写的公司经营设想, 不由的脸红, 不过里面有很多点都是对的, 如</p>
+<ul class="simple">
+<li>对于每个要我们做软件的企业,我们将争取他们为以后的后续服务提供费用</li>
+<li>saas 将是未来软件主要存在的形式,是我们今后的努力方向</li>
+</ul>
+<p>错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制 ...</p></div>
+                <a class="readmore" href="http://www.easynew.com.cn/google-docs-note.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/google-docs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/extjs-nodeinterface-destroy.html" rel="bookmark"
+                           title="Permalink to extjs 4 NodeInterface destroy">extjs 4 NodeInterface destroy</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-16T16:02:00+08:00">
+                Published: 日 16 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。</p>
+<p>当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack</p>
+<div class="highlight"><pre><span></span><span class="nx">Ext</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">proxy</span><span class="p">.</span><span class="nx">Server</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+  <span class="nx">setException</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">response</span><span class="p">){</span>
+      <span class="nx">operation</span><span class="p">.</span><span class="nx">setException</span><span class="p">({</span>
+          <span class="nx">status</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
+          <span class="nx">statusText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">,</span>
+          <span class="nx">responseText</span><span class="o">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">responseText</span> <span class="c1">//&lt;--Added this line!</span>
+      <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+<p>这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 <a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235">NodeInterface destroy with callback?</a>，无人理睬。</p>
+<p>当然 ...</p>
+                <a class="readmore" href="http://www.easynew.com.cn/extjs-nodeinterface-destroy.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/extjs-nodeinterface-destroy.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/first-blog.html" rel="bookmark"
+                           title="Permalink to ok, 这是我第一篇 pelican blog">ok, 这是我第一篇 pelican blog</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-06-12T04:12:00+08:00">
+                Published: 三 12 六月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <div class="section" id="id1">
+<h2>自定义菜单</h2>
+<p>通过以下三个选项自定义菜单</p>
+<div class="highlight"><pre><span></span><span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;未分类&#39;</span><span class="p">,</span> <span class="s1">&#39;category/misc.html&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;关于我们&#39;</span><span class="p">,</span> <span class="s1">&#39;about-us.html&#39;</span><span class="p">),</span> <span class="p">)</span>
+</pre></div>
+<p>建议你建两个同级目录，比方说就是jiangjianxiao.github.com和blog, blog用来存放pelican建立的站点, jiangjianxiao.github.com 就是pelican的原始内容</p>
+<p>修改 pelicanconf.py, 增加:</p>
+<pre class="literal-block">
+OUTPUT_PATH = '../jiangjianxao.github.com'
+</pre>
+<p>pelican-plugins 建议用submodule的方法获取</p>
+<p>git submodule add git://github.com/getpelican/pelican-plugins.git</p>
+<p>然后在其他机器就是git submodule init/git submodule update了</p>
+<p>我的publish.sh ...</p></div>
+                <a class="readmore" href="http://www.easynew.com.cn/first-blog.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/first-blog.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/python-web-sublime-text-2.html" rel="bookmark"
+                           title="Permalink to 给用 Python 的 web 开发者的 Sublime Text 2 小贴士">给用 Python 的 web 开发者的 Sublime Text 2 小贴士</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-09-16T00:00:00+08:00">
+                Published: 日 16 九月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>原文：<a class="reference external" href="http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/">http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/</a></p>
+<p>译者： <a class="reference external" href="http://zhuang13.de/">TheLover_Z</a></p>
+<p>Sublime Text 2 是一个很强大的编辑器，最近开始获得了很高的人气 － 这不是没有理由的。它是商业软件。Sublime Text 2 有很多支持 Python 的插件。虽然核心部分保持封闭但围绕着这个编辑器还是形成了 活跃的插件生态系统 。</p>
+<p>提示：你可以免费使用 Sublime 。它只是会提示你“请购买”而已。</p>
+<p>这是我使用 Sublime 这么久以来发现的小技巧。我是站在在 OS X 视角来写的，但在 Linux 和 Windows 平台这些技巧应该也适用。</p>
+<p>我以前是 Eclipse 的死党。虽然 Sublime 并没有像 Eclipse ...</p>
+                <a class="readmore" href="http://www.easynew.com.cn/python-web-sublime-text-2.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/python-web-sublime-text-2.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/no_attribute_sa_instance_state.html" rel="bookmark"
+                           title="Permalink to AttributeError: 'NoneType' object has no attribute '_sa_instance_state'">AttributeError: 'NoneType' object has no attribute '_sa_instance_state'</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-08-22T00:00:00+08:00">
+                Published: 三 22 八月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>当对sqlalchemy的一些 返回进行pickle处理时会出现如标题的错误，原因是这些返回的类型是sqlalchemy.orm.collections.InstrumentedList</p>
+<p>简单的处理将是将其转换为列表，如</p>
+<div class="highlight"><pre><span></span><span class="n">users</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Role</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">users</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">users</span><span class="p">))</span>
+</pre></div>
+
+                <a class="readmore" href="http://www.easynew.com.cn/no_attribute_sa_instance_state.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/no_attribute_sa_instance_state.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/ubuntu-pythonpath.html" rel="bookmark"
+                           title="Permalink to ubuntu 中设置 PYTHONPATH">ubuntu 中设置 PYTHONPATH</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-08-10T00:00:00+08:00">
+                Published: 五 10 八月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>一开始 是通过设置环境变量来进行的，可以编辑/etc/profile或是用户目录下的.profile</p>
+<p>增加</p>
+<p>export PYTHONPAHT=/home/jjx/works/earrow:/home/jjx/works/c92</p>
+<p>然后 用source /etc/profile或source .profile生效</p>
+<p>但在sudo下无效,如 sudo python</p>
+<p>import earrow 还是错误 ，所以 改用 pth的方式 最为简单</p>
+<p>先查看python site-packages位置</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</pre></div>
+<p>然后</p>
+<blockquote>
+cd /usr/local/lib/python2.7/dist-packages
+sudo gedit ...</blockquote>
+                <a class="readmore" href="http://www.easynew.com.cn/ubuntu-pythonpath.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/ubuntu-pythonpath.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/extjs-note.html" rel="bookmark"
+                           title="Permalink to extjs 备注">extjs 备注</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-06-17T00:00:00+08:00">
+                Published: 日 17 六月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <div class="section" id="form">
+<h2>设置form所有字段只读</h2>
+<div class="highlight"><pre><span></span><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+
+  <span class="nx">setReadOnlyForAll</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Ext</span><span class="p">.</span><span class="nx">suspendLayouts</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">getForm</span><span class="p">().</span><span class="nx">getFields</span><span class="p">().</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">field</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">(</span><span class="nx">readOnly</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="nx">Ext</span><span class="p">.</span><span class="nx">resumeLayouts</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="override">
+<h2>通过override 设置缺省值</h2>
+<p>血的教训, 如果你要将所有窗体都设置frame为true, 不要每个form都去设置, 而是使用</p>
+<div class="highlight"><pre><span></span><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">Panel</span><span class="p">.</span><span class="nx">override</span><span class="p">({</span>
+        <span class="nx">bodyPadding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nx">frame</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">// or true</span>
+
+<span class="p">});</span>
+</pre></div>
+<p>extjs 4.2 海皇星主题,frame 将是很粗的一根, 而且当form被嵌入到其他容器时,除了这个很粗的框, 背景没有同容器一样, 所以在该主题中frame应该设置为false</p>
+<ol class="arabic simple">
+<li>Store datachanged 对update没有效果 ...</li></ol></div>
+                <a class="readmore" href="http://www.easynew.com.cn/extjs-note.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/extjs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/windows-nginx-tornado.html" rel="bookmark"
+                           title="Permalink to windows 下nginx和tornado 配置">windows 下nginx和tornado 配置</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-06-07T13:19:00+08:00">
+                Published: 四 07 六月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.</p>
+<p>结合nginx和tornado 还是有好处的, 主要是减轻tornado的负担,典型的如让nginx处理静态文件,让nginx处理gzip.由于tornado是单线程的,让nginx进行负载平衡也很有必要.</p>
+<p>修改 nginx/conf目录下的nginx.conf ,替换为</p>
+<div class="section" id="id1">
+<h2>说明</h2>
+<ol class="arabic simple">
+<li>worker_process 配置为1, 是因为windows下只支持一个工作进程</li>
+<li>worker_connections 1024就行，因为select有限制</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1">#user  nobody;</span>
+
+<span class="k">worker_processes</span>  <span class="mi">1</span><span class="p">;</span>
+<span class="c1">#daemon off;</span>
+
+<span class="c1">#error_log  logs/error.log;</span>
+<span class="c1">#error_log  logs/error.log  notice;</span>
+<span class="c1">#error_log  logs/error.log  info;</span>
+
+<span class="k">pid</span>        <span class="s">logs/nginx.pid ...</span></pre></div></div>
+                <a class="readmore" href="http://www.easynew.com.cn/windows-nginx-tornado.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/windows-nginx-tornado.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
+                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-06-04T00:00:00+08:00">
+                Published: 一 04 六月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
+<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
+<blockquote>
+parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
+<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
+<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
+
+                <a class="readmore" href="http://www.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
-    Page 1 / 5
+    Page 1 / 2
         <a href="http://www.easynew.com.cn/index2.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->
