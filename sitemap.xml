@@ -4,245 +4,245 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>http://blog.easynew.com.cn/</loc>
-<lastmod>2016-07-14T09:43:47-00:00</lastmod>
+<loc>http://www.easynew.com.cn/</loc>
+<lastmod>2016-10-16T16:14:11-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/archives.html</loc>
-<lastmod>2016-07-14T09:43:47-00:00</lastmod>
+<loc>http://www.easynew.com.cn/archives.html</loc>
+<lastmod>2016-10-16T16:14:11-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/tags.html</loc>
-<lastmod>2016-07-14T09:43:47-00:00</lastmod>
+<loc>http://www.easynew.com.cn/tags.html</loc>
+<lastmod>2016-10-16T16:14:11-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/categories.html</loc>
-<lastmod>2016-07-14T09:43:47-00:00</lastmod>
+<loc>http://www.easynew.com.cn/categories.html</loc>
+<lastmod>2016-10-16T16:14:11-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/go_discard_template_method.html</loc>
+<loc>http://www.easynew.com.cn/go_discard_template_method.html</loc>
 <lastmod>2015-05-14T11:43:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/ubuntu_os_x_c_sharp.html</loc>
+<loc>http://www.easynew.com.cn/ubuntu_os_x_c_sharp.html</loc>
 <lastmod>2015-05-09T20:34:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/jython-27-beta3.html</loc>
+<loc>http://www.easynew.com.cn/jython-27-beta3.html</loc>
 <lastmod>2014-05-09T17:28:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/jvm-interactive-note.html</loc>
+<loc>http://www.easynew.com.cn/jvm-interactive-note.html</loc>
 <lastmod>2014-05-09T09:25:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/django-admin-linkage.html</loc>
+<loc>http://www.easynew.com.cn/django-admin-linkage.html</loc>
 <lastmod>2013-09-22T12:19:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/resume.html</loc>
+<loc>http://www.easynew.com.cn/resume.html</loc>
 <lastmod>2013-07-15T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/cefpython_issues.html</loc>
+<loc>http://www.easynew.com.cn/cefpython_issues.html</loc>
 <lastmod>2013-07-10T13:56:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/my-framework-viewpoint.html</loc>
+<loc>http://www.easynew.com.cn/my-framework-viewpoint.html</loc>
 <lastmod>2013-06-30T15:25:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/clojure-note.html</loc>
+<loc>http://www.easynew.com.cn/clojure-note.html</loc>
 <lastmod>2013-06-29T13:48:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/agile-pair-tdd.html</loc>
+<loc>http://www.easynew.com.cn/agile-pair-tdd.html</loc>
 <lastmod>2013-06-19T12:42:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/resources.html</loc>
+<loc>http://www.easynew.com.cn/resources.html</loc>
 <lastmod>2013-06-19T07:42:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/google-docs-note.html</loc>
+<loc>http://www.easynew.com.cn/google-docs-note.html</loc>
 <lastmod>2013-06-16T22:08:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/extjs-nodeinterface-destroy.html</loc>
+<loc>http://www.easynew.com.cn/extjs-nodeinterface-destroy.html</loc>
 <lastmod>2013-06-16T16:02:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/tornado-status-check.html</loc>
+<loc>http://www.easynew.com.cn/tornado-status-check.html</loc>
 <lastmod>2013-06-14T10:16:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/first-blog.html</loc>
+<loc>http://www.easynew.com.cn/first-blog.html</loc>
 <lastmod>2013-06-12T04:12:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/c9-open-source-plan.html</loc>
+<loc>http://www.easynew.com.cn/c9-open-source-plan.html</loc>
 <lastmod>2013-05-31T14:11:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/c9-develop-summary.html</loc>
+<loc>http://www.easynew.com.cn/c9-develop-summary.html</loc>
 <lastmod>2012-10-28T11:19:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/python-web-sublime-text-2.html</loc>
+<loc>http://www.easynew.com.cn/python-web-sublime-text-2.html</loc>
 <lastmod>2012-09-16T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/no_attribute_sa_instance_state.html</loc>
+<loc>http://www.easynew.com.cn/no_attribute_sa_instance_state.html</loc>
 <lastmod>2012-08-22T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/ubuntu-pythonpath.html</loc>
+<loc>http://www.easynew.com.cn/ubuntu-pythonpath.html</loc>
 <lastmod>2012-08-10T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/extjs-note.html</loc>
+<loc>http://www.easynew.com.cn/extjs-note.html</loc>
 <lastmod>2012-06-17T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/windows-nginx-tornado.html</loc>
+<loc>http://www.easynew.com.cn/windows-nginx-tornado.html</loc>
 <lastmod>2012-06-07T13:19:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/extjs-model-with-grid-tree.html</loc>
+<loc>http://www.easynew.com.cn/extjs-model-with-grid-tree.html</loc>
 <lastmod>2012-06-04T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/</loc>
+<loc>http://www.easynew.com.cn/</loc>
 <lastmod>2012-01-01T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/silverlight-future.html</loc>
+<loc>http://www.easynew.com.cn/silverlight-future.html</loc>
 <lastmod>2010-10-22T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/ymt-b2b-logic.html</loc>
+<loc>http://www.easynew.com.cn/ymt-b2b-logic.html</loc>
 <lastmod>2008-09-09T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/pallet-algorithm.html</loc>
+<loc>http://www.easynew.com.cn/pallet-algorithm.html</loc>
 <lastmod>2008-07-15T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/category/c9.html</loc>
+<loc>http://www.easynew.com.cn/category/c9.html</loc>
 <lastmod>2013-05-31T14:11:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/category/jython.html</loc>
+<loc>http://www.easynew.com.cn/category/jython.html</loc>
 <lastmod>2014-05-09T17:28:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/category/misc.html</loc>
+<loc>http://www.easynew.com.cn/category/misc.html</loc>
 <lastmod>2015-05-14T11:43:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.easynew.com.cn/author/jjx.html</loc>
+<loc>http://www.easynew.com.cn/author/jjx.html</loc>
 <lastmod>2015-05-14T11:43:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>

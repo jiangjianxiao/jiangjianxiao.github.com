@@ -3,8 +3,8 @@
 <head>
         <meta charset="utf-8" />
         <title>Go 扔掉template method</title>
-        <link rel="stylesheet" href="http://blog.easynew.com.cn/theme/css/main.css" />
-        <link href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+        <link rel="stylesheet" href="http://www.easynew.com.cn/theme/css/main.css" />
+        <link href="http://www.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -13,7 +13,7 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="http://blog.easynew.com.cn/">EasyNew </a></h1>
+                <h1><a href="http://www.easynew.com.cn/">EasyNew </a></h1>
                 <nav><ul>
                     <li><a href="/category/misc.html">未分类</a></li>
                     <li><a href="/about-us.html">关于我们</a></li>
@@ -23,7 +23,7 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="http://blog.easynew.com.cn/go_discard_template_method.html" rel="bookmark"
+        <a href="http://www.easynew.com.cn/go_discard_template_method.html" rel="bookmark"
            title="Permalink to Go 扔掉template method">Go 扔掉template method</a></h1>
     </header>
 
@@ -34,14 +34,14 @@
         </abbr>
 
         <address class="vcard author">
-                By                         <a class="url fn" href="http://blog.easynew.com.cn/author/jjx.html">jjx</a>
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
         </address>
-<p>In <a href="http://blog.easynew.com.cn/category/misc.html">misc</a>.</p>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
 
 </footer><!-- /.post-info -->      <p>在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是</p>
 <ul class="simple">
 <li>定义一个接口 如BaseService</li>
-<li>创建一个类实现该接口, 该类通常为抽象类, 完成程序的主要骨架, 将变动的方法抽象出来, 让子类继承实现</li>
+<li>创建一个类实现该接口, 完成程序的主要骨架, 将变动的方法抽象出来, 让子类继承实现</li>
 </ul>
 <p>在go中, 这种方式行不通</p>
 <div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
@@ -92,7 +92,7 @@
       <script type="text/javascript">
         var disqus_shortname = 'easynew';
         var disqus_identifier = 'go_discard_template_method.html';
-        var disqus_url = 'http://blog.easynew.com.cn/go_discard_template_method.html';
+        var disqus_url = 'http://www.easynew.com.cn/go_discard_template_method.html';
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//easynew.disqus.com/embed.js';
@@ -116,7 +116,7 @@
                 <div class="social">
                         <h2>social</h2>
                         <ul>
-                            <li><a href="http://blog.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            <li><a href="http://www.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
                         </ul>
                 </div><!-- /.social -->
