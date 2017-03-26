@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>EasyNew</title><link>http://www.easynew.com.cn/</link><description></description><lastBuildDate>Thu, 14 May 2015 11:43:00 +0800</lastBuildDate><item><title>Go 扔掉template method</title><link>http://www.easynew.com.cn/go_discard_template_method.html</link><description>&lt;p&gt;在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是&lt;/p&gt;
+<rss version="2.0"><channel><title>EasyNew - jjx</title><link>http://www.easynew.com.cn/</link><description></description><lastBuildDate>Sun, 26 Mar 2017 11:14:00 +0800</lastBuildDate><item><title>从骷髅峡谷谈起, 说说 windows 10 python 开发环境</title><link>http://www.easynew.com.cn/win10.html</link><description>&lt;p&gt;首先是因为骷髅峡谷, 这机器买来时想装黑苹果的, 但不完美. 所以折腾了大半年后还是装回 windows 10, 本来也没有想再把它变成工作机器, 因为潜意识中 windows 不是一个很好的开发环境.&lt;/p&gt;
+&lt;p&gt;但是因为在最近计划为 c9 考虑开放 sdk 的事情, 希望用户能在 windows/macos/ubuntu 下均能使用 c9 sdk, 所以试着重新搭建了一下环境. 结果是:&lt;/p&gt;
+&lt;p&gt;相当不错, 虽然没有 ubuntu/macos 上那种一气呵成的环境安装感觉, 但做开发环境还是没有问题的, 而且, ui 性能体验上要远超 macos 和 ubuntu (注意, 我说都是 ui 性能).&lt;/p&gt;
+&lt;p&gt;没有用 bash, 虽然我认为当前 bash 完成度已经超过了cygwin, 但要达到虚拟机的体验. 可能还要一段时间(半年?一年?)&lt;/p&gt;
+&lt;p&gt;在前几年 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 26 Mar 2017 11:14:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2017-03-26:/win10.html</guid></item><item><title>Go 扔掉template method</title><link>http://www.easynew.com.cn/go_discard_template_method.html</link><description>&lt;p&gt;在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;定义一个接口 如BaseService&lt;/li&gt;
 &lt;li&gt;创建一个类实现该接口, 完成程序的主要骨架, 将变动的方法抽象出来, 让子类继承实现&lt;/li&gt;
@@ -32,20 +36,7 @@
    &lt;span class="nx"&gt;DefaultBaseService&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 
-&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;self&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;UserService&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;ReadId&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-    &lt;span class="nb"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;UserService&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;user_service&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nx"&gt;UserService&lt;/span&gt;&lt;span class="p"&gt;{}&lt;/span&gt;
-    &lt;span class="nx"&gt;user_service&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Invoke&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// 调用的还是DefaultBaseService方法&lt;/span&gt;
-    &lt;span class="nx"&gt;user_service&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ReadId&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;// 调用的才是user_service&lt;/span&gt;
-
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Thu, 14 May 2015 11:43:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2015-05-14:go_discard_template_method.html</guid></item><item><title>尝试在ubuntu/os x上使用c#</title><link>http://www.easynew.com.cn/ubuntu_os_x_c_sharp.html</link><description>&lt;p&gt;最近微软的举动还是挺让人心动的, 但 &lt;a class="reference external" href="https://github.com/dotnet/coreclr"&gt;https://github.com/dotnet/coreclr&lt;/a&gt; 中的dnx 部分, 除了使用mono的运行时, 使用coreclr 在os x/ubuntu 上都没有能跑起来.&lt;/p&gt;
+&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;self&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;UserService&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;ReadId …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Thu, 14 May 2015 11:43:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2015-05-14:/go_discard_template_method.html</guid></item><item><title>尝试在ubuntu/os x上使用c#</title><link>http://www.easynew.com.cn/ubuntu_os_x_c_sharp.html</link><description>&lt;p&gt;最近微软的举动还是挺让人心动的, 但 &lt;a class="reference external" href="https://github.com/dotnet/coreclr"&gt;https://github.com/dotnet/coreclr&lt;/a&gt; 中的dnx 部分, 除了使用mono的运行时, 使用coreclr 在os x/ubuntu 上都没有能跑起来.&lt;/p&gt;
 &lt;p&gt;最近的一个问题是cpython 的pyopenxl , 导出excel 的write_only优化, 存在着以下问题&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;datavalidate list 在write_only=True时无效&lt;/li&gt;
@@ -61,199 +52,13 @@
 &lt;li&gt;dapper&lt;/li&gt;
 &lt;li&gt;npgsql&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;python 通过 pyzmq 向 .net 的netmq rep发起请求, 初步测试结果如下&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;导出26000条带data validate 的excel 冷启动为2秒左右, 第二次为1.3秒左右, 文件大小为1.5 m, 比pyopenxl 的小很多&lt;/li&gt;
-&lt;li&gt;使用npgsql 插入26000条记录, 约26秒, 相当1秒1000条, 比cpython的约33秒也有一定的进步&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;所以有个初步的设想是写个简单c#的服务端, 提供excel的导入导出服务, 两者使用zmq req/rep 协议,josn字符串传递, 二进制使用base64编码传递(cpython 2.7的字符串实际上是字节数组, 同.net 的字符串是不一样的)&lt;/p&gt;
-&lt;div class="section" id="id1"&gt;
-&lt;h2&gt;我的决策&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;局限服务端编程&lt;/li&gt;
-&lt;li&gt;不用asp.net mvc/wcf/remoting/wpf等&lt;/li&gt;
-&lt;li&gt;不用 entity framework&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;h2&gt;几个问题&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;当dapper 的command timeout 设置似乎无效, 建立连接字符串的 CommandTimeout=60;有效, 待继续排查&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="mono"&gt;
-&lt;h2&gt;mono 安装&lt;/h2&gt;
-&lt;p&gt;ubuntu 安装和更新已经非常方便了&lt;/p&gt;
-&lt;blockquote&gt;
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-echo &amp;quot;deb &lt;a class="reference external" href="http://download.mono-project.com/repo/debian"&gt;http://download.mono-project.com/repo/debian&lt;/a&gt; wheezy main&amp;quot; | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
-sudo apt-get update&lt;/blockquote&gt;
-&lt;p&gt;如果是 ubuntu 12.04 tls 不敢升级&lt;/p&gt;
-&lt;blockquote&gt;
-echo &amp;quot;deb &lt;a class="reference external" href="http://download.mono-project.com/repo/debian"&gt;http://download.mono-project.com/repo/debian&lt;/a&gt; wheezy-libtiff-compat main&amp;quot; | sudo tee -a /etc/apt/sources.list.d/mono-xamarin.list
-apt-get update
-apt-get install mono-complete&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id3"&gt;
-&lt;h2&gt;mono 调试&lt;/h2&gt;
-&lt;p&gt;sdb &lt;a class="reference external" href="https://github.com/mono/sdb"&gt;https://github.com/mono/sdb&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;可以使用&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;System.Diagnostics&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Program&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-
-    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="nf"&gt;Main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-
-        &lt;span class="n"&gt;Debugger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Break&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-        &lt;span class="c1"&gt;// ...&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;sdb &amp;quot;run demo.exe&amp;quot;&lt;/p&gt;
-&lt;p&gt;可用&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;r demo.exe 运行demo.exe&lt;/li&gt;
-&lt;li&gt;src 查看源代码&lt;/li&gt;
-&lt;li&gt;step 向下执行&lt;/li&gt;
-&lt;li&gt;frame&lt;/li&gt;
-&lt;li&gt;quit 等等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="nuget"&gt;
-&lt;h2&gt;nuget&lt;/h2&gt;
-&lt;p&gt;ubuntu 用apt-get install nuget&lt;/p&gt;
-&lt;p&gt;nuget install 安装包, 在 packages.config 所在目录安装, 并用OutputDirectory 指定packages目录 nuget install -OutputDirectory packages&lt;/p&gt;
-&lt;p&gt;重要文件&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;packages.config nuget包文件&lt;/li&gt;
-&lt;li&gt;packages nuget 包文件&lt;/li&gt;
-&lt;li&gt;csproj/sln 项目文件&lt;/li&gt;
-&lt;li&gt;*.cs&lt;/li&gt;
-&lt;li&gt;Properties/*.cs&lt;/li&gt;
-&lt;li&gt;packages.config/app.config&lt;/li&gt;
-&lt;li&gt;.settings/*.json visual studio code 配置文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;.gitignore&lt;/p&gt;
-&lt;blockquote&gt;
-Thumbs.db
-*.dll
-.DS_Store
-packages
-bin
-obj
-*.userprefs&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;h2&gt;编辑器&lt;/h2&gt;
-&lt;p&gt;可以使用 visual studio code和ximarin studio&lt;/p&gt;
-&lt;p&gt;这里做的笔记是visual studio code 的&lt;/p&gt;
-&lt;p&gt;使用visual studio code 可参考这个链接 &lt;a class="reference external" href="https://code.visualstudio.com/Docs/ASPnet5"&gt;https://code.visualstudio.com/Docs/ASPnet5&lt;/a&gt;&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;npm install -g yo grunt-cli generator-aspnet bower&lt;/li&gt;
-&lt;li&gt;yo aspnet 生成空白项目&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="section" id="shift-cmd-b"&gt;
-&lt;h3&gt;编译 用 shift+cmd+b&lt;/h3&gt;
-&lt;p&gt;cmd+p, configure task runner, 实际修改的是.settings/tasks.json&lt;/p&gt;
-&lt;p&gt;将默认的任务修改成如下内容：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;quot;version&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;quot;command&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xbuild&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;quot;args&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ExcelService.sln&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;也可以直接在项目目录下用xbuild 编译&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="debug"&gt;
-&lt;h3&gt;debug&lt;/h3&gt;
-&lt;p&gt;cmd+p, debug:configure, 实际修改的是.settings/launch.json。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;quot;version&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;List&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;configurations.&lt;/span&gt; &lt;span class="err"&gt;Add&lt;/span&gt; &lt;span class="err"&gt;new&lt;/span&gt; &lt;span class="err"&gt;configurations&lt;/span&gt; &lt;span class="err"&gt;or&lt;/span&gt; &lt;span class="err"&gt;edit&lt;/span&gt; &lt;span class="err"&gt;existing&lt;/span&gt; &lt;span class="err"&gt;ones.&lt;/span&gt;
-    &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;ONLY&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;node&amp;quot;&lt;/span&gt; &lt;span class="err"&gt;and&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;mono&amp;quot;&lt;/span&gt; &lt;span class="err"&gt;are&lt;/span&gt; &lt;span class="err"&gt;supported&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="err"&gt;change&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;type&amp;quot;&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;switch.&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;configurations&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-        &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;Name&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;configuration;&lt;/span&gt; &lt;span class="err"&gt;appears&lt;/span&gt; &lt;span class="err"&gt;in&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;launch&lt;/span&gt; &lt;span class="err"&gt;configuration&lt;/span&gt; &lt;span class="err"&gt;drop&lt;/span&gt; &lt;span class="err"&gt;down&lt;/span&gt; &lt;span class="err"&gt;menu.&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Launch ExecelService&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;Type&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;configuration.&lt;/span&gt; &lt;span class="err"&gt;Possible&lt;/span&gt; &lt;span class="err"&gt;values:&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;node&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;mono&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;.&lt;/span&gt;
-            &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;mono&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;Workspace&lt;/span&gt; &lt;span class="err"&gt;relative&lt;/span&gt; &lt;span class="err"&gt;or&lt;/span&gt; &lt;span class="err"&gt;absolute&lt;/span&gt; &lt;span class="err"&gt;path&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;program.&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;quot;program&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;bin/Debug/ExcelService.exe&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="err"&gt;//要调试的可执行文件位置&lt;/span&gt;
-            &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;Automatically&lt;/span&gt; &lt;span class="err"&gt;stop&lt;/span&gt; &lt;span class="err"&gt;program&lt;/span&gt; &lt;span class="err"&gt;after&lt;/span&gt; &lt;span class="err"&gt;launch.&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;quot;stopOnEntry&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;Command&lt;/span&gt; &lt;span class="err"&gt;line&lt;/span&gt; &lt;span class="err"&gt;arguments&lt;/span&gt; &lt;span class="err"&gt;passed&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;program.&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;quot;args&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[],&lt;/span&gt;
-            &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;Workspace&lt;/span&gt; &lt;span class="err"&gt;relative&lt;/span&gt; &lt;span class="err"&gt;or&lt;/span&gt; &lt;span class="err"&gt;absolute&lt;/span&gt; &lt;span class="err"&gt;path&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;working&lt;/span&gt; &lt;span class="err"&gt;directory&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;program&lt;/span&gt; &lt;span class="err"&gt;being&lt;/span&gt; &lt;span class="err"&gt;debugged.&lt;/span&gt; &lt;span class="err"&gt;Default&lt;/span&gt; &lt;span class="err"&gt;is&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;current&lt;/span&gt; &lt;span class="err"&gt;workspace.&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;quot;cwd&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;Workspace&lt;/span&gt; &lt;span class="err"&gt;relative&lt;/span&gt; &lt;span class="err"&gt;or&lt;/span&gt; &lt;span class="err"&gt;absolute&lt;/span&gt; &lt;span class="err"&gt;path&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;runtime&lt;/span&gt; &lt;span class="err"&gt;executable&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;be&lt;/span&gt; &lt;span class="err"&gt;used.&lt;/span&gt; &lt;span class="err"&gt;Default&lt;/span&gt; &lt;span class="err"&gt;is&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;runtime&lt;/span&gt; &lt;span class="err"&gt;executable&lt;/span&gt; &lt;span class="err"&gt;on&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;PATH.&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;quot;runtimeExecutable&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;Environment&lt;/span&gt; &lt;span class="err"&gt;variables&lt;/span&gt; &lt;span class="err"&gt;passed&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;program.&lt;/span&gt;
-            &lt;span class="nt"&gt;&amp;quot;env&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;h2&gt;参考&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.cnblogs.com/dudu/p/mac-coreclr-helloworld.html"&gt;http://www.cnblogs.com/dudu/p/mac-coreclr-helloworld.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.cnblogs.com/murongxiaopifu/p/4489024.html"&gt;http://www.cnblogs.com/murongxiaopifu/p/4489024.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;性能评测, mono 版本比较老, 但大体性能同java差距不能说很大了&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://benchmarksgame.alioth.debian.org/u64q/benchmark.php?test=all&amp;amp;lang=csharp&amp;amp;lang2=java&amp;amp;data=u64q"&gt;http://benchmarksgame.alioth.debian.org/u64q/benchmark.php?test=all&amp;amp;lang=csharp&amp;amp;lang2=java&amp;amp;data=u64q&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sat, 09 May 2015 20:34:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2015-05-09:ubuntu_os_x_c_sharp.html</guid></item><item><title>jython27 beta 3</title><link>http://www.easynew.com.cn/jython-27-beta3.html</link><description>&lt;p&gt;最近 jython 发布了 2.7 beta2 ,  这里想说的是即将到来的beta3.&lt;/p&gt;
+&lt;p&gt;python 通过 pyzmq 向 .net …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sat, 09 May 2015 20:34:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2015-05-09:/ubuntu_os_x_c_sharp.html</guid></item><item><title>jython27 beta 3</title><link>http://www.easynew.com.cn/jython-27-beta3.html</link><description>&lt;p&gt;最近 jython 发布了 2.7 beta2 ,  这里想说的是即将到来的beta3.&lt;/p&gt;
 &lt;p&gt;Jim Baker  在jython-dev上的邮件说明 beta3 主要是合并socket-reboot分支的, 这个 分支主要 是Design of a reworked implementation of socket, ssl, and select modules for Jython, using Netty 4.&lt;/p&gt;
 &lt;p&gt;并且这个版本 easy_install/pip将能重新工作在jython 2.7中&lt;/p&gt;
 &lt;p&gt;但我的尝试是运行ez_setup.py时的这个 错误&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;devnull&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;引发 IOError, google以下, 好象有人报告这个错误, 不过同我这里还不一样  &lt;a class="reference external" href="http://bugs.jython.org/issue1944"&gt;http://bugs.jython.org/issue1944&lt;/a&gt;, 即 LC_ALL=&amp;quot;en_US.UTF-8&amp;quot; ./jython -c 'open(&amp;quot;/dev/null&amp;quot;, &amp;quot;w&amp;quot;)'  同样还是报错, 测试了jython 2.5也是如此&lt;/p&gt;
-&lt;p&gt;在sqlalchemy 0.86的代码 中, 包含了另外一个版本 的ez_setup 可以完成 setuptools的安装&lt;/p&gt;
-&lt;p&gt;pip 需要使用 &lt;a class="reference external" href="https://github.com/jimbaker/pip"&gt;https://github.com/jimbaker/pip&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;性能, 还是很慢, 无法忍受&lt;/p&gt;
-&lt;p&gt;看到日志提示: You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.&lt;/p&gt;
-&lt;p&gt;放了 Javassist.jar 在classpath ,不过这个应该对下面的db访问没有多大关系&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# encoding=utf-8&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt;  &lt;span class="s1"&gt;&amp;#39;__pypy__&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;builtin_module_names&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;psycopg2cffi&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;compat&lt;/span&gt;
-    &lt;span class="n"&gt;compat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy.ext.declarative&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;declarative_base&lt;/span&gt;
-&lt;span class="n"&gt;Base&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;declarative_base&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy.orm&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;sessionmaker&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scoped_session&lt;/span&gt;
-
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;platform&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;java&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;postgresql+zxjdbc://postgres:123456@localhost/c9&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;postgresql://postgres:123456@localhost/c9&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;Session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scoped_session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sessionmaker&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;select * from users;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fetchall&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-&lt;span class="n"&gt;_start&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;_count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_count&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;timing&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;_start&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;这段代码测试 jython/pypy/python的表现&lt;/p&gt;
-&lt;p&gt;pypy  timing 2.4122531414
-python timing 1.4104578495
-jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
-&lt;p&gt;用类似的操作单独测试 zxjdbc, 表现也好不了多少&lt;/p&gt;
-&lt;p&gt;timing 10.6180000305&lt;/p&gt;
-&lt;p&gt;类似的查询用groovy 跑, 2.108, 比cpython差, 说明对于依赖c 扩展(比方这里主要就是psycopg2 + libpq)的一些 操作, python的性能问题对实际表现影响不大&lt;/p&gt;
-&lt;p&gt;至于pypy只要不断的提高 查询次数 , 性能就会逐渐拉平cpython并且最终超越. 对于 对c 扩展支持不佳的pypy来说,算是不错的了&lt;/p&gt;
-&lt;p&gt;而jython 则是无法忍受, 所以不能在实际项目中写大量的jython代码, 起码同groovy持平或差一点才能考虑&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Fri, 09 May 2014 17:28:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2014-05-09:jython-27-beta3.html</guid></item><item><title>jvm 互操作笔记</title><link>http://www.easynew.com.cn/jvm-interactive-note.html</link><description>&lt;p&gt;当前, 使用java很多时候不可避免, 比方说以下场景&lt;/p&gt;
+&lt;p&gt;引发 IOError, google以下, 好象有人报告这个错误, 不过同我这里还不一样  &lt;a class="reference external" href="http://bugs.jython.org/issue1944"&gt;http://bugs.jython …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Fri, 09 May 2014 17:28:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2014-05-09:/jython-27-beta3.html</guid></item><item><title>jvm 互操作笔记</title><link>http://www.easynew.com.cn/jvm-interactive-note.html</link><description>&lt;p&gt;当前, 使用java很多时候不可避免, 比方说以下场景&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;excel 导出需要更多的控制 ,xlwt/xlrd 无法实现类似data validation using dropdown list之类的特性, 有个包支持但格式限制在2007&lt;/li&gt;
 &lt;li&gt;taobao 消息通知, 目前只提供java/c# sdk&lt;/li&gt;
@@ -275,69 +80,7 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
 &lt;p&gt;pyjnius 问题&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;由于python是多进程部署, 由于java的内存占用, 这不是一个好主意, 会导致内存浪费的比较严重!&lt;/li&gt;
-&lt;li&gt;包本身问题,  比方说pyjnus 将字符串转换成byte array有问题, 不能转换大于127的字符, jython 没有问题, 参考  &lt;a class="reference external" href="https://github.com/kivy/pyjnius/issues/93"&gt;https://github.com/kivy/pyjnius/issues/93&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;jython 主要问题是性能和发展不力. 当然, 如果在这个场景, 主要用jzmq转发请求, 性能不是主要问题.  当然,  最理想的方式就是3.&lt;/p&gt;
-&lt;p&gt;下面是用jython转发taobao消息服务例子, 很简单是吗&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt;  &lt;span class="nn"&gt;com.taobao.api.internal.tmc&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TmcClient&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;MessageHandler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;MessageStatus&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;org.zeromq&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ZMQ&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TmcClient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;app_secret&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ZMQ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ZMQ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PUSH&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tcp://*:5555&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MessageHandlerImpl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MessageHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-            &lt;span class="k"&gt;pass&lt;/span&gt;
-        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;onMessage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-            &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;topic&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;, &lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;content&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;}&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getTopic&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getContent&lt;/span&gt;&lt;span class="p"&gt;()))&lt;/span&gt;
-
-            &lt;span class="k"&gt;except&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fail&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setMessageHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MessageHandlerImpl&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
-
-    &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;由于定位在交互, 所以在jvm, 不会写大规模,系统的代码(同时也要避免这种情况), 同时为避免动态/静态语言转变的思维压力,降低学习成本. 使用groovy, 退化一些性能换取效率会更好. groovy的gdk能省下使用第叁方包的很多时间&lt;/p&gt;
-&lt;div class="section" id="pyjnius"&gt;
-&lt;h2&gt;pyjnius&lt;/h2&gt;
-&lt;p&gt;github: &lt;a class="reference external" href="https://github.com/kivy/pyjnius"&gt;https://github.com/kivy/pyjnius&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;windows 下编译&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;windows 下目前版本用vc编译有问题, 使用mingw编译 setup.py install --compiler=mingw32&lt;/li&gt;
-&lt;li&gt;事先需要设置JAVA_HOME&lt;/li&gt;
-&lt;li&gt;需要将 %JAVA_HOME%jrebinclient 加入到路径变量, 用server会有问题&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;poi&lt;/p&gt;
-&lt;p&gt;jnius.ByteArray.tostring 没有问题, 是poi workbook.getBytes()有问题, 无法获得全部数据&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ByteArrayOutputStream&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;wb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;write&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toByteArray&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;正确&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="jzmq"&gt;
-&lt;h2&gt;jzmq&lt;/h2&gt;
-&lt;p&gt;提示: java.lang.UnsatisfiedLinkError: java.lang.UnsatisfiedLinkError: no jzmq in java.library.path&lt;/p&gt;
-&lt;p&gt;这种方法没有用&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;   &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;java.lang&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;System&lt;/span&gt;
-   &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setProperty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;java.library.path&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/usr/local/lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-   &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getProperty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;java.library.path&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-
-&lt;span class="err"&gt;或&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Djava&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/usr/loca/lib&amp;quot;&lt;/span&gt;
-
-&lt;span class="err"&gt;或&lt;/span&gt; &lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;
-
-&lt;span class="n"&gt;libjzqm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;  &lt;span class="err"&gt;在&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;zmq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="err"&gt;在&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Fri, 09 May 2014 09:25:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2014-05-09:jvm-interactive-note.html</guid></item><item><title>django admin 联动</title><link>http://www.easynew.com.cn/django-admin-linkage.html</link><description>&lt;p&gt;在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。&lt;/p&gt;
+&lt;li&gt;包本身问题 …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Fri, 09 May 2014 09:25:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2014-05-09:/jvm-interactive-note.html</guid></item><item><title>django admin 联动</title><link>http://www.easynew.com.cn/django-admin-linkage.html</link><description>&lt;p&gt;在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;定义数据源&lt;/h2&gt;
 &lt;p&gt;简单起见， 我们在settings.py定义一个LOCATION 变量&lt;/p&gt;
@@ -351,86 +94,7 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ugettext&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
 
-&lt;span class="n"&gt;COUNTRY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LOCATION&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;())]&lt;/span&gt;
-
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Company&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;country&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blank&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;verbose_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Country&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;choices&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;COUNTRY&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blank&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;verbose_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;State&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="admin-py"&gt;
-&lt;h2&gt;admin.py 的定义&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;admin&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.conf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ugettext&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
-
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CompanyAdminForm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelForm&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ChoiceField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;State&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;required&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;locations&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
-
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LOCATION&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="n"&gt;ins&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;instance&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CompanyAdminForm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fields&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;state&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ins&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;ins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="n"&gt;state&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;choices&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LOCATION&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
-
-    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Company&lt;/span&gt;
-
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CompanyAdmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelAdmin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;form&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CompanyAdminForm&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;这里， locations 函数等会将用于模板， __init__ 用来设置修改界面首次显示时 state 的选项&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="templates-admin-app-company-change-form-html"&gt;
-&lt;h2&gt;templates/admin/app/company/change_form.html&lt;/h2&gt;
-&lt;p&gt;这里， app 应该替换为你自己的应用名, 在你的templates目录创建该文件，并复制django-admin的原 change_form.html 内容, 在合适位置加入（自行写js代码 )&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;script&lt;/span&gt; &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;LOCATION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{{&lt;/span&gt; &lt;span class="nx"&gt;adminform&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;locations&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nx"&gt;safe&lt;/span&gt; &lt;span class="p"&gt;}};&lt;/span&gt;
-
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;django&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;jQuery&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;ready&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-
-        &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#id_country&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;change&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-
-            &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;country&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;val&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-            &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#id_state&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;country&lt;/span&gt; &lt;span class="p"&gt;){&lt;/span&gt;
-
-                &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;LOCATION&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;country&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-
-                &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-                &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-                    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-                    &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#id_state&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;option value=&amp;#39;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;v&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;#39;&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;v&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;/option&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-                &lt;span class="p"&gt;}&lt;/span&gt;
-
-            &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-
-                &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#id_state&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;option value=&amp;#39;&amp;#39;&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;---------&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;/option&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-            &lt;span class="p"&gt;}&lt;/span&gt;
-
-
-
-        &lt;span class="p"&gt;});&lt;/span&gt;
-
-
-
-    &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;/script&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 22 Sep 2013 12:19:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-09-22:django-admin-linkage.html</guid></item><item><title>简历管理</title><link>http://www.easynew.com.cn/resume.html</link><description>&lt;p&gt;这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。&lt;/p&gt;
+&lt;span class="n"&gt;COUNTRY …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 22 Sep 2013 12:19:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-09-22:/django-admin-linkage.html</guid></item><item><title>简历管理</title><link>http://www.easynew.com.cn/resume.html</link><description>&lt;p&gt;这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。&lt;/p&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;安装&lt;/h2&gt;
 &lt;ol class="arabic simple"&gt;
@@ -456,99 +120,7 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
 &lt;li&gt;进入主界面. 这个界面完成主要的功能&lt;/li&gt;
 &lt;/ol&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历&lt;/li&gt;
-&lt;li&gt;移动简历到新的部门 - 移动到 按钮&lt;/li&gt;
-&lt;li&gt;导出简历为新的excel文件 - 导出按钮&lt;/li&gt;
-&lt;li&gt;批量删除简历 - 批量删除按钮&lt;/li&gt;
-&lt;li&gt;将搜索后的结果导出到excel文件 - 导出链接&lt;/li&gt;
-&lt;li&gt;导入单个文件 - 导入文件链接&lt;/li&gt;
-&lt;li&gt;导入选择文件夹下的文件 - 导入文件夹链接&lt;/li&gt;
-&lt;li&gt;创建新简历 - 新简历链接&lt;/li&gt;
-&lt;li&gt;在主界面中,点击公司或部门会显示该部门及其下级的简历, 通过选择列,可以控制输出的项目, 通过搜索,可以以搜索简历&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="index" src="/images/index.png" style="width: 800px; height: 600px;" /&gt;
-&lt;ol class="arabic simple" start="3"&gt;
-&lt;li&gt;点击已存在的简历或点击新简历或选择导入文件后会转向简历页面&lt;/li&gt;
-&lt;/ol&gt;
-&lt;img alt="resume" src="/images/resume.png" style="width: 800px; height: 600px;" /&gt;
-&lt;ol class="arabic simple" start="4"&gt;
-&lt;li&gt;部门管理界面&lt;/li&gt;
-&lt;/ol&gt;
-&lt;img alt="department" src="/images/department.png" style="width: 800px; height: 600px;" /&gt;
-&lt;ol class="arabic simple" start="5"&gt;
-&lt;li&gt;导入文件夹界面&lt;/li&gt;
-&lt;/ol&gt;
-&lt;img alt="import" src="/images/import.png" style="width: 800px; height: 600px;" /&gt;
-&lt;ol class="arabic simple" start="7"&gt;
-&lt;li&gt;调动历史&lt;/li&gt;
-&lt;/ol&gt;
-&lt;img alt="transfer" src="/images/transfer.png" style="width: 800px; height: 600px;" /&gt;
-&lt;ol class="arabic simple" start="7"&gt;
-&lt;li&gt;报告&lt;/li&gt;
-&lt;/ol&gt;
-&lt;img alt="report" src="/images/report.png" style="width: 800px; height: 600px;" /&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;h2&gt;更新日志&lt;/h2&gt;
-&lt;p class="rubric"&gt;2013-11-13&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;补充用身份证号来确定简历唯一性, 影响导入和导出&lt;/li&gt;
-&lt;li&gt;增加刷新年龄功能&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class="rubric"&gt;2013-7-24&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;增加年度考核情况栏&lt;/li&gt;
-&lt;li&gt;fix 履历 第六行&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class="rubric"&gt;2013-7-20&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;增加 调动 功能&lt;/li&gt;
-&lt;li&gt;fix 首页分页问题&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;调动和移动到的不同： 调动会留下记录， 移动到不留下记录。 可以通过 调动历史 查看调动历史记录&lt;/p&gt;
-&lt;p&gt;在调动历史页面，点击左侧的部门显示该部门及其下级部门的调出记录，点击导出，导出刷选的记录， 选择一条或多条记录，点击批量删除，删除可能错误的调出记录。 也可以使用顶部的姓名进一步过滤某员工的调出记录&lt;/p&gt;
-&lt;p&gt;调出如果操作失误可以删除调出历史记录，使用移动到功能复原&lt;/p&gt;
-&lt;p class="rubric"&gt;2013-7-19&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;更新,导出到xls时图片不压线&lt;/li&gt;
-&lt;li&gt;fix 保存简历后还提示需要保存问题&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class="rubric"&gt;2013-7-19&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;增加离职功能&lt;/li&gt;
-&lt;li&gt;增加报告功能&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;在首页,选择用户并点击离职/在职按钮, 在职的会变为离职,并记录操作时间, 如果对已离职的记录进行操作,则会使其变为在职,并清空原离职时间&lt;/p&gt;
-&lt;p&gt;点击报告, 将显示一年登记的在职简历和离职简历,并显示每月登记的在职简历和离职简历, 点击每行,会出现详细的在职清单和离职清单,点击姓名,将显示其建立&lt;/p&gt;
-&lt;p&gt;在简历编辑界面,如果员工已离职,则在标题 员工名旁显示(已离职)&lt;/p&gt;
-&lt;p&gt;过滤条中增加全部/离职/在职过滤, 选择列增加离职和离职时间(当前,离职用true表示离职,false表示在职)&lt;/p&gt;
-&lt;p class="rubric"&gt;2013-7-18&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;fix 选择列增加年龄&lt;/li&gt;
-&lt;li&gt;外语及熟练程序 改为外语水平&lt;/li&gt;
-&lt;li&gt;新建简历时部门默认为当前选择的部门&lt;/li&gt;
-&lt;li&gt;表格离开时，如果数据有改变提示是否保存&lt;/li&gt;
-&lt;li&gt;毕业员院校栏长度一致&lt;/li&gt;
-&lt;li&gt;打印简历&lt;/li&gt;
-&lt;li&gt;导入excel中的图形&lt;/li&gt;
-&lt;li&gt;导出简历时同时导出图形&lt;/li&gt;
-&lt;li&gt;新建或编辑简历时点击照片更改照片&lt;/li&gt;
-&lt;li&gt;增加年龄区间过滤, 均可为空白, 输入后点击搜索按钮&lt;/li&gt;
-&lt;li&gt;fix 左侧导出没有导出姓名问题&lt;/li&gt;
-&lt;li&gt;其他调整&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;本次更新通过com调用excel,每次导出,导入均创建一个excel实例, 速度应该比前面版本要慢&lt;/strong&gt;&lt;/p&gt;
-&lt;p class="rubric"&gt;部分细节&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;从excel导入时，如果表一有图形，则会在resume/static/images目录下创建一个图形文件，并将路径传给建立的photo字段&lt;/li&gt;
-&lt;li&gt;在新建或编辑简历时，如果选择了一个新图片，则系统会调整该图片大小并在resume/static/images目录生成一个新图形文件&lt;/li&gt;
-&lt;li&gt;resume/resume.xls 为导出简历时的模板文件，该模板文件的页面设置-缩放 调整为1页宽一页高。&lt;/li&gt;
-&lt;li&gt;导出简历时， 系统会将简历导出到 导出建立部门名目录&lt;/li&gt;
-&lt;li&gt;当打印时，系统会根据resume/resume.xls 生成一个临时的excel文件并打印，所以如果对格式不满意，可修改resume/resume.xls 文件&lt;/li&gt;
-&lt;li&gt;双面打印的设置同机器有关，需要在自己的机器上设置， 选择 resume/resume.xls 文件，选择打印- 属性-设置双面打印后，保存该文件，关闭。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Mon, 15 Jul 2013 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-07-15:resume.html</guid></item><item><title>cefpython 当前的两个问题</title><link>http://www.easynew.com.cn/cefpython_issues.html</link><description>&lt;p&gt;最近, 使用cefpython 写 yarder.co  的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.&lt;/p&gt;
+&lt;li&gt;按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历 …&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Mon, 15 Jul 2013 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-07-15:/resume.html</guid></item><item><title>cefpython 当前的两个问题</title><link>http://www.easynew.com.cn/cefpython_issues.html</link><description>&lt;p&gt;最近, 使用cefpython 写 yarder.co  的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.&lt;/p&gt;
 &lt;p&gt;首先是 当js调用python时, python的异常不会传播到javascript. 这个问题参考 &lt;a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=11"&gt;Throw JS / Python exceptions according to execution context&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;所以,当前你的处理方式应该是在python内部处理异常,并返回一个是否成功的状态给js!&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -562,31 +134,7 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
                 &lt;span class="c1"&gt;# log excpeiton&lt;/span&gt;
                 &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;success&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;error&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;my_method&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;success&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-        &lt;span class="c1"&gt;// process result.result&lt;/span&gt;
-
-&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-
-        &lt;span class="nx"&gt;alert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;error&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;其次是 javascript 的字符串传递到python时使用的是字节码的方式,你需要显式的转换到utf-8, 就算你做已经做到了下几点&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;网页文件是 utf-8 了&lt;/li&gt;
-&lt;li&gt;网页已经 &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;/&amp;gt;&lt;/li&gt;
-&lt;li&gt;application_settings已经传递 &amp;quot;string_encoding&amp;quot;: &amp;quot;utf-8&amp;quot;&lt;/li&gt;
-&lt;li&gt;browser_settings已经传递 &amp;quot;default_encoding&amp;quot;: &amp;quot;utf-8&amp;quot; 了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;此问题报告在 &lt;a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=60"&gt;Strings should be unicode by default, if bytes is required make it explicit&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;目前, 你可以选择将参数打包为json字符串, 然后在python端 用以下代码处理&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="n"&gt;entity&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;好在这两个问题cefpython的作者都是acceptd了, 希望能很快出更新版本吧&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 10 Jul 2013 13:56:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-07-10:cefpython_issues.html</guid></item><item><title>我的框架观点</title><link>http://www.easynew.com.cn/my-framework-viewpoint.html</link><description>&lt;p&gt;我对创建能二次开发的软件一直很迷恋,最早影响我的是ms office,特别是excel.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 10 Jul 2013 13:56:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-07-10:/cefpython_issues.html</guid></item><item><title>我的框架观点</title><link>http://www.easynew.com.cn/my-framework-viewpoint.html</link><description>&lt;p&gt;我对创建能二次开发的软件一直很迷恋,最早影响我的是ms office,特别是excel.&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;excel堪称完美的对象模型&lt;/li&gt;
 &lt;li&gt;内建的vba 开发环境和excel对象模型的完美交互.&lt;/li&gt;
@@ -601,31 +149,7 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
 &lt;li&gt;创建了activex 控件, 解决发布的问题&lt;/li&gt;
 &lt;li&gt;借助remobjects dataabstract , 实现分布式数据访问.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;marsx 在某些方面是成功的,他达到了我的一些目的: 达成软件即开发环境是可能的, 在开发时也有很好的效率, 特别是ui的定制上, 几乎是客户要什么现场就可以完成. 但主要的问题在paxcompiler, 这是一种编译性质的语言, 它有一些bug和缺少动态语言的灵活性, 加之在delphi这种静态语言上面,也开发不出好的orm, 虽然借助remobject dataabstract对简单的crud做了封装,但复杂数据访问还是以sql开发为主, 时间一长难以维护.&lt;/p&gt;
-&lt;p&gt;marsx 今年已经算是放弃了.&lt;/p&gt;
-&lt;p&gt;关于marsx , 大家可以看看我早期在秋毫中发的贴子 &lt;a class="reference external" href="http://www.qiuhao.com/thread-12225-1-1.html"&gt;http://www.qiuhao.com/thread-12225-1-1.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;大部分小型软件开发公司, 都希望创建一个可定制的框架,然后招一些低级的程序员来工作. 以达到业务不被他人窃取,并且最小化开发成本的要求. 得确, 这也是我早年所想的. 但现在, 则是完全不同.&lt;/p&gt;
-&lt;p&gt;软件开发中人是第一要务, 思想的碰撞是很重要的, 掌握在某些人手中的思想必然要死亡的!&lt;/p&gt;
-&lt;p&gt;大而全的框架通常都是自主的,但这就是一个重复创建轮子的问题, 而且, 对于使用这些框架的程序员而言,使用你的轮子对他没有任何帮助, 留不住人. 而且, 轮子无法达到现有开源软件的高度. 比方说&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;ui 框架能达到extjs 的高度吗&lt;/li&gt;
-&lt;li&gt;orm 能达到sqlalchemy的高度吗&lt;/li&gt;
-&lt;li&gt;webserver能达到twisted/tornado的高度吗&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这些自创的轮子在一定时候必然遇到瓶颈. 所以说, 使用现有的东西往往更好,但是接下去的问题就是:对这些现有的东西做了过度的封装.甚至于无法更新到新的版本,这当然也是不行的.&lt;/p&gt;
-&lt;p&gt;所以,我的第二个观点是:封装必须是最佳实践,你对exjts的封装必须是最佳实践,你对sqlalchemy的封装必须是最佳实践....&lt;/p&gt;
-&lt;p&gt;这样, 使用你的框架的程序员是最舒服的, 他可以重用他的知识, 这也是尊重他人的一种体现.&lt;/p&gt;
-&lt;p&gt;第三: 选择好你的语言, 我现在认为,对于企业应用 客户端javascript/服务端python是最好的二次开发语言. 他们的eval机制都非常的好. python的import非常的灵活.大量优秀的库,你无法抗拒.&lt;/p&gt;
-&lt;p&gt;语言选择就像选择女朋友, 每个人心目中的女朋友是不同的. 找到你自己最喜欢的,并且寻找有类似爱好的合作伙伴.&lt;/p&gt;
-&lt;p&gt;第四: 完美的对象模型还是要追求的,特别是客户端定制. 在b/s时代, 你可以看看google apps script的是怎么构造的.&lt;/p&gt;
-&lt;p&gt;第五: 能在软件内做二次开发还是需要追求的. 我建议分以下实施(这个慢慢细谈,我也正在将桌面的经验移值到浏览器端, 当然, 我还是基于axapta的一些观点, 大家还可以参考openerp的, 但我觉的openerp是违反了我说的前两点原则的, 所以,我不会向python 开发者推荐用openerp!)&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;应用程序的元数据存储和调用. 参考c9的菜单, 菜单项, 安全键, baseenum , tables 等机制.&lt;/li&gt;
-&lt;li&gt;ui的构造, 在软件中直接创建,修改界面. 参考c9的forms, querties, report&lt;/li&gt;
-&lt;li&gt;脚本的创建和访问. 在软件中直接写脚本,存储并暴露给用户. 参考c9的forms, querites, reports, jobs&lt;/li&gt;
-&lt;li&gt;服务端修改. 参考 c9的classes&lt;/li&gt;
-&lt;/ol&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 30 Jun 2013 15:25:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-30:my-framework-viewpoint.html</guid></item><item><title>clojure 学习笔记</title><link>http://www.easynew.com.cn/clojure-note.html</link><description>&lt;p&gt;学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).&lt;/p&gt;
+&lt;p&gt;marsx 在某些方面是成功的,他达到了我的一些目的: 达成软件即开发环境是可能的, 在开发时也有很好的效率, 特别是ui的定制上, 几乎是客户要什么现场就可以完成. 但主要的问题在paxcompiler …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 30 Jun 2013 15:25:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-30:/my-framework-viewpoint.html</guid></item><item><title>clojure 学习笔记</title><link>http://www.easynew.com.cn/clojure-note.html</link><description>&lt;p&gt;学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).&lt;/p&gt;
 &lt;p&gt;lisp的基础思想是简单的，但lisp语言是复杂的!&lt;/p&gt;
 &lt;p&gt;clojure可能是jvm中实现最好的动态语言了, groovy已经沦为java的小弟, 它很少有自己的库(gradle这样的工具不算), jython的更新迟缓, jruby一般就是兼容使用ruby的库,很少有原生为jruby开发的库. 而clojure的库,则是发挥了clojure的特点, 比方说korma 就是一个很吸引人的东西.&lt;/p&gt;
 &lt;div class="section" id="lisp"&gt;
@@ -641,34 +165,7 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
 &lt;p&gt;各种符号的滥用解很大程度上是需要改善lisp的括号使用， 符号使用列表:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 # 的使用。 #{1 2 3 } 表示set, #&amp;quot;\W+&amp;quot; 表示正则, #(&amp;gt; (count %) 2) 表示匿名函数， #_宏表示忽略下一个clojure形式.
-* repl 时 *1 *2 *3 表示最近三次求值结果, *e 表示最后一个异常
-% 匿名函数时用%1, %2表示第n个参数, % 也可以表示第一个参数.
-, 逗号等于于空格, 可以用来改善可读性
-/ 除了表示除法外， 还可以调用java类方法，如(Math/pow), 还可以表示有理数，如 3/5
-\ 表示字符，如\c
-. 除了小数点外， 表示调用java方法，执行对象是后一个参数 (.otherMethod otherObj 0) 或者是new, 如(java.util.ArrayList. 100)
--&amp;gt;/-&amp;gt;&amp;gt;宏
-{}用于 set和map. #{1 2 3}, {&amp;quot;name&amp;quot; &amp;quot;easynew&amp;quot; &amp;quot;url&amp;quot;  &amp;quot;http://blog.easynew.com.cn&amp;quot;}
-&amp;amp; 函数参数列表中是将后续的元素作为一个序列传给&amp;amp;后的变量. (defn f [arg1 arg2 &amp;amp; argn] (println argn)). 如果 (f 1 2 3 4 5) , argn 就是 (3 4 5), 用于解构时也是如此
-: 关键字 如{:name &amp;quot;easynew&amp;quot; :url &amp;quot;http://blog.easynew.com.cn&amp;quot;}
-:as 解构中绑定整个闭合结构到:as 后的变量. (let [[x y :as coords] [1 2 3 4 5 6]]  coords是 [1 2 3 4 5 6]
-` 阻止对列表求值
-() 列表
-[] vector , [1 2 3]其实就是(vector 1 2 3)
-; 注释，还可以用comment注释宏，如(comment (* 2 2)), 但comment会返回nil
-&lt;/pre&gt;
-&lt;p&gt;讨厌的东西&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;导入有require或require+refer或use 或import 处理java导入&lt;/li&gt;
-&lt;li&gt;匿名函数除了用fn定义(fn [w] (&amp;gt; (count w) 2)), 还可以用#(&amp;gt; (count %) 2 ) , 用%1, %2表示第n个参数, % 也可以表示第一个参数.&lt;/li&gt;
-&lt;li&gt;除了false和nil, 其他求值都为true&lt;/li&gt;
-&lt;li&gt;(-&amp;gt;Book &amp;quot;title&amp;quot; &amp;quot;author &amp;quot;)  (Book. &amp;quot;title&amp;quot; &amp;quot;author&amp;quot;), 第二个是调用构造函数，第一个理解很费脑 -&amp;gt;不是将前一个作为后一个函数的参数吗？&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;h2&gt;资源&lt;/h2&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sat, 29 Jun 2013 13:48:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-29:clojure-note.html</guid></item><item><title>敏捷中的结对和tdd</title><link>http://www.easynew.com.cn/agile-pair-tdd.html</link><description>&lt;p&gt;今天我转了两篇文章, 都是抨击敏捷开发的, 都深合我意. 所以不得不多说几句.&lt;/p&gt;
+* repl …&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sat, 29 Jun 2013 13:48:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-29:/clojure-note.html</guid></item><item><title>敏捷中的结对和tdd</title><link>http://www.easynew.com.cn/agile-pair-tdd.html</link><description>&lt;p&gt;今天我转了两篇文章, 都是抨击敏捷开发的, 都深合我意. 所以不得不多说几句.&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://kb.cnblogs.com/page/543318/"&gt;结对编程, 我的噩梦&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://blog.jobbole.com/41665/"&gt;半年来的工作感受&lt;/a&gt;&lt;/li&gt;
@@ -679,11 +176,11 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
 &lt;p&gt;tdd, 与其说是一种测试方法, 我更倾向于认定他是一种开发方式, 这种方式, 融合在你的编码过程中. 在dbanotes上我的评论就是: 如果一件事情最初需要三个过程, 则tdd的测试代码会忠实的反映这三个过程. 但后期, 有人可以用更简捷的一个过程实现, 或是二个过程实现,或是更改了其中一个过程的返回方式(当然,这样也会影响下一个结果的接收方式), 但最终结果还是正确的. 性能也好了,代码也更好了. 但是, 如果他不修改最初的tdd测试代码(很大可能不是他写的),则测试不会通过.&lt;/p&gt;
 &lt;p&gt;当tdd测试代码几倍于实际的代码时, 这就是作者抱怨的问题. 也是一种阻碍生产力的体现.&lt;/p&gt;
 &lt;p&gt;我同作者的看法一样, 测试代码更应该关心结果而不是关心过程, 这才是测试的所在!&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 19 Jun 2013 12:42:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-19:agile-pair-tdd.html</guid></item><item><title>资源</title><link>http://www.easynew.com.cn/resources.html</link><description>&lt;p&gt;此文档用来记录一些资源, 备忘用, 不定期更新&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 19 Jun 2013 12:42:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-19:/agile-pair-tdd.html</guid></item><item><title>资源</title><link>http://www.easynew.com.cn/resources.html</link><description>&lt;p&gt;此文档用来记录一些资源, 备忘用, 不定期更新&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.boarsoft.com/javascript/gridCombo/"&gt;Ext/Sencha Basic GridComboBox&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 19 Jun 2013 07:42:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-19:resources.html</guid></item><item><title>整理google docs上的资料, 记录一些有意思的东西</title><link>http://www.easynew.com.cn/google-docs-note.html</link><description>&lt;p&gt;google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 19 Jun 2013 07:42:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-19:/resources.html</guid></item><item><title>整理google docs上的资料, 记录一些有意思的东西</title><link>http://www.easynew.com.cn/google-docs-note.html</link><description>&lt;p&gt;google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;一些有意思的想法&lt;/h2&gt;
 &lt;p&gt;框架设计其实是一个哲学概念,每个成功的框架总是有一套自己的处世哲学,然后在以后一以贯之,比方说大家熟悉的spring,就是以ioc,接口编程贯彻始末.&lt;/p&gt;
@@ -695,9 +192,7 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
 &lt;li&gt;对于每个要我们做软件的企业,我们将争取他们为以后的后续服务提供费用&lt;/li&gt;
 &lt;li&gt;saas 将是未来软件主要存在的形式,是我们今后的努力方向&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制,执行力不够,拖延症, 目标太大等等!&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 16 Jun 2013 22:08:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-16:google-docs-note.html</guid></item><item><title>extjs 4 NodeInterface destroy</title><link>http://www.easynew.com.cn/extjs-nodeinterface-destroy.html</link><description>&lt;p&gt;extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。&lt;/p&gt;
+&lt;p&gt;错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制 …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 16 Jun 2013 22:08:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-16:/google-docs-note.html</guid></item><item><title>extjs 4 NodeInterface destroy</title><link>http://www.easynew.com.cn/extjs-nodeinterface-destroy.html</link><description>&lt;p&gt;extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。&lt;/p&gt;
 &lt;p&gt;当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;override&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
   &lt;span class="nx"&gt;setException&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
@@ -710,91 +205,7 @@ jython timing 14.6050000191 且不说启动脚本 用了10多秒&lt;/p&gt;
 &lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 &lt;a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235"&gt;NodeInterface destroy with callback?&lt;/a&gt;，无人理睬。&lt;/p&gt;
-&lt;p&gt;当然，贴子中 model.superclass.destroy.call(model, {callback: myCallback}}); 现在也不能用了，因为它在&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fireEvent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bulkremove&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;报错, TreeStore没有indexOf方法，所以，思路只有复制该方法，去除该行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;node_destroy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-
-      &lt;span class="nx"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-          &lt;span class="nx"&gt;records&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-          &lt;span class="nx"&gt;action&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;destroy&amp;#39;&lt;/span&gt;
-      &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-      &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;isNotPhantom&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;phantom&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-          &lt;span class="nx"&gt;scope&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;scope&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-          &lt;span class="nx"&gt;stores&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-          &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-          &lt;span class="nx"&gt;storeCount&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-          &lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-          &lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-          &lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-          &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-      &lt;span class="nx"&gt;operation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Operation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-      &lt;span class="nx"&gt;callback&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-          &lt;span class="nx"&gt;args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-
-          &lt;span class="c1"&gt;// The stores property will be mutated, so clone it first&lt;/span&gt;
-          &lt;span class="nx"&gt;stores&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;stores&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-          &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;wasSuccessful&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-              &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;storeCount&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;stores&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;storeCount&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                  &lt;span class="nx"&gt;store&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;stores&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-
-                  &lt;span class="c1"&gt;// If the store has a remove (it&amp;#39;s not a TreeStore), then&lt;/span&gt;
-                  &lt;span class="c1"&gt;// remove this record from Store. Avoid Store handling anything by passing the &amp;quot;isMove&amp;quot; flag&lt;/span&gt;
-                  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                      &lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-                  &lt;span class="p"&gt;}&lt;/span&gt;
-
-                  &lt;span class="c1"&gt;// Other parties may need to know that the record as gone&lt;/span&gt;
-                  &lt;span class="c1"&gt;// eg View SelectionModels&lt;/span&gt;
-                  &lt;span class="c1"&gt;// store.fireEvent(&amp;#39;bulkremove&amp;#39;, store, [me], [store.indexOf(me)], false);&lt;/span&gt;
-                  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;isNotPhantom&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                      &lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fireEvent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;write&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-                  &lt;span class="p"&gt;}&lt;/span&gt;
-              &lt;span class="p"&gt;}&lt;/span&gt;
-              &lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;clearListeners&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-              &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;success&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;scope&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-          &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-              &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;failure&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;scope&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-          &lt;span class="p"&gt;}&lt;/span&gt;
-          &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;scope&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-      &lt;span class="p"&gt;};&lt;/span&gt;
-
-      &lt;span class="c1"&gt;// Not a phantom, t  en we must perform this operation on the remote datasource.&lt;/span&gt;
-      &lt;span class="c1"&gt;// Record will be removed from the store in the callback upon a success response&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;isNotPhantom&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-          &lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getProxy&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;destroy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-      &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="c1"&gt;// If it&amp;#39;s a phantom, then call the callback directly with a dummy successful ResultSet&lt;/span&gt;
-      &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-          &lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;complete&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;success&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-          &lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;resultSet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getProxy&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;reader&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;nullResultSet&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-          &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-      &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;me&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;然后这样调用&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;node_destroy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;rec&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nx"&gt;success&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;record&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-
-                &lt;span class="nx"&gt;record&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-
-
-        &lt;span class="p"&gt;},&lt;/span&gt;
-        &lt;span class="nx"&gt;failure&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;record&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;MessageBox&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;alert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;出错了&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;error&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;responseText&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-
-
-&lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;可以预见的是，如果extjs 不改变这个设计，你得跟随每个版本更新node_destroy方法！&lt;/p&gt;
-&lt;p&gt;ok, 看来我不是第一个提出此方法的人 &lt;a class="reference external" href="http://blog.csdn.net/caili314/article/details/7912124"&gt;ExtJS 添加和删除树结点:先向服务器请求&lt;/a&gt;&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 16 Jun 2013 16:02:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-16:extjs-nodeinterface-destroy.html</guid></item><item><title>ok, 这是我第一篇 pelican blog</title><link>http://www.easynew.com.cn/first-blog.html</link><description>&lt;div class="section" id="id1"&gt;
+&lt;p&gt;当然 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 16 Jun 2013 16:02:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-16:/extjs-nodeinterface-destroy.html</guid></item><item><title>ok, 这是我第一篇 pelican blog</title><link>http://www.easynew.com.cn/first-blog.html</link><description>&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;自定义菜单&lt;/h2&gt;
 &lt;p&gt;通过以下三个选项自定义菜单&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DISPLAY_PAGES_ON_MENU&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
@@ -809,127 +220,17 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
 &lt;p&gt;pelican-plugins 建议用submodule的方法获取&lt;/p&gt;
 &lt;p&gt;git submodule add git://github.com/getpelican/pelican-plugins.git&lt;/p&gt;
 &lt;p&gt;然后在其他机器就是git submodule init/git submodule update了&lt;/p&gt;
-&lt;p&gt;我的publish.sh:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-pelican -s pelicanconf.py content -o ../jiangjinaxiao.github.com
-
-git add .
-git commit -m &amp;quot;update&amp;quot;
-git push origin master
-
-cd ../jiangjianxiao.github.com
-git add .
-git commit -m &amp;quot;Update&amp;quot;
-git push origin master
-cd ../blog
-&lt;/pre&gt;
-&lt;p&gt;也可以做个git hook 来完成&lt;/p&gt;
-&lt;p&gt;THEME 路径必须使用绝对路径&lt;/p&gt;
-&lt;p&gt;集成disqus 时必须设置SITEURL, 因为article.html 模板中有判断&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 12 Jun 2013 04:12:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-12:first-blog.html</guid></item><item><title>给用 Python 的 web 开发者的 Sublime Text 2 小贴士</title><link>http://www.easynew.com.cn/python-web-sublime-text-2.html</link><description>&lt;p&gt;原文：&lt;a class="reference external" href="http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/"&gt;http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我的publish.sh …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 12 Jun 2013 04:12:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2013-06-12:/first-blog.html</guid></item><item><title>给用 Python 的 web 开发者的 Sublime Text 2 小贴士</title><link>http://www.easynew.com.cn/python-web-sublime-text-2.html</link><description>&lt;p&gt;原文：&lt;a class="reference external" href="http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/"&gt;http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;译者： &lt;a class="reference external" href="http://zhuang13.de/"&gt;TheLover_Z&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Sublime Text 2 是一个很强大的编辑器，最近开始获得了很高的人气 － 这不是没有理由的。它是商业软件。Sublime Text 2 有很多支持 Python 的插件。虽然核心部分保持封闭但围绕着这个编辑器还是形成了 活跃的插件生态系统 。&lt;/p&gt;
 &lt;p&gt;提示：你可以免费使用 Sublime 。它只是会提示你“请购买”而已。&lt;/p&gt;
 &lt;p&gt;这是我使用 Sublime 这么久以来发现的小技巧。我是站在在 OS X 视角来写的，但在 Linux 和 Windows 平台这些技巧应该也适用。&lt;/p&gt;
-&lt;p&gt;我以前是 Eclipse 的死党。虽然 Sublime 并没有像 Eclipse 那么强大，但是我发现 Sublime 最近的几个版本让我用起来是相当的舒服。最大的原因就是 Eclipse 要求文件夹和文件必须引入到所谓的 “Eclipse space” 下面。&lt;/p&gt;
-&lt;p&gt;Sublime 用起来更舒适。当你需要使用不同的工具和工程的时候，Sublime 比 Eclipse 更直观易懂。&lt;/p&gt;
-&lt;div class="section" id="id1"&gt;
-&lt;h2&gt;插件管理&lt;/h2&gt;
-&lt;p&gt;&lt;cite&gt;Sublime 插件包管理 &amp;lt;http://wbond.net/sublime_packages/package_control/installation&amp;gt;&lt;/cite&gt; 。你按照这样的步骤就可以安装任何插件了。它可以自动帮你使用云端(或者 Github)的资源安装。&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;ctrl+`&lt;/li&gt;
-&lt;li&gt;输入以下代码， 回车&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nn"&gt;os&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;pf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Package Control.sublime-package&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;ipp&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sublime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;installed_packages_path&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;makedirs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ipp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ipp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;install_opener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build_opener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ProxyHandler&lt;/span&gt;&lt;span class="p"&gt;()));&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ipp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;pf&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://sublime.wbond.net/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;pf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;%20&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Please restart Sublime Text to finish installation&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;在插件包管理安装以后你可以按 CMD(windows下为CTRL) + SHIFT + P, 然后输入Install Package 来添加新的包。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;h2&gt;从命令行打开文件&lt;/h2&gt;
-&lt;p&gt;我在我的 .rc 文件添加了下面的命令，然后我就可以在终端直接打开文件了&lt;/p&gt;
-&lt;blockquote&gt;
-alias subl=&amp;quot;'/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl'&amp;quot;
-alias nano=&amp;quot;subl&amp;quot;
-export EDITOR=&amp;quot;subl&amp;quot;&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id3"&gt;
-&lt;h2&gt;从命令行打开文件夹&lt;/h2&gt;
-&lt;p&gt;你也可以在 Sublime Text 打开文件夹。&lt;/p&gt;
-&lt;p&gt;就像这样：&lt;/p&gt;
-&lt;blockquote&gt;
-subl src&lt;/blockquote&gt;
-&lt;p&gt;然后整个 src/ 文件夹就会被打开。&lt;/p&gt;
-&lt;p&gt;提示：一个文件夹 = 一个项目 = 一个窗口？我不确定是不是还有办法让一个窗口显示多个项目&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="tab"&gt;
-&lt;h2&gt;使用更聪明的 tab 配置&lt;/h2&gt;
-&lt;p&gt;永远不要使用硬 tab 字符。&lt;/p&gt;
-&lt;p&gt;点击 View &amp;gt; Indentation &amp;gt; Convert Indentation to Spaces 然后确定 Indent using spaces 是被勾选的。新版本的 Sublime 应该会根据文件类型记住这个设置。&lt;/p&gt;
-&lt;p&gt;注意 Sublime 会试图自动检测所有打开的文件的 tab 设置 ，所以处理外部文件的时候要小心。使用 git 的 pre-commit 来预防出现这种情况。&lt;/p&gt;
-&lt;p&gt;你也可以配置通过 Preferences 菜单的配置文件来 实现 ，但是尝试了好多次以后还是失败了。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;h2&gt;使用特定的语法高亮&lt;/h2&gt;
-&lt;p&gt;如果你有一个文件你想要使用特定的高亮，比如说你想对 ZCML 文件使用 XML 的高亮方式。&lt;/p&gt;
-&lt;p&gt;打开文件，然后 View &amp;gt; Syntax &amp;gt;Open all with current extension as… -&amp;gt;[你想要的语法选择]&lt;/p&gt;
-&lt;p&gt;查看更多关于语法高亮的 资料 。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;h2&gt;语法匹配检查&lt;/h2&gt;
-&lt;p&gt;SublimeLinter 会在你键入的时候在后台扫描你的文件以保证正确性。请查看 README 的 Configuration 部分。不过你可能需要安装额外的软件(比如 Node.js)来保证功能的完整性。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="sublimecodeintel"&gt;
-&lt;h2&gt;使用 SublimeCodeIntel 自动补全支持&lt;/h2&gt;
-&lt;p&gt;从插件包管理器安装 SublimeCodeIntel&lt;/p&gt;
-&lt;p&gt;如果你正在处理 Python 项目，这个代码就可以：&lt;/p&gt;
-&lt;p&gt;[codeintel]
-recipe = corneti.recipes.codeintel
-eggs = ${instance:eggs}
-extra-paths = ${omelette:location}&lt;/p&gt;
-&lt;p&gt;然后就会自动生成 .codeintel 文件。&lt;/p&gt;
-&lt;p&gt;CodeIntel 假定在你的项目根目录下面有 .codeintel 文件，键入：&lt;/p&gt;
-&lt;p&gt;subl .&lt;/p&gt;
-&lt;p&gt;来打开文件夹。&lt;/p&gt;
-&lt;p&gt;现在 Sublime 应该支持自动补全了。比如说你键入&lt;/p&gt;
-&lt;p&gt;from zope.interface import &amp;lt;--- 这时候就应该蹦出来自动补全选项了&lt;/p&gt;
-&lt;p&gt;而且，ALT + 鼠标左键可以把你带到 import 或者函数的声明部分。&lt;/p&gt;
-&lt;p&gt;CodeIntel 也支持 PHP, Ruby, JS, 这里只列出一小部分。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id6"&gt;
-&lt;h2&gt;快速到达任何地方&lt;/h2&gt;
-&lt;p&gt;按下 CMD + P，键入文件名的一小部分，就可以提示你全路径。非常强大的一个特性。&lt;/p&gt;
-&lt;p&gt;使用 CTRL + G 来到达任意行。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id7"&gt;
-&lt;h2&gt;文件内上下文敏感搜索&lt;/h2&gt;
-&lt;p&gt;针对 JS, CSS, Python 等语言设计。按下 CMD + R。输入你需要查找的内容，就会自动跳转到声明部分。&lt;/p&gt;
-&lt;p&gt;或者 Python：&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="html-xml"&gt;
-&lt;h2&gt;HTML/XML 标签工具&lt;/h2&gt;
-&lt;p&gt;针对 XML 的语法，Sublime Text 提供了一些必杀技。&lt;/p&gt;
-&lt;p&gt;用插件包管理器安装 Tag 。然后你就可以：&lt;/p&gt;
-&lt;p&gt;选择文本然后按下 CMD + SHIFT + P 搜索标签。然后就会一目了然，你也可以配置你自己风格的偏好。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="git"&gt;
-&lt;h2&gt;git&lt;/h2&gt;
-&lt;p&gt;你可以使用 kemayo 的 git 插件 ，也是从插件包管理器安装。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id8"&gt;
-&lt;h2&gt;还未解决的问题&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.sublimetext.com/forum/viewtopic.php?f=2&amp;amp;t=7137"&gt;怎么编辑注释和增加新行同时保持注释闭合&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.sublimetext.com/forum/viewtopic.php?f=2&amp;amp;t=7153"&gt;更好的 restructed/markdown 语法高亮支持&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;在 Sublime 窗口运行 Plone 或者单元测试，用鼠标点击可以跟踪到相关的错误&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 16 Sep 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-09-16:python-web-sublime-text-2.html</guid></item><item><title>AttributeError: 'NoneType' object has no attribute '_sa_instance_state'</title><link>http://www.easynew.com.cn/no_attribute_sa_instance_state.html</link><description>&lt;p&gt;当对sqlalchemy的一些 返回进行pickle处理时会出现如标题的错误，原因是这些返回的类型是sqlalchemy.orm.collections.InstrumentedList&lt;/p&gt;
+&lt;p&gt;我以前是 Eclipse 的死党。虽然 Sublime 并没有像 Eclipse …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 16 Sep 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-09-16:/python-web-sublime-text-2.html</guid></item><item><title>AttributeError: 'NoneType' object has no attribute '_sa_instance_state'</title><link>http://www.easynew.com.cn/no_attribute_sa_instance_state.html</link><description>&lt;p&gt;当对sqlalchemy的一些 返回进行pickle处理时会出现如标题的错误，原因是这些返回的类型是sqlalchemy.orm.collections.InstrumentedList&lt;/p&gt;
 &lt;p&gt;简单的处理将是将其转换为列表，如&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Role&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;pickle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pickle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 22 Aug 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-08-22:no_attribute_sa_instance_state.html</guid></item><item><title>ubuntu 中设置 PYTHONPATH</title><link>http://www.easynew.com.cn/ubuntu-pythonpath.html</link><description>&lt;p&gt;一开始 是通过设置环境变量来进行的，可以编辑/etc/profile或是用户目录下的.profile&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Wed, 22 Aug 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-08-22:/no_attribute_sa_instance_state.html</guid></item><item><title>ubuntu 中设置 PYTHONPATH</title><link>http://www.easynew.com.cn/ubuntu-pythonpath.html</link><description>&lt;p&gt;一开始 是通过设置环境变量来进行的，可以编辑/etc/profile或是用户目录下的.profile&lt;/p&gt;
 &lt;p&gt;增加&lt;/p&gt;
 &lt;p&gt;export PYTHONPAHT=/home/jjx/works/earrow:/home/jjx/works/c92&lt;/p&gt;
 &lt;p&gt;然后 用source /etc/profile或source .profile生效&lt;/p&gt;
@@ -942,13 +243,7 @@ extra-paths = ${omelette:location}&lt;/p&gt;
 &lt;p&gt;然后&lt;/p&gt;
 &lt;blockquote&gt;
 cd /usr/local/lib/python2.7/dist-packages
-sudo gedit my.pth&lt;/blockquote&gt;
-&lt;p&gt;增加&lt;/p&gt;
-&lt;blockquote&gt;
-/home/jjx/works/earrow
-/home/jjx/works/c92&lt;/blockquote&gt;
-&lt;p&gt;行之间回车 保存&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Fri, 10 Aug 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-08-10:ubuntu-pythonpath.html</guid></item><item><title>extjs 备注</title><link>http://www.easynew.com.cn/extjs-note.html</link><description>&lt;div class="section" id="form"&gt;
+sudo gedit …&lt;/blockquote&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Fri, 10 Aug 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-08-10:/ubuntu-pythonpath.html</guid></item><item><title>extjs 备注</title><link>http://www.easynew.com.cn/extjs-note.html</link><description>&lt;div class="section" id="form"&gt;
 &lt;h2&gt;设置form所有字段只读&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Panel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;override&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
 
@@ -973,52 +268,7 @@ sudo gedit my.pth&lt;/blockquote&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;extjs 4.2 海皇星主题,frame 将是很粗的一根, 而且当form被嵌入到其他容器时,除了这个很粗的框, 背景没有同容器一样, 所以在该主题中frame应该设置为false&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
-&lt;li&gt;Store datachanged 对update没有效果, 仅对add/remove有效果, 4.1.1 rc2,所以可能需要同步监听datachanged和update才行&lt;/li&gt;
-&lt;li&gt;Store.loadData,就我个人而言应该设置isLoading返回true,但显然extjs 没有这样做&lt;/li&gt;
-&lt;li&gt;form对record的绑定不行,loadRecord/updateRecord需要手动调用,所以很多时候只能通过form.form.findField().setValue完成更新,设计问题&lt;/li&gt;
-&lt;li&gt;调用model.destroy() 可以使用success,failure回调,参数是当前model和operation, 典型代码应该是这样&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;_sel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;destroy&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-
-        &lt;span class="nx"&gt;success&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;rec&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-        &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;_sel&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ol class="arabic simple" start="5"&gt;
-&lt;li&gt;TreeStore和Panel&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;如果rootVisible 为false 并且没有定义root,则会自动向TreeStore.setRootNode({expanded:true});&lt;/p&gt;
-&lt;p&gt;这个是需要注意的,因为有时你在TreeStore 中定义了root,但又在panel中设置了rootVisible,这里的建议是在总是在panel中设置root,而不在TreeStore的设置root, 不然在rootVisible=false时,自动生成的root覆盖了treestore中的root&lt;/p&gt;
-&lt;p&gt;当调用TreeStore.setRootNode时,在如下条件全部成立时自动调用load方法&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;preventLoad!=true ,此参数是setRootNode的第二个参数,通常调用setRootNode会忽略此参数,导致这个条件成立&lt;/li&gt;
-&lt;li&gt;root的expanded 为true 或autoLoad为true, 这里可以看到,光设置autoLoad 为false ,但expanded为true时,也会自动调用load&lt;/li&gt;
-&lt;li&gt;isLoaded为false&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;所以,建议传递loaded:true到root来达到按需加载的效果&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Ext.tree.Panel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nx"&gt;rootVisible&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="nx"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="nx"&gt;loaded&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                &lt;span class="nx"&gt;expanded&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
-        &lt;span class="p"&gt;},&lt;/span&gt;
-        &lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Ext.data.TreeStore&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-
-                &lt;span class="s2"&gt;&amp;quot;model&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;WorkflowAction&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                &lt;span class="nx"&gt;autoLoad&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                &lt;span class="nx"&gt;proxy&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                        &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                        &lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-                &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="p"&gt;})&lt;/span&gt;
-
-&lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 17 Jun 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-06-17:extjs-note.html</guid></item><item><title>windows 下nginx和tornado 配置</title><link>http://www.easynew.com.cn/windows-nginx-tornado.html</link><description>&lt;p&gt;在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.&lt;/p&gt;
+&lt;li&gt;Store datachanged 对update没有效果 …&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 17 Jun 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-06-17:/extjs-note.html</guid></item><item><title>windows 下nginx和tornado 配置</title><link>http://www.easynew.com.cn/windows-nginx-tornado.html</link><description>&lt;p&gt;在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.&lt;/p&gt;
 &lt;p&gt;结合nginx和tornado 还是有好处的, 主要是减轻tornado的负担,典型的如让nginx处理静态文件,让nginx处理gzip.由于tornado是单线程的,让nginx进行负载平衡也很有必要.&lt;/p&gt;
 &lt;p&gt;修改 nginx/conf目录下的nginx.conf ,替换为&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
@@ -1036,118 +286,13 @@ sudo gedit my.pth&lt;/blockquote&gt;
 &lt;span class="c1"&gt;#error_log  logs/error.log  notice;&lt;/span&gt;
 &lt;span class="c1"&gt;#error_log  logs/error.log  info;&lt;/span&gt;
 
-&lt;span class="k"&gt;pid&lt;/span&gt;        &lt;span class="s"&gt;logs/nginx.pid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="k"&gt;events&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-
-    &lt;span class="kn"&gt;worker_connections&lt;/span&gt;  &lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="kn"&gt;accept_mutex&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-
-&lt;span class="k"&gt;http&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-
-    &lt;span class="kn"&gt;include&lt;/span&gt;       &lt;span class="s"&gt;mime.types&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="kn"&gt;default_type&lt;/span&gt;  &lt;span class="s"&gt;application/octet-stream&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="c1"&gt;#log_format  main  &amp;#39;$remote_addr - $remote_user [$time_local] &amp;quot;$request&amp;quot; &amp;#39;&lt;/span&gt;
-
-    &lt;span class="c1"&gt;#                  &amp;#39;$status $body_bytes_sent &amp;quot;$http_referer&amp;quot; &amp;#39;&lt;/span&gt;
-
-    &lt;span class="c1"&gt;#                  &amp;#39;&amp;quot;$http_user_agent&amp;quot; &amp;quot;$http_x_forwarded_for&amp;quot;&amp;#39;;&lt;/span&gt;
-
-
-
-    &lt;span class="c1"&gt;#access_log  logs/access.log  main;&lt;/span&gt;
-
-
-
-    &lt;span class="kn"&gt;sendfile&lt;/span&gt;        &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="c1"&gt;#tcp_nopush     on;&lt;/span&gt;
-
-    &lt;span class="kn"&gt;keepalive_timeout&lt;/span&gt;  &lt;span class="mi"&gt;65&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="kn"&gt;gzip&lt;/span&gt;  &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="kn"&gt;gzip_min_length&lt;/span&gt;  &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="kn"&gt;gzip_buffers&lt;/span&gt;     &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="mi"&gt;8k&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="kn"&gt;gzip_types&lt;/span&gt; &lt;span class="s"&gt;text/plain&lt;/span&gt; &lt;span class="s"&gt;application/json&lt;/span&gt; &lt;span class="s"&gt;application/x-javascript&lt;/span&gt; &lt;span class="s"&gt;text/css&lt;/span&gt; &lt;span class="s"&gt;application/xml&lt;/span&gt; &lt;span class="s"&gt;text/javascript&lt;/span&gt; &lt;span class="s"&gt;image/jpeg&lt;/span&gt; &lt;span class="s"&gt;image/gif&lt;/span&gt; &lt;span class="s"&gt;image/png&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="kn"&gt;proxy_next_upstream&lt;/span&gt; &lt;span class="s"&gt;error&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-
-
-    &lt;span class="kn"&gt;upstream&lt;/span&gt; &lt;span class="s"&gt;tornadoes&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-
-        &lt;span class="kn"&gt;server&lt;/span&gt; &lt;span class="n"&gt;127.0.0.1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-        &lt;span class="kn"&gt;server&lt;/span&gt; &lt;span class="n"&gt;127.0.0.1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8001&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-
-
-    &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="kn"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-
-        &lt;span class="kn"&gt;listen&lt;/span&gt;       &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-        &lt;span class="kn"&gt;server_name&lt;/span&gt;  &lt;span class="s"&gt;localhost&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-            &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="s"&gt;/static/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-
-                &lt;span class="kn"&gt;root&lt;/span&gt; &lt;span class="s"&gt;你的静态文件根目录&lt;/span&gt;
-
-            &lt;span class="err"&gt;}&lt;/span&gt;
-
-        &lt;span class="s"&gt;location&lt;/span&gt; &lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-
-            &lt;span class="kn"&gt;proxy_pass_header&lt;/span&gt; &lt;span class="s"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-            &lt;span class="kn"&gt;proxy_set_header&lt;/span&gt; &lt;span class="s"&gt;Host&lt;/span&gt; &lt;span class="nv"&gt;$http_host&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-            &lt;span class="kn"&gt;proxy_redirect&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-            &lt;span class="kn"&gt;proxy_set_header&lt;/span&gt; &lt;span class="s"&gt;X-Real-IP&lt;/span&gt; &lt;span class="nv"&gt;$remote_addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-            &lt;span class="kn"&gt;proxy_set_header&lt;/span&gt; &lt;span class="s"&gt;X-Scheme&lt;/span&gt; &lt;span class="nv"&gt;$scheme&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-            &lt;span class="kn"&gt;proxy_pass&lt;/span&gt; &lt;span class="s"&gt;http://tornadoes&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-
-
-        &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="p"&gt;}&lt;/span&gt;
-
-
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="worker-processes-worker-connections"&gt;
-&lt;h2&gt;延伸: 关于worker_processes/worker_connections&lt;/h2&gt;
-&lt;p&gt;默认为1024&lt;/p&gt;
-&lt;p&gt;在纯nginx下，web服务器的最大访问客户数 max clients = worker_processes 乘以worker_connections。&lt;/p&gt;
-&lt;p&gt;nginx作为反向代理的时候 max clients = worker_processes 乘以worker_connections 再除以4。&lt;/p&gt;
-&lt;p&gt;worker_processes 一般等于CPU的内核数目&lt;/p&gt;
-&lt;p&gt;配置 worker_processes时一般同时配置event中的 worker_rlimit_nofile, worker_processes 不超过worker_rlimit_nofile&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="daemon-off"&gt;
-&lt;h2&gt;延伸: daemon off;&lt;/h2&gt;
-&lt;p&gt;如果使用supervisor 管理nginx进程，需要加上, windows下如果使用srvany.exe， 也需要(这个待验证！)&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Thu, 07 Jun 2012 13:19:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-06-07:windows-nginx-tornado.html</guid></item><item><title>extjs model同时用于grid和tree的问题</title><link>http://www.easynew.com.cn/extjs-model-with-grid-tree.html</link><description>&lt;p&gt;当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.&lt;/p&gt;
+&lt;span class="k"&gt;pid&lt;/span&gt;        &lt;span class="s"&gt;logs/nginx.pid …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Thu, 07 Jun 2012 13:19:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-06-07:/windows-nginx-tornado.html</guid></item><item><title>extjs model同时用于grid和tree的问题</title><link>http://www.easynew.com.cn/extjs-model-with-grid-tree.html</link><description>&lt;p&gt;当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.&lt;/p&gt;
 &lt;p&gt;当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的&lt;/p&gt;
 &lt;blockquote&gt;
 parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;p&gt;但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.&lt;/p&gt;
 &lt;p&gt;回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Mon, 04 Jun 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-06-04:extjs-model-with-grid-tree.html</guid></item><item><title>关于我们</title><link>http://www.easynew.com.cn/</link><description>&lt;p&gt;拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript/go。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Mon, 04 Jun 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-06-04:/extjs-model-with-grid-tree.html</guid></item><item><title>关于我们</title><link>http://www.easynew.com.cn/</link><description>&lt;p&gt;拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript/go。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。&lt;/p&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;经历&lt;/h2&gt;
 &lt;ul class="simple"&gt;
@@ -1161,33 +306,8 @@ parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;div class="section" id="python"&gt;
 &lt;h2&gt;python 经验&lt;/h2&gt;
-&lt;p&gt;欢迎就python为主的项目开展合作，个人python经验：&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;对twisted/gevent/tornado等高并发框架有深入了解,对django/flask/bottle/webpy等web框架均有项目经验或涉猎。&lt;/li&gt;
-&lt;li&gt;对sqlalchemy有深入了解， 深入了解postgresql/sqlserver /mysql，目前以postgresql为主要开发数据库&lt;/li&gt;
-&lt;li&gt;对sencha extjs有深入了解，由于有丰富的桌面开发经验(vb6/windows forms/pb/delphi等)，对spa类应用特为擅长&lt;/li&gt;
-&lt;li&gt;对zeromq有深入了解&lt;/li&gt;
-&lt;li&gt;对cython优化python有深入了解&lt;/li&gt;
-&lt;li&gt;有redis/mongodb等nosql 开发经验&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;我们接受各种可能的合作方式。欢迎通过 私信 联系我们， 或请参考 下方联系我们&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;地址: 浙江余姚市东旱门南路81号白云商贸中心458室&lt;/p&gt;
-&lt;p&gt;gmail/gtalk: &lt;a class="reference external" href="mailto:jiangjianxiao&amp;#64;gmail.com"&gt;jiangjianxiao&amp;#64;gmail.com&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;联系人: 蒋先生&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 01 Jan 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-01-01:</guid></item><item><title>关于silverlight 前景的讨论，不吐不快</title><link>http://www.easynew.com.cn/silverlight-future.html</link><description>&lt;p&gt;首先，且不讨论这个事件的本身，最近以来，我一直对ms感到失望，这是因为ms在开发技术的延续性上越来越随心所欲，当然，早期的开发者可能也经历过dao,dao direct,rdo,ado的时代，但那时的api 相对很小，学习坡度很小。而现在，自从.net 推出后 windows forms不更新了,wf 更新换代了，linq to sql 也死了，dlr也不管了。问题是这些替代者完全能胜任了吗？没有！！！！&lt;/p&gt;
-&lt;p&gt;好吧，现在就讨论silverlight ,或许这个人说的本身就没有错误，silverlight 本身就不能完全的跨所有的平台，虽然它现在能在部分osx和windows 运行，但远远不是真正的跨平台。只有html5 才能真正的跨平台。但是，无论如何，silverlight现在是作为wp7的主要开发技术之一，而wp7 却是你们目前要主推的东西。你完全可以这样说，silverlight 对我们还是很重要，作为wp7的主要开发技术，我们将继续发展silverlight 。但是没有， 从这些言论来看，个人觉得ms 目前派系斗争真的是厉害。就怕遇见猪一样的队友，肯定是没错的。我对ms的前景现在完全不抱乐观的态度，不在于ms有没有能力，而是现在他们这个内耗，实在是太匪夷所思了。  资源的争取不是靠打垮内部的另一个团队来得到的。&lt;/p&gt;
-&lt;p&gt;好了，现在这个言论，肯定会影响一批人使用silverlight了，包括我，因为silverlight 虽然有很好的开发模式，但是，它现在存在的大量的问题，无论是性能或是bug上，没有一个好的将来保证，真的不敢用。 这样的结果，估计ms很满意了，问题是，如果使用html5 ,你能把用户绑定到你的平台吗？使用websocket,json,服务器端无论是java/python/ruby ,哪个都不比你的弱！你有这个信心吗？&lt;/p&gt;
-&lt;p&gt;附带一下我的一段评论，可能更容易表达我的观点：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;个人以为，这个ms的发言者犯了一个不必要的错误，没有必要讨论silverlight的跨平台，因为无论.net或是silverlight的clr，都没有真正的跨平台。其次是作为wp7的主要开发技术，他有可能不发展吗？这样的话你们推广wp7的后劲在哪里呢？
-他的言论，造成不必要的恐慌。&lt;/p&gt;
-&lt;p&gt;其次，silverlight我认为对ms很重要，因为这是有效的平台的绑定工具，而html5 ，我觉的开发这里完全可以选择更强有力的服务器技术，如java/ruby/python之类的。而且html5浏览器技术竞争激励，其他厂商比ms有更快的应变和发布手段，更好的口碑。ms不会讨好。&lt;/p&gt;
-&lt;p&gt;所以，其实两者都很重要，但是如果ms内部真的要扬html,遏制silverlight话，真是个吃屎的决定&lt;/p&gt;
-&lt;/blockquote&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Fri, 22 Oct 2010 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2010-10-22:silverlight-future.html</guid></item><item><title>亿脉通 b2b 业务逻辑描述</title><link>http://www.easynew.com.cn/ymt-b2b-logic.html</link><description>&lt;p&gt;做亿脉通时写的&lt;/p&gt;
+&lt;p&gt;欢迎就python为主的项目开展合作，个人python经验 …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Sun, 01 Jan 2012 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2012-01-01:/</guid></item><item><title>关于silverlight 前景的讨论，不吐不快</title><link>http://www.easynew.com.cn/silverlight-future.html</link><description>&lt;p&gt;首先，且不讨论这个事件的本身，最近以来，我一直对ms感到失望，这是因为ms在开发技术的延续性上越来越随心所欲，当然，早期的开发者可能也经历过dao,dao direct,rdo,ado的时代，但那时的api 相对很小，学习坡度很小。而现在，自从.net 推出后 windows forms不更新了,wf 更新换代了，linq to sql 也死了，dlr也不管了。问题是这些替代者完全能胜任了吗？没有！！！！&lt;/p&gt;
+&lt;p&gt;好吧，现在就讨论silverlight ,或许这个人说的本身就没有错误，silverlight 本身就不能完全的跨所有的平台，虽然它现在能在部分osx和windows 运行，但远远不是真正的跨平台。只有html5 才能真正的跨平台。但是，无论如何，silverlight现在是作为wp7的主要开发技术之一，而wp7 却是你们目前要主推的东西。你完全可以这样说，silverlight 对我们还是很重要，作为wp7的主要开发技术，我们将继续发展silverlight 。但是没有 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Fri, 22 Oct 2010 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2010-10-22:/silverlight-future.html</guid></item><item><title>亿脉通 b2b 业务逻辑描述</title><link>http://www.easynew.com.cn/ymt-b2b-logic.html</link><description>&lt;p&gt;做亿脉通时写的&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;代理和分销&lt;/h2&gt;
 &lt;p&gt;这里试图把这两个单词给明确化,在b2b系统中,代理是指由厂商授权的,在某一地区销售某类产品的权力. 代理可能是独家的,也可能是多家的,总代则是意味着在全国均有销售权力,通常,代理需要有严格的区域约束.每个大区域,如省形成一个代理树,不允许不同的树或树的不同级次进行互通,对于一个产品类别,总的来说是一棵大树,也可以分割为多棵小树
@@ -1201,64 +321,7 @@ parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;p&gt;使用 &lt;a class="reference external" href="http://www.stats.gov.cn/tjbz/xzqhdm/t20080215_402462675.htm"&gt;国标编码&lt;/a&gt;&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;两位一级,最大5级&lt;/li&gt;
-&lt;li&gt;86 第一级,全国,一个&lt;/li&gt;
-&lt;li&gt;8601~8608 8个,二级&lt;/li&gt;
-&lt;li&gt;860110... 三级&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;区域主要使用在两个地方&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;代理区域&lt;/li&gt;
-&lt;li&gt;公司所在区域&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;代理区域和公司所在区域没有严格的一致性,比方说公司所在杭州,它完全可以代理某类产品的全国或者是广州地区的代理,公司所在区域只有一个,代理的区域无限,通常,公所所在区域仅仅适用于零售商.&lt;/p&gt;
-&lt;p&gt;在指定一个商家对于某一产品类别的代理区域时,仅需要制定该区域的顶级区域即可
-公司所在区域用于系统逻辑&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;当报价发布到某一区域时,公司所在区域用于判断是否在该该报价单的发布区域之中&lt;/li&gt;
-&lt;li&gt;当请求成为下家时,公司所在区域用于决定是否允许请求该产品的所在代理区域的分销&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;h2&gt;产品类别和产品&lt;/h2&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;设计上,客户是拥有自己的产品类别和产品库的&lt;/li&gt;
-&lt;li&gt;一开始,客户的产品类别和产品库是空白的&lt;/li&gt;
-&lt;li&gt;客户可以从标准库中选择产品类别和产品&lt;/li&gt;
-&lt;li&gt;客户也可以自己输入产品或产品类别&lt;/li&gt;
-&lt;li&gt;选择或输入的产品或产品类别,如果不存在,则会新增到客户自己的产品类别和产品库中&lt;/li&gt;
-&lt;li&gt;以后客户仅仅从自己的产品类别和产品库中选择就行&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;代理时使用产品类别&lt;/p&gt;
-&lt;p&gt;在 b2b中,使用简化版本的产品类别和产品&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;h2&gt;上家和下家&lt;/h2&gt;
-&lt;p&gt;分销商拥有多个客户,这些客户没有地域区分,客户可能分销其中的一种或多种代理产品(也就是说有客户但没有分销任何代理产品),当用户分销或代理其中的一种代理产品时,是否需要进行区域限制(这里面有跨代理区域或区域跨级,当跨区域授权时必须保证该区域没有其它代理层次,系统必须提出警告).
-目前系统会设计会总是限制&lt;/p&gt;
-&lt;p&gt;客户拥有多个上家,由于代理体系的限制,客户的某类产品分销,则只有一个上家&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="agent"&gt;
-&lt;h2&gt;代理(Agent)&lt;/h2&gt;
-&lt;p&gt;保存商家,区域,代理产品的数据,该数据有认证一栏, 厂商认证只有我们的后台管理人员才能授权(以后可能是厂商),当上级为厂商认证时,分销商可以设置下级为分销商认证,其它则不行,默认为未认证&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id6"&gt;
-&lt;h2&gt;报价&lt;/h2&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;可以发布代理的产品,也可以发布其他产品&lt;/li&gt;
-&lt;li&gt;这些代理产品的代理区域可能是不同的,当然,通常情况下都是一样的&lt;/li&gt;
-&lt;li&gt;默认报价发布区域应该是分销商的选项,这是因为公司所在区域和要发布的区域没有一致性&lt;/li&gt;
-&lt;li&gt;分销商拥有一种或多种代理产品,这些代理产品可能由厂家直接授权或是上级分销商授权,在显示报价时需要显示这些认证信息&lt;/li&gt;
-&lt;li&gt;厂商认证可以由厂商或我们的后台管理来做,而上级分销商授权,则允许上级代理商直接完成(无需审核 )&lt;/li&gt;
-&lt;li&gt;只有当客户分销一种或多种代理产品时,该客户才能查看到 分销商的客户 自有客户报价&lt;/li&gt;
-&lt;li&gt;分销商可以同时创建多个报价单(每个单据有多个明细) ,用户可以新建或从原有报价单创建新的报价单,当从原有报价单创建新的报价单时,原报价单 将转移到报价单历史表 . 这意味着用户查询的总是当前的报价,而报价历史记录,则用于分析,可以使用单独的一个数据库&lt;/li&gt;
-&lt;li&gt;当查看报价时,首先是根据报价单的发布区域,这个是包含关系,如果报价单发布区域为浙江,则公司区域在浙江范围内的所有公司均可见. 同时,该公司的所有客户也可见,考虑到 公司的客户并没有地域限制.可能广州的客户可以查看到浙江地区的报价. 但只有当客户代理一种或多种产品时,该客户才可以查看到私有报价,考虑到代理体系对区域要求的严格性,所有这些能查看的私有报价的客户都被严格的限定到发布报价的公司所在的大致区域&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id7"&gt;
-&lt;h2&gt;促销&lt;/h2&gt;
-&lt;p&gt;促销信息也有同报价一样的区域限制&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Tue, 09 Sep 2008 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2008-09-09:ymt-b2b-logic.html</guid></item><item><title>预分托盘算法</title><link>http://www.easynew.com.cn/pallet-algorithm.html</link><description>&lt;p&gt;根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数&lt;/p&gt;
+&lt;li&gt;86 第一级,全国,一个 …&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Tue, 09 Sep 2008 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2008-09-09:/ymt-b2b-logic.html</guid></item><item><title>预分托盘算法</title><link>http://www.easynew.com.cn/pallet-algorithm.html</link><description>&lt;p&gt;根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数&lt;/p&gt;
 &lt;p&gt;建立一个二维数据&lt;/p&gt;
 &lt;table border="1" class="docutils"&gt;
 &lt;colgroup&gt;
@@ -1298,7 +361,4 @@ parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;p&gt;这些用6个变量区分&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;real netWeight,grossWeight,quantity;  //非尾箱&lt;/li&gt;
-&lt;li&gt;real trailNetWeight,trailGrossWeight,trailQuantity; //尾箱&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;判断尾箱的依据需要根据班组而定,如果班组是d并且尾盒m数,或者是其他班组但尾箱盒数有值, 或当前箱数正好是托盘剩余数+1&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Tue, 15 Jul 2008 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2008-07-15:pallet-algorithm.html</guid></item></channel></rss>
+&lt;li&gt;real trailNetWeight …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjx</dc:creator><pubDate>Tue, 15 Jul 2008 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:www.easynew.com.cn,2008-07-15:/pallet-algorithm.html</guid></item></channel></rss>

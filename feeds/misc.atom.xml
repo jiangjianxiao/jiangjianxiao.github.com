@@ -1,5 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>EasyNew</title><link href="http://www.easynew.com.cn/" rel="alternate"></link><link href="http://www.easynew.com.cn/feeds/misc.atom.xml" rel="self"></link><id>http://www.easynew.com.cn/</id><updated>2015-05-14T11:43:00+08:00</updated><entry><title>Go 扔掉template method</title><link href="http://www.easynew.com.cn/go_discard_template_method.html" rel="alternate"></link><published>2015-05-14T11:43:00+08:00</published><updated>2015-05-14T11:43:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2015-05-14:go_discard_template_method.html</id><summary type="html">&lt;p&gt;在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>EasyNew - misc</title><link href="http://www.easynew.com.cn/" rel="alternate"></link><link href="http://www.easynew.com.cn/feeds/misc.atom.xml" rel="self"></link><id>http://www.easynew.com.cn/</id><updated>2017-03-26T11:14:00+08:00</updated><entry><title>从骷髅峡谷谈起, 说说 windows 10 python 开发环境</title><link href="http://www.easynew.com.cn/win10.html" rel="alternate"></link><published>2017-03-26T11:14:00+08:00</published><updated>2017-03-26T11:14:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2017-03-26:/win10.html</id><summary type="html">&lt;p&gt;首先是因为骷髅峡谷, 这机器买来时想装黑苹果的, 但不完美. 所以折腾了大半年后还是装回 windows 10, 本来也没有想再把它变成工作机器, 因为潜意识中 windows 不是一个很好的开发环境.&lt;/p&gt;
+&lt;p&gt;但是因为在最近计划为 c9 考虑开放 sdk 的事情, 希望用户能在 windows/macos/ubuntu 下均能使用 c9 sdk, 所以试着重新搭建了一下环境. 结果是:&lt;/p&gt;
+&lt;p&gt;相当不错, 虽然没有 ubuntu/macos 上那种一气呵成的环境安装感觉, 但做开发环境还是没有问题的, 而且, ui 性能体验上要远超 macos 和 ubuntu (注意, 我说都是 ui 性能).&lt;/p&gt;
+&lt;p&gt;没有用 bash, 虽然我认为当前 bash 完成度已经超过了cygwin, 但要达到虚拟机的体验. 可能还要一段时间(半年?一年?)&lt;/p&gt;
+&lt;p&gt;在前几年 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;首先是因为骷髅峡谷, 这机器买来时想装黑苹果的, 但不完美. 所以折腾了大半年后还是装回 windows 10, 本来也没有想再把它变成工作机器, 因为潜意识中 windows 不是一个很好的开发环境.&lt;/p&gt;
+&lt;p&gt;但是因为在最近计划为 c9 考虑开放 sdk 的事情, 希望用户能在 windows/macos/ubuntu 下均能使用 c9 sdk, 所以试着重新搭建了一下环境. 结果是:&lt;/p&gt;
+&lt;p&gt;相当不错, 虽然没有 ubuntu/macos 上那种一气呵成的环境安装感觉, 但做开发环境还是没有问题的, 而且, ui 性能体验上要远超 macos 和 ubuntu (注意, 我说都是 ui 性能).&lt;/p&gt;
+&lt;p&gt;没有用 bash, 虽然我认为当前 bash 完成度已经超过了cygwin, 但要达到虚拟机的体验. 可能还要一段时间(半年?一年?)&lt;/p&gt;
+&lt;p&gt;在前几年, 我花了一定的努力将开发环境从 windows 转到了macos, 当然, 我现在还是认为macos是最佳的开发环境. 只不过, 当前有些变化&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;系统:macos 从 10.9 后体验非常不好. 10.10 是个失败的版本, 10.11 算恢复过来, 但 10.12 这个版本感觉也不是很好.&lt;/li&gt;
+&lt;li&gt;硬件部分　new macbook, 2016 rmbp 感觉不好, 高性能的 macos 设备不再推出, 价格飞涨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以, 当初我们谈绑定, 比方说 windows 绑定, 只是当你习惯 macos 后, 其实也算是 macos 绑定, 当苹果的软件和硬件保持的水准,这种绑定是可以接受的.  反之, 像我这样的, 感觉会不爽. 特别是随着 windows 10 的不断改进, 新的硬件的诱惑, 比方说 xps 13/15, surface pro/book, thinkpad x1 等.&lt;/p&gt;
+&lt;p&gt;在windows 下做 python 开发, 主要的问题来自两个方面&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;包含 c 扩展的包编译问题, 两个问题, 一个要配置编译器, 如 vc 2008, 另一个因为编译需要的库和头通常在windows上得到的方法比较麻烦, ubuntu通常是简单的 apt-get install xxx-dev&lt;/li&gt;
+&lt;li&gt;command 的 utf-8 问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但目前,这两个问题都有较好的解决方案, 下面就简单都描述一下解决过程&lt;/p&gt;
+&lt;p&gt;首先, 关于编译器, 微软专门提供了一个 Microsoft Visual C++ Compiler for Python 2.7, 免费, 可从这个地址下载 &lt;a class="reference external" href="http://www.microsoft.com/en-us/download/details.aspx?id=44266"&gt;http://www.microsoft.com/en-us/download/details.aspx?id=44266&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;当安装后,修改 C:Users[user name]AppDataLocalProgramsCommonMicrosoftVisual C++ for Python9.0vcvarsall.bat, 加入&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SET &lt;span class="nv"&gt;DISTUTILS_USE_SDK&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+SET &lt;span class="nv"&gt;MSSdk&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;如果你用x86的python 2.7 , 那可能是这样的&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:x86
+&lt;span class="nb"&gt;echo&lt;/span&gt; Setting environment &lt;span class="k"&gt;for&lt;/span&gt; using Microsoft Visual Studio &lt;span class="m"&gt;2008&lt;/span&gt; x86 tools.
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;VCINSTALLDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;%~dp0VC&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;WindowsSdkDir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;%~dp0WinSDK&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; not exist &lt;span class="s2"&gt;&amp;quot;%VCINSTALLDIR%bin\cl.exe&amp;quot;&lt;/span&gt; goto missing
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;%VCINSTALLDIR%Bin&lt;span class="p"&gt;;&lt;/span&gt;%WindowsSdkDir%Bin&lt;span class="p"&gt;;&lt;/span&gt;%PATH%
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;INCLUDE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;%VCINSTALLDIR%Include&lt;span class="p"&gt;;&lt;/span&gt;%WindowsSdkDir%Include&lt;span class="p"&gt;;&lt;/span&gt;%INCLUDE%
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;LIB&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;%VCINSTALLDIR%Lib&lt;span class="p"&gt;;&lt;/span&gt;%WindowsSdkDir%Lib&lt;span class="p"&gt;;&lt;/span&gt;%LIB%
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;LIBPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;%VCINSTALLDIR%Lib&lt;span class="p"&gt;;&lt;/span&gt;%WindowsSdkDir%Lib&lt;span class="p"&gt;;&lt;/span&gt;%LIBPATH%
+SET &lt;span class="nv"&gt;DISTUTILS_USE_SDK&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+SET &lt;span class="nv"&gt;MSSdk&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+goto :eof
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;以后如果需要安装需要编译的包, 就选择打开 Visual C++ 2008 32-bit Command Prompt, 然后安装&lt;/p&gt;
+&lt;p&gt;由于新的whl 格式, 现在其实大部分基于whl格式的安装文件均为 windows 提供了预先编译的 pyd, 就 c9 而言, 我们依赖的所有库均没有问题&lt;/p&gt;
+&lt;p&gt;c9 当前依赖的库:&lt;/p&gt;
+&lt;blockquote&gt;
+cython
+gevent
+pyzmq
+twisted
+txzmq
+cyclone
+tornado
+xlrd
+xlwt
+sqlalchemy
+psycopg2
+reportlab==2.7
+pillow
+html5lib==0.95
+xhtml2pdf
+inflect
+bottle==0.11.6
+python-memcached
+sockjs-cyclone
+ipython
+websocket-client
+fabric
+simplejson
+gevent-websocket
+pydispatcher
+M2CryptoWin32
+sqlalchemy-utils
+openpyxl
+wechatpy
+requests
+jieba
+PyJWT
+xpinyin
+qiniu
+shell.py
+rsa&lt;/blockquote&gt;
+&lt;p&gt;另外 &lt;a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/"&gt;http://www.lfd.uci.edu/~gohlke/pythonlibs/&lt;/a&gt; 值得收藏, 当安装失败时可以先瞧瞧有没有非官方维护的whl包&lt;/p&gt;
+&lt;p&gt;还有就是 virtualenvwrapper-win, 用惯 virtualenvwrapper 便利的不可缺少的工具&lt;/p&gt;
+&lt;p&gt;当然, git for windows也是不可缺少的.&lt;/p&gt;
+&lt;p&gt;第二点, 就是 command utf-8, 在当前, 解决方案也比较简单&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;首先是chcp 65001&lt;/li&gt;
+&lt;li&gt;然后是修改command字体, 比方说 lucida console&lt;/li&gt;
+&lt;li&gt;在系统属性中增加环境变量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;PYTHONIOENCODING&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;utf-8
+&lt;/pre&gt;&lt;/div&gt;
+</content></entry><entry><title>Go 扔掉template method</title><link href="http://www.easynew.com.cn/go_discard_template_method.html" rel="alternate"></link><published>2015-05-14T11:43:00+08:00</published><updated>2015-05-14T11:43:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2015-05-14:/go_discard_template_method.html</id><summary type="html">&lt;p&gt;在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;定义一个接口 如BaseService&lt;/li&gt;
+&lt;li&gt;创建一个类实现该接口, 完成程序的主要骨架, 将变动的方法抽象出来, 让子类继承实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在go中, 这种方式行不通&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;package&lt;/span&gt; &lt;span class="nx"&gt;main&lt;/span&gt;
+
+
+&lt;span class="kd"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;BaseService&lt;/span&gt; &lt;span class="kd"&gt;interface&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+   &lt;span class="nx"&gt;Invoke&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt; &lt;span class="kd"&gt;map&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="kd"&gt;interface&lt;/span&gt;&lt;span class="p"&gt;{})&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+
+&lt;span class="kd"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;DefaultBaseService&lt;/span&gt; &lt;span class="kd"&gt;struct&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;self&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;DefaultBaseService&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;Invoke&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt; &lt;span class="kd"&gt;map&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="kd"&gt;interface&lt;/span&gt;&lt;span class="p"&gt;{}){&lt;/span&gt;
+
+    &lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ReadId&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;self&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;DefaultBaseService&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;ReadId&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+    &lt;span class="nb"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;DefaultBaseService&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+
+&lt;span class="kd"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;UserService&lt;/span&gt; &lt;span class="kd"&gt;struct&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+   &lt;span class="nx"&gt;DefaultBaseService&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;self&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;UserService&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;ReadId …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;定义一个接口 如BaseService&lt;/li&gt;
 &lt;li&gt;创建一个类实现该接口, 完成程序的主要骨架, 将变动的方法抽象出来, 让子类继承实现&lt;/li&gt;
@@ -45,7 +168,23 @@
 
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</summary></entry><entry><title>尝试在ubuntu/os x上使用c#</title><link href="http://www.easynew.com.cn/ubuntu_os_x_c_sharp.html" rel="alternate"></link><published>2015-05-09T20:34:00+08:00</published><updated>2015-05-09T20:34:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2015-05-09:ubuntu_os_x_c_sharp.html</id><summary type="html">&lt;p&gt;最近微软的举动还是挺让人心动的, 但 &lt;a class="reference external" href="https://github.com/dotnet/coreclr"&gt;https://github.com/dotnet/coreclr&lt;/a&gt; 中的dnx 部分, 除了使用mono的运行时, 使用coreclr 在os x/ubuntu 上都没有能跑起来.&lt;/p&gt;
+</content></entry><entry><title>尝试在ubuntu/os x上使用c#</title><link href="http://www.easynew.com.cn/ubuntu_os_x_c_sharp.html" rel="alternate"></link><published>2015-05-09T20:34:00+08:00</published><updated>2015-05-09T20:34:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2015-05-09:/ubuntu_os_x_c_sharp.html</id><summary type="html">&lt;p&gt;最近微软的举动还是挺让人心动的, 但 &lt;a class="reference external" href="https://github.com/dotnet/coreclr"&gt;https://github.com/dotnet/coreclr&lt;/a&gt; 中的dnx 部分, 除了使用mono的运行时, 使用coreclr 在os x/ubuntu 上都没有能跑起来.&lt;/p&gt;
+&lt;p&gt;最近的一个问题是cpython 的pyopenxl , 导出excel 的write_only优化, 存在着以下问题&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;datavalidate list 在write_only=True时无效&lt;/li&gt;
+&lt;li&gt;save_virtual_workbook 在write_only=True下无效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但是不启用write_only, 26000多条记录导出在有datevalidate 的情况下跑出20多秒, 无法接受&lt;/p&gt;
+&lt;p&gt;使用pypy 则会降低到7到5秒, 但目前pypy访问db的性能还是比cpython慢一倍, 无法在正式环境中接受使用它&lt;/p&gt;
+&lt;p&gt;所以, 有一个想法是想使用mono, 初步的测试是&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;netmq&lt;/li&gt;
+&lt;li&gt;aspose cells&lt;/li&gt;
+&lt;li&gt;json.net&lt;/li&gt;
+&lt;li&gt;dapper&lt;/li&gt;
+&lt;li&gt;npgsql&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;python 通过 pyzmq 向 .net …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近微软的举动还是挺让人心动的, 但 &lt;a class="reference external" href="https://github.com/dotnet/coreclr"&gt;https://github.com/dotnet/coreclr&lt;/a&gt; 中的dnx 部分, 除了使用mono的运行时, 使用coreclr 在os x/ubuntu 上都没有能跑起来.&lt;/p&gt;
 &lt;p&gt;最近的一个问题是cpython 的pyopenxl , 导出excel 的write_only优化, 存在着以下问题&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;datavalidate list 在write_only=True时无效&lt;/li&gt;
@@ -203,7 +342,29 @@ obj
 &lt;p&gt;性能评测, mono 版本比较老, 但大体性能同java差距不能说很大了&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://benchmarksgame.alioth.debian.org/u64q/benchmark.php?test=all&amp;amp;lang=csharp&amp;amp;lang2=java&amp;amp;data=u64q"&gt;http://benchmarksgame.alioth.debian.org/u64q/benchmark.php?test=all&amp;amp;lang=csharp&amp;amp;lang2=java&amp;amp;data=u64q&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>jvm 互操作笔记</title><link href="http://www.easynew.com.cn/jvm-interactive-note.html" rel="alternate"></link><published>2014-05-09T09:25:00+08:00</published><updated>2014-05-09T09:25:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2014-05-09:jvm-interactive-note.html</id><summary type="html">&lt;p&gt;当前, 使用java很多时候不可避免, 比方说以下场景&lt;/p&gt;
+</content></entry><entry><title>jvm 互操作笔记</title><link href="http://www.easynew.com.cn/jvm-interactive-note.html" rel="alternate"></link><published>2014-05-09T09:25:00+08:00</published><updated>2014-05-09T09:25:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2014-05-09:/jvm-interactive-note.html</id><summary type="html">&lt;p&gt;当前, 使用java很多时候不可避免, 比方说以下场景&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;excel 导出需要更多的控制 ,xlwt/xlrd 无法实现类似data validation using dropdown list之类的特性, 有个包支持但格式限制在2007&lt;/li&gt;
+&lt;li&gt;taobao 消息通知, 目前只提供java/c# sdk&lt;/li&gt;
+&lt;li&gt;大数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;交互的手段很多&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;在python内部使用jpype/pyjnius 这样 的桥接工具调用&lt;/li&gt;
+&lt;li&gt;通过 jython, 然后在用消息队列或是pyro这样的支持jython/ironpython/python这样的包交互或者进程交互&lt;/li&gt;
+&lt;li&gt;直接java/groovy写, 然后通过消息队列或者进程交互&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;目前, 尝试的工具有&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;pyjnius 调用 poi&lt;/li&gt;
+&lt;li&gt;jython + jzmq&lt;/li&gt;
+&lt;li&gt;java + jzmq&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;都是可以运作的, 不过前两个选项都存在一些缺点&lt;/p&gt;
+&lt;p&gt;pyjnius 问题&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;由于python是多进程部署, 由于java的内存占用, 这不是一个好主意, 会导致内存浪费的比较严重!&lt;/li&gt;
+&lt;li&gt;包本身问题 …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;当前, 使用java很多时候不可避免, 比方说以下场景&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;excel 导出需要更多的控制 ,xlwt/xlrd 无法实现类似data validation using dropdown list之类的特性, 有个包支持但格式限制在2007&lt;/li&gt;
 &lt;li&gt;taobao 消息通知, 目前只提供java/c# sdk&lt;/li&gt;
@@ -238,7 +399,7 @@ obj
     &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ZMQ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PUSH&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tcp://*:5555&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MessageHandlerImpl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MessageHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="k"&gt;pass&lt;/span&gt;
         &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;onMessage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -251,7 +412,7 @@ obj
     &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;由于定位在交互, 所以在jvm, 不会写大规模,系统的代码(同时也要避免这种情况), 同时为避免动态/静态语言转变的思维压力,降低学习成本. 使用groovy, 退化一些性能换取效率会更好. groovy的gdk能省下使用第叁方包的很多时间&lt;/p&gt;
@@ -287,7 +448,21 @@ obj
 &lt;span class="n"&gt;libjzqm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;  &lt;span class="err"&gt;在&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;zmq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="err"&gt;在&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>django admin 联动</title><link href="http://www.easynew.com.cn/django-admin-linkage.html" rel="alternate"></link><published>2013-09-22T12:19:00+08:00</published><updated>2013-09-22T12:19:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-09-22:django-admin-linkage.html</id><summary type="html">&lt;p&gt;在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。&lt;/p&gt;
+</content></entry><entry><title>django admin 联动</title><link href="http://www.easynew.com.cn/django-admin-linkage.html" rel="alternate"></link><published>2013-09-22T12:19:00+08:00</published><updated>2013-09-22T12:19:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-09-22:/django-admin-linkage.html</id><summary type="html">&lt;p&gt;在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;定义数据源&lt;/h2&gt;
+&lt;p&gt;简单起见， 我们在settings.py定义一个LOCATION 变量&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;LOCATION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;浙江&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;杭州&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;宁波&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;湖北&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;武汉&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xxx&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="models-py-model"&gt;
+&lt;h2&gt;models.py 中的model 定义&lt;/h2&gt;
+&lt;p&gt;这里没有为state定义choices 是因为state的选项是根据country的值变化的&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.conf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ugettext&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
+
+&lt;span class="n"&gt;COUNTRY …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;在 django-admin 中实现联动，比方说 省/市下拉列表的联动有些麻烦，但还是可行的，下面说明一下大概的过程， 数据源的不同也会影响一些处理代码，请自行修改。下面的代码其实是在讲country/state的联动，但原理一致。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;定义数据源&lt;/h2&gt;
 &lt;p&gt;简单起见， 我们在settings.py定义一个LOCATION 变量&lt;/p&gt;
@@ -325,9 +500,9 @@ obj
 
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LOCATION&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;ins&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;instance&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CompanyAdminForm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CompanyAdminForm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fields&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;state&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ins&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;ins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -380,7 +555,33 @@ obj
 &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;/script&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>简历管理</title><link href="http://www.easynew.com.cn/resume.html" rel="alternate"></link><published>2013-07-15T00:00:00+08:00</published><updated>2013-07-15T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-07-15:resume.html</id><summary type="html">&lt;p&gt;这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。&lt;/p&gt;
+</content></entry><entry><title>简历管理</title><link href="http://www.easynew.com.cn/resume.html" rel="alternate"></link><published>2013-07-15T00:00:00+08:00</published><updated>2013-07-15T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-07-15:/resume.html</id><summary type="html">&lt;p&gt;这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。&lt;/p&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;安装&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;安装visual c++ 2008和2010 运行时&lt;/li&gt;
+&lt;li&gt;解压resume.rar 到任一磁盘目录(注意, 路径应该不能包含中文)， 双击目录中的client.exe&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;注意事项&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;导入的简历文件格式必须同提交给开发者的保持一致， 但也可以通过client.json的中的MAPPING配置项, 重新配置内容和单位格位置的映射。&lt;/li&gt;
+&lt;li&gt;在导入时，根据所属单位自动确定所在公司（部门）， 如果所属单位没有找到对应的记录，则会显示在未分类。&lt;/li&gt;
+&lt;li&gt;当前，使用comtypes 调用excel, excel 必须安装在目标机器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;帮助&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;如果是第一次使用, 会让你输入公司和下级部门(这里部门也可以当子公司概念使用). 后期,可以通过部门维护来维护公司和部门数据. (简称有两个用途,1 是在填写excel简历时,填写者可能写公司缩写, 二是系统在显示时使用简称避免界面上可能的换行)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img alt="quick_start" src="/images/quick_start.png" style="width: 800px; height: 600px;" /&gt;
+&lt;ol class="arabic simple" start="2"&gt;
+&lt;li&gt;进入主界面. 这个界面完成主要的功能&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历 …&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;这是一个定制的小应用文档. 该使用使用cefpython和bootmetro构建， 使用了comtypes/pil/sqlalchemy等包。&lt;/p&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;安装&lt;/h2&gt;
 &lt;ol class="arabic simple"&gt;
@@ -498,7 +699,21 @@ obj
 &lt;li&gt;双面打印的设置同机器有关，需要在自己的机器上设置， 选择 resume/resume.xls 文件，选择打印- 属性-设置双面打印后，保存该文件，关闭。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>cefpython 当前的两个问题</title><link href="http://www.easynew.com.cn/cefpython_issues.html" rel="alternate"></link><published>2013-07-10T13:56:00+08:00</published><updated>2013-07-10T13:56:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-07-10:cefpython_issues.html</id><summary type="html">&lt;p&gt;最近, 使用cefpython 写 yarder.co  的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.&lt;/p&gt;
+</content></entry><entry><title>cefpython 当前的两个问题</title><link href="http://www.easynew.com.cn/cefpython_issues.html" rel="alternate"></link><published>2013-07-10T13:56:00+08:00</published><updated>2013-07-10T13:56:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-07-10:/cefpython_issues.html</id><summary type="html">&lt;p&gt;最近, 使用cefpython 写 yarder.co  的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.&lt;/p&gt;
+&lt;p&gt;首先是 当js调用python时, python的异常不会传播到javascript. 这个问题参考 &lt;a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=11"&gt;Throw JS / Python exceptions according to execution context&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;所以,当前你的处理方式应该是在python内部处理异常,并返回一个是否成功的状态给js!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+                &lt;span class="c1"&gt;#你的代码&lt;/span&gt;
+
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;success&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;result&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;xxxx&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;ex&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="c1"&gt;# log excpeiton&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;success&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;error&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;最近, 使用cefpython 写 yarder.co  的客户端, 使用的是 cefpython和 bootmetro. 主要发现这两个问题, 写下来供大家选择cefpython 时参考.&lt;/p&gt;
 &lt;p&gt;首先是 当js调用python时, python的异常不会传播到javascript. 这个问题参考 &lt;a class="reference external" href="https://code.google.com/p/cefpython/issues/detail?id=11"&gt;Throw JS / Python exceptions according to execution context&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;所以,当前你的处理方式应该是在python内部处理异常,并返回一个是否成功的状态给js!&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -536,7 +751,22 @@ obj
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;好在这两个问题cefpython的作者都是acceptd了, 希望能很快出更新版本吧&lt;/p&gt;
-</summary></entry><entry><title>我的框架观点</title><link href="http://www.easynew.com.cn/my-framework-viewpoint.html" rel="alternate"></link><published>2013-06-30T15:25:00+08:00</published><updated>2013-06-30T15:25:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-30:my-framework-viewpoint.html</id><summary type="html">&lt;p&gt;我对创建能二次开发的软件一直很迷恋,最早影响我的是ms office,特别是excel.&lt;/p&gt;
+</content></entry><entry><title>我的框架观点</title><link href="http://www.easynew.com.cn/my-framework-viewpoint.html" rel="alternate"></link><published>2013-06-30T15:25:00+08:00</published><updated>2013-06-30T15:25:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-30:/my-framework-viewpoint.html</id><summary type="html">&lt;p&gt;我对创建能二次开发的软件一直很迷恋,最早影响我的是ms office,特别是excel.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;excel堪称完美的对象模型&lt;/li&gt;
+&lt;li&gt;内建的vba 开发环境和excel对象模型的完美交互.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;很多年前, c3 的模型就借鉴了excel的对象模型构建.&lt;/p&gt;
+&lt;p&gt;在后来, ms 的axapta 再一次给我很大的影响. axapta 内嵌的application object tree更为完美, 语言级别的orm, 核心保密, 外围开源的模式, 完美的分布式c/s结构,方便的更新方式对我影响很大, 我花了一年左右时间创建了一个叫marsx的项目.&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;使用delphi 开发&lt;/li&gt;
+&lt;li&gt;内嵌了paxcompiler语言,允许使用paxcompiler中的pascal语言进行开发&lt;/li&gt;
+&lt;li&gt;创建了application object tree, 可以ctrl+d启动开发环境&lt;/li&gt;
+&lt;li&gt;代码编译后放在服务器端数据库, 用户登录时检查更新动态下载代码达到更新效果&lt;/li&gt;
+&lt;li&gt;创建了activex 控件, 解决发布的问题&lt;/li&gt;
+&lt;li&gt;借助remobjects dataabstract , 实现分布式数据访问.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;marsx 在某些方面是成功的,他达到了我的一些目的: 达成软件即开发环境是可能的, 在开发时也有很好的效率, 特别是ui的定制上, 几乎是客户要什么现场就可以完成. 但主要的问题在paxcompiler …&lt;/p&gt;</summary><content type="html">&lt;p&gt;我对创建能二次开发的软件一直很迷恋,最早影响我的是ms office,特别是excel.&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;excel堪称完美的对象模型&lt;/li&gt;
 &lt;li&gt;内建的vba 开发环境和excel对象模型的完美交互.&lt;/li&gt;
@@ -575,7 +805,23 @@ obj
 &lt;li&gt;脚本的创建和访问. 在软件中直接写脚本,存储并暴露给用户. 参考c9的forms, querites, reports, jobs&lt;/li&gt;
 &lt;li&gt;服务端修改. 参考 c9的classes&lt;/li&gt;
 &lt;/ol&gt;
-</summary></entry><entry><title>clojure 学习笔记</title><link href="http://www.easynew.com.cn/clojure-note.html" rel="alternate"></link><published>2013-06-29T13:48:00+08:00</published><updated>2013-06-29T13:48:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-29:clojure-note.html</id><summary type="html">&lt;p&gt;学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).&lt;/p&gt;
+</content></entry><entry><title>clojure 学习笔记</title><link href="http://www.easynew.com.cn/clojure-note.html" rel="alternate"></link><published>2013-06-29T13:48:00+08:00</published><updated>2013-06-29T13:48:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-29:/clojure-note.html</id><summary type="html">&lt;p&gt;学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).&lt;/p&gt;
+&lt;p&gt;lisp的基础思想是简单的，但lisp语言是复杂的!&lt;/p&gt;
+&lt;p&gt;clojure可能是jvm中实现最好的动态语言了, groovy已经沦为java的小弟, 它很少有自己的库(gradle这样的工具不算), jython的更新迟缓, jruby一般就是兼容使用ruby的库,很少有原生为jruby开发的库. 而clojure的库,则是发挥了clojure的特点, 比方说korma 就是一个很吸引人的东西.&lt;/p&gt;
+&lt;div class="section" id="lisp"&gt;
+&lt;h2&gt;lisp基本点&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;当对一个列表求值时, 第一个是函数, 其他是参数, 用`阻止对列表求值&lt;/li&gt;
+&lt;li&gt;lisp 没有ast这样的过程. 代码就是ast&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;我所讨厌的东西&lt;/h2&gt;
+&lt;p&gt;太多了, clojure中充满了各种符号的滥用和一件事情多种做法! 我讨厌一种事情有多种做法，很多时候，它意味着总有一些方法不是最佳的，你总是需要做选择，我讨厌做选择！&lt;/p&gt;
+&lt;p&gt;各种符号的滥用解很大程度上是需要改善lisp的括号使用， 符号使用列表:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# 的使用。 #{1 2 3 } 表示set, #&amp;quot;\W+&amp;quot; 表示正则, #(&amp;gt; (count %) 2) 表示匿名函数， #_宏表示忽略下一个clojure形式.
+* repl …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;学习lisp 可以防止老年痴呆! 所以,我会慢慢的, 不断的反复的看clojure, 即使用不上:).&lt;/p&gt;
 &lt;p&gt;lisp的基础思想是简单的，但lisp语言是复杂的!&lt;/p&gt;
 &lt;p&gt;clojure可能是jvm中实现最好的动态语言了, groovy已经沦为java的小弟, 它很少有自己的库(gradle这样的工具不算), jython的更新迟缓, jruby一般就是兼容使用ruby的库,很少有原生为jruby开发的库. 而clojure的库,则是发挥了clojure的特点, 比方说korma 就是一个很吸引人的东西.&lt;/p&gt;
 &lt;div class="section" id="lisp"&gt;
@@ -618,7 +864,7 @@ obj
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;资源&lt;/h2&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>敏捷中的结对和tdd</title><link href="http://www.easynew.com.cn/agile-pair-tdd.html" rel="alternate"></link><published>2013-06-19T12:42:00+08:00</published><updated>2013-06-19T12:42:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-19:agile-pair-tdd.html</id><summary type="html">&lt;p&gt;今天我转了两篇文章, 都是抨击敏捷开发的, 都深合我意. 所以不得不多说几句.&lt;/p&gt;
+</content></entry><entry><title>敏捷中的结对和tdd</title><link href="http://www.easynew.com.cn/agile-pair-tdd.html" rel="alternate"></link><published>2013-06-19T12:42:00+08:00</published><updated>2013-06-19T12:42:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-19:/agile-pair-tdd.html</id><summary type="html">&lt;p&gt;今天我转了两篇文章, 都是抨击敏捷开发的, 都深合我意. 所以不得不多说几句.&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://kb.cnblogs.com/page/543318/"&gt;结对编程, 我的噩梦&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://blog.jobbole.com/41665/"&gt;半年来的工作感受&lt;/a&gt;&lt;/li&gt;
@@ -629,11 +875,38 @@ obj
 &lt;p&gt;tdd, 与其说是一种测试方法, 我更倾向于认定他是一种开发方式, 这种方式, 融合在你的编码过程中. 在dbanotes上我的评论就是: 如果一件事情最初需要三个过程, 则tdd的测试代码会忠实的反映这三个过程. 但后期, 有人可以用更简捷的一个过程实现, 或是二个过程实现,或是更改了其中一个过程的返回方式(当然,这样也会影响下一个结果的接收方式), 但最终结果还是正确的. 性能也好了,代码也更好了. 但是, 如果他不修改最初的tdd测试代码(很大可能不是他写的),则测试不会通过.&lt;/p&gt;
 &lt;p&gt;当tdd测试代码几倍于实际的代码时, 这就是作者抱怨的问题. 也是一种阻碍生产力的体现.&lt;/p&gt;
 &lt;p&gt;我同作者的看法一样, 测试代码更应该关心结果而不是关心过程, 这才是测试的所在!&lt;/p&gt;
-</summary></entry><entry><title>资源</title><link href="http://www.easynew.com.cn/resources.html" rel="alternate"></link><published>2013-06-19T07:42:00+08:00</published><updated>2013-06-19T07:42:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-19:resources.html</id><summary type="html">&lt;p&gt;此文档用来记录一些资源, 备忘用, 不定期更新&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;今天我转了两篇文章, 都是抨击敏捷开发的, 都深合我意. 所以不得不多说几句.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://kb.cnblogs.com/page/543318/"&gt;结对编程, 我的噩梦&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://blog.jobbole.com/41665/"&gt;半年来的工作感受&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;先说结对, 我绝对是属于内向类型的, 当然喜欢安静的解决问题, 同作者一样,我更倾向通过代码评估来交流. 另外,两个大男人坐了一起结对,令人感觉好不自然,太基了!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果同美女结对,我会取消我的上一句话&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;至于第二篇, 可能有些人就以为作者又在摆酷了, 但我想是因为作者没有说的更深入, 他的意思被误解了.&lt;/p&gt;
+&lt;p&gt;tdd, 与其说是一种测试方法, 我更倾向于认定他是一种开发方式, 这种方式, 融合在你的编码过程中. 在dbanotes上我的评论就是: 如果一件事情最初需要三个过程, 则tdd的测试代码会忠实的反映这三个过程. 但后期, 有人可以用更简捷的一个过程实现, 或是二个过程实现,或是更改了其中一个过程的返回方式(当然,这样也会影响下一个结果的接收方式), 但最终结果还是正确的. 性能也好了,代码也更好了. 但是, 如果他不修改最初的tdd测试代码(很大可能不是他写的),则测试不会通过.&lt;/p&gt;
+&lt;p&gt;当tdd测试代码几倍于实际的代码时, 这就是作者抱怨的问题. 也是一种阻碍生产力的体现.&lt;/p&gt;
+&lt;p&gt;我同作者的看法一样, 测试代码更应该关心结果而不是关心过程, 这才是测试的所在!&lt;/p&gt;
+</content></entry><entry><title>资源</title><link href="http://www.easynew.com.cn/resources.html" rel="alternate"></link><published>2013-06-19T07:42:00+08:00</published><updated>2013-06-19T07:42:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-19:/resources.html</id><summary type="html">&lt;p&gt;此文档用来记录一些资源, 备忘用, 不定期更新&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.boarsoft.com/javascript/gridCombo/"&gt;Ext/Sencha Basic GridComboBox&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</summary></entry><entry><title>整理google docs上的资料, 记录一些有意思的东西</title><link href="http://www.easynew.com.cn/google-docs-note.html" rel="alternate"></link><published>2013-06-16T22:08:00+08:00</published><updated>2013-06-16T22:08:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-16:google-docs-note.html</id><summary type="html">&lt;p&gt;google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;此文档用来记录一些资源, 备忘用, 不定期更新&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.boarsoft.com/javascript/gridCombo/"&gt;Ext/Sencha Basic GridComboBox&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content></entry><entry><title>整理google docs上的资料, 记录一些有意思的东西</title><link href="http://www.easynew.com.cn/google-docs-note.html" rel="alternate"></link><published>2013-06-16T22:08:00+08:00</published><updated>2013-06-16T22:08:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-16:/google-docs-note.html</id><summary type="html">&lt;p&gt;google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;一些有意思的想法&lt;/h2&gt;
+&lt;p&gt;框架设计其实是一个哲学概念,每个成功的框架总是有一套自己的处世哲学,然后在以后一以贯之,比方说大家熟悉的spring,就是以ioc,接口编程贯彻始末.&lt;/p&gt;
+&lt;p&gt;不在烦恼架构问题, 对我而言,这就是生产力&lt;/p&gt;
+&lt;p&gt;面向对象设计的问题在于使用者必须了解整个对象的体系结构，面向对象设计往往通过template method 达到代码重用，但由于设计改变，开发者不得不引入更多的中间方法。随着对象体系的复杂度增大，整个结构会越来越难以维护。由于更改结构对下层使用者的影响不可估计，也导致改变代码是困难的。&lt;/p&gt;
+&lt;p&gt;所以在使用template method时，不要让继承大于3级以上， 一般都是Base/Abstract/具体的类。 多使用策略模式，利用接口和委托减少复杂度。&lt;/p&gt;
+&lt;p&gt;看到n年(2007)前写的公司经营设想, 不由的脸红, 不过里面有很多点都是对的, 如&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;对于每个要我们做软件的企业,我们将争取他们为以后的后续服务提供费用&lt;/li&gt;
+&lt;li&gt;saas 将是未来软件主要存在的形式,是我们今后的努力方向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制 …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;google docs 上有很多好几年前杂乱无章的东西, 打算陆续看一下,该删的都删了&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;一些有意思的想法&lt;/h2&gt;
 &lt;p&gt;框架设计其实是一个哲学概念,每个成功的框架总是有一套自己的处世哲学,然后在以后一以贯之,比方说大家熟悉的spring,就是以ioc,接口编程贯彻始末.&lt;/p&gt;
@@ -647,7 +920,20 @@ obj
 &lt;/ul&gt;
 &lt;p&gt;错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制,执行力不够,拖延症, 目标太大等等!&lt;/p&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>extjs 4 NodeInterface destroy</title><link href="http://www.easynew.com.cn/extjs-nodeinterface-destroy.html" rel="alternate"></link><published>2013-06-16T16:02:00+08:00</published><updated>2013-06-16T16:02:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-16:extjs-nodeinterface-destroy.html</id><summary type="html">&lt;p&gt;extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。&lt;/p&gt;
+</content></entry><entry><title>extjs 4 NodeInterface destroy</title><link href="http://www.easynew.com.cn/extjs-nodeinterface-destroy.html" rel="alternate"></link><published>2013-06-16T16:02:00+08:00</published><updated>2013-06-16T16:02:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-16:/extjs-nodeinterface-destroy.html</id><summary type="html">&lt;p&gt;extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。&lt;/p&gt;
+&lt;p&gt;当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;override&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="nx"&gt;setException&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+      &lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setException&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+          &lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+          &lt;span class="nx"&gt;statusText&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;statusText&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+          &lt;span class="nx"&gt;responseText&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;responseText&lt;/span&gt; &lt;span class="c1"&gt;//&amp;lt;--Added this line!&lt;/span&gt;
+      &lt;span class="p"&gt;});&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 &lt;a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235"&gt;NodeInterface destroy with callback?&lt;/a&gt;，无人理睬。&lt;/p&gt;
+&lt;p&gt;当然 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;extjs 4 有一些可说是sb的设计， 比方说model的save和destroy服务端报错时不返回responseText， 或许它是一切都在success中处理, 所有访问都是http 200, 错误你自己传递给客户端。 显然这是不现实的。&lt;/p&gt;
 &lt;p&gt;当然，这个可以通过覆盖 Ext.data.proxy.Server.setException来hack&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;override&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
   &lt;span class="nx"&gt;setException&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
@@ -744,7 +1030,22 @@ obj
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;可以预见的是，如果extjs 不改变这个设计，你得跟随每个版本更新node_destroy方法！&lt;/p&gt;
 &lt;p&gt;ok, 看来我不是第一个提出此方法的人 &lt;a class="reference external" href="http://blog.csdn.net/caili314/article/details/7912124"&gt;ExtJS 添加和删除树结点:先向服务器请求&lt;/a&gt;&lt;/p&gt;
-</summary></entry><entry><title>ok, 这是我第一篇 pelican blog</title><link href="http://www.easynew.com.cn/first-blog.html" rel="alternate"></link><published>2013-06-12T04:12:00+08:00</published><updated>2013-06-12T04:12:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-12:first-blog.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+</content></entry><entry><title>ok, 这是我第一篇 pelican blog</title><link href="http://www.easynew.com.cn/first-blog.html" rel="alternate"></link><published>2013-06-12T04:12:00+08:00</published><updated>2013-06-12T04:12:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2013-06-12:/first-blog.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;自定义菜单&lt;/h2&gt;
+&lt;p&gt;通过以下三个选项自定义菜单&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DISPLAY_PAGES_ON_MENU&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;DISPLAY_CATEGORIES_ON_MENU&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;MENUITEMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;未分类&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;category/misc.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;关于我们&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;about-us.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;建议你建两个同级目录，比方说就是jiangjianxiao.github.com和blog, blog用来存放pelican建立的站点, jiangjianxiao.github.com 就是pelican的原始内容&lt;/p&gt;
+&lt;p&gt;修改 pelicanconf.py, 增加:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+OUTPUT_PATH = '../jiangjianxao.github.com'
+&lt;/pre&gt;
+&lt;p&gt;pelican-plugins 建议用submodule的方法获取&lt;/p&gt;
+&lt;p&gt;git submodule add git://github.com/getpelican/pelican-plugins.git&lt;/p&gt;
+&lt;p&gt;然后在其他机器就是git submodule init/git submodule update了&lt;/p&gt;
+&lt;p&gt;我的publish.sh …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;自定义菜单&lt;/h2&gt;
 &lt;p&gt;通过以下三个选项自定义菜单&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DISPLAY_PAGES_ON_MENU&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
@@ -777,7 +1078,12 @@ cd ../blog
 &lt;p&gt;THEME 路径必须使用绝对路径&lt;/p&gt;
 &lt;p&gt;集成disqus 时必须设置SITEURL, 因为article.html 模板中有判断&lt;/p&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>给用 Python 的 web 开发者的 Sublime Text 2 小贴士</title><link href="http://www.easynew.com.cn/python-web-sublime-text-2.html" rel="alternate"></link><published>2012-09-16T00:00:00+08:00</published><updated>2012-09-16T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-09-16:python-web-sublime-text-2.html</id><summary type="html">&lt;p&gt;原文：&lt;a class="reference external" href="http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/"&gt;http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/&lt;/a&gt;&lt;/p&gt;
+</content></entry><entry><title>给用 Python 的 web 开发者的 Sublime Text 2 小贴士</title><link href="http://www.easynew.com.cn/python-web-sublime-text-2.html" rel="alternate"></link><published>2012-09-16T00:00:00+08:00</published><updated>2012-09-16T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-09-16:/python-web-sublime-text-2.html</id><summary type="html">&lt;p&gt;原文：&lt;a class="reference external" href="http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/"&gt;http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译者： &lt;a class="reference external" href="http://zhuang13.de/"&gt;TheLover_Z&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sublime Text 2 是一个很强大的编辑器，最近开始获得了很高的人气 － 这不是没有理由的。它是商业软件。Sublime Text 2 有很多支持 Python 的插件。虽然核心部分保持封闭但围绕着这个编辑器还是形成了 活跃的插件生态系统 。&lt;/p&gt;
+&lt;p&gt;提示：你可以免费使用 Sublime 。它只是会提示你“请购买”而已。&lt;/p&gt;
+&lt;p&gt;这是我使用 Sublime 这么久以来发现的小技巧。我是站在在 OS X 视角来写的，但在 Linux 和 Windows 平台这些技巧应该也适用。&lt;/p&gt;
+&lt;p&gt;我以前是 Eclipse 的死党。虽然 Sublime 并没有像 Eclipse …&lt;/p&gt;</summary><content type="html">&lt;p&gt;原文：&lt;a class="reference external" href="http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/"&gt;http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;译者： &lt;a class="reference external" href="http://zhuang13.de/"&gt;TheLover_Z&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Sublime Text 2 是一个很强大的编辑器，最近开始获得了很高的人气 － 这不是没有理由的。它是商业软件。Sublime Text 2 有很多支持 Python 的插件。虽然核心部分保持封闭但围绕着这个编辑器还是形成了 活跃的插件生态系统 。&lt;/p&gt;
 &lt;p&gt;提示：你可以免费使用 Sublime 。它只是会提示你“请购买”而已。&lt;/p&gt;
@@ -874,12 +1180,30 @@ extra-paths = ${omelette:location}&lt;/p&gt;
 &lt;li&gt;在 Sublime 窗口运行 Plone 或者单元测试，用鼠标点击可以跟踪到相关的错误&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>AttributeError: 'NoneType' object has no attribute '_sa_instance_state'</title><link href="http://www.easynew.com.cn/no_attribute_sa_instance_state.html" rel="alternate"></link><published>2012-08-22T00:00:00+08:00</published><updated>2012-08-22T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-08-22:no_attribute_sa_instance_state.html</id><summary type="html">&lt;p&gt;当对sqlalchemy的一些 返回进行pickle处理时会出现如标题的错误，原因是这些返回的类型是sqlalchemy.orm.collections.InstrumentedList&lt;/p&gt;
+</content></entry><entry><title>AttributeError: 'NoneType' object has no attribute '_sa_instance_state'</title><link href="http://www.easynew.com.cn/no_attribute_sa_instance_state.html" rel="alternate"></link><published>2012-08-22T00:00:00+08:00</published><updated>2012-08-22T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-08-22:/no_attribute_sa_instance_state.html</id><summary type="html">&lt;p&gt;当对sqlalchemy的一些 返回进行pickle处理时会出现如标题的错误，原因是这些返回的类型是sqlalchemy.orm.collections.InstrumentedList&lt;/p&gt;
 &lt;p&gt;简单的处理将是将其转换为列表，如&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Role&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;pickle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pickle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</summary></entry><entry><title>ubuntu 中设置 PYTHONPATH</title><link href="http://www.easynew.com.cn/ubuntu-pythonpath.html" rel="alternate"></link><published>2012-08-10T00:00:00+08:00</published><updated>2012-08-10T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-08-10:ubuntu-pythonpath.html</id><summary type="html">&lt;p&gt;一开始 是通过设置环境变量来进行的，可以编辑/etc/profile或是用户目录下的.profile&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;当对sqlalchemy的一些 返回进行pickle处理时会出现如标题的错误，原因是这些返回的类型是sqlalchemy.orm.collections.InstrumentedList&lt;/p&gt;
+&lt;p&gt;简单的处理将是将其转换为列表，如&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Role&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;pickle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pickle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</content></entry><entry><title>ubuntu 中设置 PYTHONPATH</title><link href="http://www.easynew.com.cn/ubuntu-pythonpath.html" rel="alternate"></link><published>2012-08-10T00:00:00+08:00</published><updated>2012-08-10T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-08-10:/ubuntu-pythonpath.html</id><summary type="html">&lt;p&gt;一开始 是通过设置环境变量来进行的，可以编辑/etc/profile或是用户目录下的.profile&lt;/p&gt;
+&lt;p&gt;增加&lt;/p&gt;
+&lt;p&gt;export PYTHONPAHT=/home/jjx/works/earrow:/home/jjx/works/c92&lt;/p&gt;
+&lt;p&gt;然后 用source /etc/profile或source .profile生效&lt;/p&gt;
+&lt;p&gt;但在sudo下无效,如 sudo python&lt;/p&gt;
+&lt;p&gt;import earrow 还是错误 ，所以 改用 pth的方式 最为简单&lt;/p&gt;
+&lt;p&gt;先查看python site-packages位置&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后&lt;/p&gt;
+&lt;blockquote&gt;
+cd /usr/local/lib/python2.7/dist-packages
+sudo gedit …&lt;/blockquote&gt;</summary><content type="html">&lt;p&gt;一开始 是通过设置环境变量来进行的，可以编辑/etc/profile或是用户目录下的.profile&lt;/p&gt;
 &lt;p&gt;增加&lt;/p&gt;
 &lt;p&gt;export PYTHONPAHT=/home/jjx/works/earrow:/home/jjx/works/c92&lt;/p&gt;
 &lt;p&gt;然后 用source /etc/profile或source .profile生效&lt;/p&gt;
@@ -898,7 +1222,32 @@ sudo gedit my.pth&lt;/blockquote&gt;
 /home/jjx/works/earrow
 /home/jjx/works/c92&lt;/blockquote&gt;
 &lt;p&gt;行之间回车 保存&lt;/p&gt;
-</summary></entry><entry><title>extjs 备注</title><link href="http://www.easynew.com.cn/extjs-note.html" rel="alternate"></link><published>2012-06-17T00:00:00+08:00</published><updated>2012-06-17T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-06-17:extjs-note.html</id><summary type="html">&lt;div class="section" id="form"&gt;
+</content></entry><entry><title>extjs 备注</title><link href="http://www.easynew.com.cn/extjs-note.html" rel="alternate"></link><published>2012-06-17T00:00:00+08:00</published><updated>2012-06-17T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-06-17:/extjs-note.html</id><summary type="html">&lt;div class="section" id="form"&gt;
+&lt;h2&gt;设置form所有字段只读&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Panel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;override&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+
+  &lt;span class="nx"&gt;setReadOnlyForAll&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;readOnly&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;suspendLayouts&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getForm&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;getFields&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;each&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;field&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nx"&gt;field&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setReadOnly&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;readOnly&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;resumeLayouts&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="override"&gt;
+&lt;h2&gt;通过override 设置缺省值&lt;/h2&gt;
+&lt;p&gt;血的教训, 如果你要将所有窗体都设置frame为true, 不要每个form都去设置, 而是使用&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Panel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;override&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+        &lt;span class="nx"&gt;bodyPadding&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;frame&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt; &lt;span class="c1"&gt;// or true&lt;/span&gt;
+
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;extjs 4.2 海皇星主题,frame 将是很粗的一根, 而且当form被嵌入到其他容器时,除了这个很粗的框, 背景没有同容器一样, 所以在该主题中frame应该设置为false&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Store datachanged 对update没有效果 …&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="section" id="form"&gt;
 &lt;h2&gt;设置form所有字段只读&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;Ext&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Panel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;override&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
 
@@ -968,7 +1317,25 @@ sudo gedit my.pth&lt;/blockquote&gt;
 &lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>windows 下nginx和tornado 配置</title><link href="http://www.easynew.com.cn/windows-nginx-tornado.html" rel="alternate"></link><published>2012-06-07T13:19:00+08:00</published><updated>2012-06-07T13:19:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-06-07:windows-nginx-tornado.html</id><summary type="html">&lt;p&gt;在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.&lt;/p&gt;
+</content></entry><entry><title>windows 下nginx和tornado 配置</title><link href="http://www.easynew.com.cn/windows-nginx-tornado.html" rel="alternate"></link><published>2012-06-07T13:19:00+08:00</published><updated>2012-06-07T13:19:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-06-07:/windows-nginx-tornado.html</id><summary type="html">&lt;p&gt;在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.&lt;/p&gt;
+&lt;p&gt;结合nginx和tornado 还是有好处的, 主要是减轻tornado的负担,典型的如让nginx处理静态文件,让nginx处理gzip.由于tornado是单线程的,让nginx进行负载平衡也很有必要.&lt;/p&gt;
+&lt;p&gt;修改 nginx/conf目录下的nginx.conf ,替换为&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;说明&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;worker_process 配置为1, 是因为windows下只支持一个工作进程&lt;/li&gt;
+&lt;li&gt;worker_connections 1024就行，因为select有限制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#user  nobody;&lt;/span&gt;
+
+&lt;span class="k"&gt;worker_processes&lt;/span&gt;  &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;#daemon off;&lt;/span&gt;
+
+&lt;span class="c1"&gt;#error_log  logs/error.log;&lt;/span&gt;
+&lt;span class="c1"&gt;#error_log  logs/error.log  notice;&lt;/span&gt;
+&lt;span class="c1"&gt;#error_log  logs/error.log  info;&lt;/span&gt;
+
+&lt;span class="k"&gt;pid&lt;/span&gt;        &lt;span class="s"&gt;logs/nginx.pid …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;在windows下,nginx和tornado 都可以以残废形容.两者均只能使用select,很多功能都在windows下无法正常运行. 但对于并发用户不高的需求而言,还是可以一试的.&lt;/p&gt;
 &lt;p&gt;结合nginx和tornado 还是有好处的, 主要是减轻tornado的负担,典型的如让nginx处理静态文件,让nginx处理gzip.由于tornado是单线程的,让nginx进行负载平衡也很有必要.&lt;/p&gt;
 &lt;p&gt;修改 nginx/conf目录下的nginx.conf ,替换为&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
@@ -1091,13 +1458,33 @@ sudo gedit my.pth&lt;/blockquote&gt;
 &lt;h2&gt;延伸: daemon off;&lt;/h2&gt;
 &lt;p&gt;如果使用supervisor 管理nginx进程，需要加上, windows下如果使用srvany.exe， 也需要(这个待验证！)&lt;/p&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>extjs model同时用于grid和tree的问题</title><link href="http://www.easynew.com.cn/extjs-model-with-grid-tree.html" rel="alternate"></link><published>2012-06-04T00:00:00+08:00</published><updated>2012-06-04T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-06-04:extjs-model-with-grid-tree.html</id><summary type="html">&lt;p&gt;当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.&lt;/p&gt;
+</content></entry><entry><title>extjs model同时用于grid和tree的问题</title><link href="http://www.easynew.com.cn/extjs-model-with-grid-tree.html" rel="alternate"></link><published>2012-06-04T00:00:00+08:00</published><updated>2012-06-04T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-06-04:/extjs-model-with-grid-tree.html</id><summary type="html">&lt;p&gt;当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.&lt;/p&gt;
 &lt;p&gt;当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的&lt;/p&gt;
 &lt;blockquote&gt;
 parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;p&gt;但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.&lt;/p&gt;
 &lt;p&gt;回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid&lt;/p&gt;
-</summary></entry><entry><title>关于我们</title><link href="http://www.easynew.com.cn/" rel="alternate"></link><published>2012-01-01T00:00:00+08:00</published><updated>2012-01-01T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-01-01:</id><summary type="html">&lt;p&gt;拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript/go。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.&lt;/p&gt;
+&lt;p&gt;当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的&lt;/p&gt;
+&lt;blockquote&gt;
+parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
+&lt;p&gt;但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.&lt;/p&gt;
+&lt;p&gt;回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid&lt;/p&gt;
+</content></entry><entry><title>关于我们</title><link href="http://www.easynew.com.cn/" rel="alternate"></link><published>2012-01-01T00:00:00+08:00</published><updated>2012-01-01T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2012-01-01:/</id><summary type="html">&lt;p&gt;拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript/go。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。&lt;/p&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;经历&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;国内较早的bbs (activeubb)开发者（用户曾包括 当当,5dmedia, 蓝色理想，考研网，tfgc等)&lt;/li&gt;
+&lt;li&gt;国内较早的内容管理系统 activecontent开发者(用户曾包括 蓝色理想,5dmedia等等）&lt;/li&gt;
+&lt;li&gt;国内第一个游戏卡交易平台卡吧的开发者，开发卡易售前身方舟平台&lt;/li&gt;
+&lt;li&gt;开发进销存 c9&lt;/li&gt;
+&lt;li&gt;国内首家成布检验系统开发者，拥有多家国内知名纺织印染行业客户。&lt;/li&gt;
+&lt;li&gt;开发经验包括 microsoft dynamics ax定制开发/pos/mrp ii/b2b/仪表数据采集分析/im等等系统, 服务企业包括盛大，颐高等知名企业&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="python"&gt;
+&lt;h2&gt;python 经验&lt;/h2&gt;
+&lt;p&gt;欢迎就python为主的项目开展合作，个人python经验 …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;拥有丰富项目开发经验，涉猎过多种语言、平台，目前专注于python/c/javascript/go。2007年microsoft c# mvp。擅长企业应用开发， 善于捕捉用户需求，为用户快速创建原型产品。&lt;/p&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;经历&lt;/h2&gt;
 &lt;ul class="simple"&gt;
@@ -1127,7 +1514,8 @@ parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;p&gt;联系人: 蒋先生&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>关于silverlight 前景的讨论，不吐不快</title><link href="http://www.easynew.com.cn/silverlight-future.html" rel="alternate"></link><published>2010-10-22T00:00:00+08:00</published><updated>2010-10-22T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2010-10-22:silverlight-future.html</id><summary type="html">&lt;p&gt;首先，且不讨论这个事件的本身，最近以来，我一直对ms感到失望，这是因为ms在开发技术的延续性上越来越随心所欲，当然，早期的开发者可能也经历过dao,dao direct,rdo,ado的时代，但那时的api 相对很小，学习坡度很小。而现在，自从.net 推出后 windows forms不更新了,wf 更新换代了，linq to sql 也死了，dlr也不管了。问题是这些替代者完全能胜任了吗？没有！！！！&lt;/p&gt;
+</content></entry><entry><title>关于silverlight 前景的讨论，不吐不快</title><link href="http://www.easynew.com.cn/silverlight-future.html" rel="alternate"></link><published>2010-10-22T00:00:00+08:00</published><updated>2010-10-22T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2010-10-22:/silverlight-future.html</id><summary type="html">&lt;p&gt;首先，且不讨论这个事件的本身，最近以来，我一直对ms感到失望，这是因为ms在开发技术的延续性上越来越随心所欲，当然，早期的开发者可能也经历过dao,dao direct,rdo,ado的时代，但那时的api 相对很小，学习坡度很小。而现在，自从.net 推出后 windows forms不更新了,wf 更新换代了，linq to sql 也死了，dlr也不管了。问题是这些替代者完全能胜任了吗？没有！！！！&lt;/p&gt;
+&lt;p&gt;好吧，现在就讨论silverlight ,或许这个人说的本身就没有错误，silverlight 本身就不能完全的跨所有的平台，虽然它现在能在部分osx和windows 运行，但远远不是真正的跨平台。只有html5 才能真正的跨平台。但是，无论如何，silverlight现在是作为wp7的主要开发技术之一，而wp7 却是你们目前要主推的东西。你完全可以这样说，silverlight 对我们还是很重要，作为wp7的主要开发技术，我们将继续发展silverlight 。但是没有 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;首先，且不讨论这个事件的本身，最近以来，我一直对ms感到失望，这是因为ms在开发技术的延续性上越来越随心所欲，当然，早期的开发者可能也经历过dao,dao direct,rdo,ado的时代，但那时的api 相对很小，学习坡度很小。而现在，自从.net 推出后 windows forms不更新了,wf 更新换代了，linq to sql 也死了，dlr也不管了。问题是这些替代者完全能胜任了吗？没有！！！！&lt;/p&gt;
 &lt;p&gt;好吧，现在就讨论silverlight ,或许这个人说的本身就没有错误，silverlight 本身就不能完全的跨所有的平台，虽然它现在能在部分osx和windows 运行，但远远不是真正的跨平台。只有html5 才能真正的跨平台。但是，无论如何，silverlight现在是作为wp7的主要开发技术之一，而wp7 却是你们目前要主推的东西。你完全可以这样说，silverlight 对我们还是很重要，作为wp7的主要开发技术，我们将继续发展silverlight 。但是没有， 从这些言论来看，个人觉得ms 目前派系斗争真的是厉害。就怕遇见猪一样的队友，肯定是没错的。我对ms的前景现在完全不抱乐观的态度，不在于ms有没有能力，而是现在他们这个内耗，实在是太匪夷所思了。  资源的争取不是靠打垮内部的另一个团队来得到的。&lt;/p&gt;
 &lt;p&gt;好了，现在这个言论，肯定会影响一批人使用silverlight了，包括我，因为silverlight 虽然有很好的开发模式，但是，它现在存在的大量的问题，无论是性能或是bug上，没有一个好的将来保证，真的不敢用。 这样的结果，估计ms很满意了，问题是，如果使用html5 ,你能把用户绑定到你的平台吗？使用websocket,json,服务器端无论是java/python/ruby ,哪个都不比你的弱！你有这个信心吗？&lt;/p&gt;
 &lt;p&gt;附带一下我的一段评论，可能更容易表达我的观点：&lt;/p&gt;
@@ -1137,7 +1525,21 @@ parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;p&gt;其次，silverlight我认为对ms很重要，因为这是有效的平台的绑定工具，而html5 ，我觉的开发这里完全可以选择更强有力的服务器技术，如java/ruby/python之类的。而且html5浏览器技术竞争激励，其他厂商比ms有更快的应变和发布手段，更好的口碑。ms不会讨好。&lt;/p&gt;
 &lt;p&gt;所以，其实两者都很重要，但是如果ms内部真的要扬html,遏制silverlight话，真是个吃屎的决定&lt;/p&gt;
 &lt;/blockquote&gt;
-</summary></entry><entry><title>亿脉通 b2b 业务逻辑描述</title><link href="http://www.easynew.com.cn/ymt-b2b-logic.html" rel="alternate"></link><published>2008-09-09T00:00:00+08:00</published><updated>2008-09-09T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2008-09-09:ymt-b2b-logic.html</id><summary type="html">&lt;p&gt;做亿脉通时写的&lt;/p&gt;
+</content></entry><entry><title>亿脉通 b2b 业务逻辑描述</title><link href="http://www.easynew.com.cn/ymt-b2b-logic.html" rel="alternate"></link><published>2008-09-09T00:00:00+08:00</published><updated>2008-09-09T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2008-09-09:/ymt-b2b-logic.html</id><summary type="html">&lt;p&gt;做亿脉通时写的&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;代理和分销&lt;/h2&gt;
+&lt;p&gt;这里试图把这两个单词给明确化,在b2b系统中,代理是指由厂商授权的,在某一地区销售某类产品的权力. 代理可能是独家的,也可能是多家的,总代则是意味着在全国均有销售权力,通常,代理需要有严格的区域约束.每个大区域,如省形成一个代理树,不允许不同的树或树的不同级次进行互通,对于一个产品类别,总的来说是一棵大树,也可以分割为多棵小树
+独家的代理最简单. 非独家的代理,即某一区域允许多家代理时,通常是划分下级区域给不同的代理必须明白的说明,该公司的代理区域. 一个公司可能拥有多个区域的销售.&lt;/p&gt;
+&lt;p&gt;公司/代理的类别/允许销售的区域(浙江或是宁波杭州两地区,只需要使用代理区域的顶级代码)&lt;/p&gt;
+&lt;p&gt;分销是指拥有代理的公司将权力下放给其他公司的行为,这意味着创建一个树,这个树需要有上面的约束, 一个地区可以有多个分销,授权者可以将某一个或多个分销设置为分销认证
+分销认证将会在系统中被使用,当用户请求绑定一个上家时,系统将查看该上家的代理产品是否已经在该区域上级(但还是隶属于该上家的客户)已有分销认证商家,如果有,则对用户隐藏该产品,并出现该商家的信息以便用户绑定.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;区域&lt;/h2&gt;
+&lt;p&gt;使用 &lt;a class="reference external" href="http://www.stats.gov.cn/tjbz/xzqhdm/t20080215_402462675.htm"&gt;国标编码&lt;/a&gt;&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;两位一级,最大5级&lt;/li&gt;
+&lt;li&gt;86 第一级,全国,一个 …&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;做亿脉通时写的&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;代理和分销&lt;/h2&gt;
 &lt;p&gt;这里试图把这两个单词给明确化,在b2b系统中,代理是指由厂商授权的,在某一地区销售某类产品的权力. 代理可能是独家的,也可能是多家的,总代则是意味着在全国均有销售权力,通常,代理需要有严格的区域约束.每个大区域,如省形成一个代理树,不允许不同的树或树的不同级次进行互通,对于一个产品类别,总的来说是一棵大树,也可以分割为多棵小树
@@ -1208,7 +1610,47 @@ parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;h2&gt;促销&lt;/h2&gt;
 &lt;p&gt;促销信息也有同报价一样的区域限制&lt;/p&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>预分托盘算法</title><link href="http://www.easynew.com.cn/pallet-algorithm.html" rel="alternate"></link><published>2008-07-15T00:00:00+08:00</published><updated>2008-07-15T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2008-07-15:pallet-algorithm.html</id><summary type="html">&lt;p&gt;根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数&lt;/p&gt;
+</content></entry><entry><title>预分托盘算法</title><link href="http://www.easynew.com.cn/pallet-algorithm.html" rel="alternate"></link><published>2008-07-15T00:00:00+08:00</published><updated>2008-07-15T00:00:00+08:00</updated><author><name>jjx</name></author><id>tag:www.easynew.com.cn,2008-07-15:/pallet-algorithm.html</id><summary type="html">&lt;p&gt;根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数&lt;/p&gt;
+&lt;p&gt;建立一个二维数据&lt;/p&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="30%" /&gt;
+&lt;col width="70%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;托盘号&lt;/th&gt;
+&lt;th class="head"&gt;当前可用箱数&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;xx&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;xx&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;xx&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;每取一条出货记录,就遍历这个临时表,如果发现某一托盘有可用箱数,则该记录的托盘号就是它了.&lt;/p&gt;
+&lt;p&gt;当然,根据每一托盘的可用箱数,出货记录可能被分成多条,使用多个托盘&lt;/p&gt;
+&lt;p class="rubric"&gt;关于尾箱处理&lt;/p&gt;
+&lt;p&gt;如果尾箱是拼箱的话,则取开始箱号和结束箱号等于该记录安排箱号所在的托盘号,而不是占用托盘数 joinCartonPallet 用该变量来表示&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;后面的我也记不清了, 不过语言是axapta的x++&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;班组d(散装班组)和其它班组的净重,毛重,数量算法不同,主要是要加上整箱重量和包装盒重量&lt;/p&gt;
+&lt;p&gt;班组d和其他班组对尾箱的净重和毛重和数量的算法也不同 ,主要是要加上包装盒重&lt;/p&gt;
+&lt;p&gt;上面两者用&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;real boxWeight;&lt;/li&gt;
+&lt;li&gt;real cartonWeight;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这两个变量来区分&lt;/p&gt;
+&lt;p&gt;这些用6个变量区分&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;real netWeight,grossWeight,quantity;  //非尾箱&lt;/li&gt;
+&lt;li&gt;real trailNetWeight …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;根据包装出货选择 得出起始箱号和终止箱号,根据每托盘箱数得出总托盘数&lt;/p&gt;
 &lt;p&gt;建立一个二维数据&lt;/p&gt;
 &lt;table border="1" class="docutils"&gt;
 &lt;colgroup&gt;
@@ -1251,4 +1693,4 @@ parentNode.removeChild(this, destroy, suppressEvents);&lt;/blockquote&gt;
 &lt;li&gt;real trailNetWeight,trailGrossWeight,trailQuantity; //尾箱&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;判断尾箱的依据需要根据班组而定,如果班组是d并且尾盒m数,或者是其他班组但尾箱盒数有值, 或当前箱数正好是托盘剩余数+1&lt;/p&gt;
-</summary></entry></feed>
+</content></entry></feed>

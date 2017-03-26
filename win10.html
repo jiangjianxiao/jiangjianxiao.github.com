@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>从骷髅峡谷谈起, 说说 windows 10 python 开发环境</title>
+        <link rel="stylesheet" href="http://www.easynew.com.cn/theme/css/main.css" />
+        <link href="http://www.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EasyNew Atom Feed" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://www.easynew.com.cn/">EasyNew </a></h1>
+                <nav><ul>
+                    <li><a href="/category/misc.html">未分类</a></li>
+                    <li><a href="/about-us.html">关于我们</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://www.easynew.com.cn/win10.html" rel="bookmark"
+           title="Permalink to 从骷髅峡谷谈起, 说说 windows 10 python 开发环境">从骷髅峡谷谈起, 说说 windows 10 python 开发环境</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-03-26T11:14:00+08:00">
+                Published: 周日 26 三月 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->      <p>首先是因为骷髅峡谷, 这机器买来时想装黑苹果的, 但不完美. 所以折腾了大半年后还是装回 windows 10, 本来也没有想再把它变成工作机器, 因为潜意识中 windows 不是一个很好的开发环境.</p>
+<p>但是因为在最近计划为 c9 考虑开放 sdk 的事情, 希望用户能在 windows/macos/ubuntu 下均能使用 c9 sdk, 所以试着重新搭建了一下环境. 结果是:</p>
+<p>相当不错, 虽然没有 ubuntu/macos 上那种一气呵成的环境安装感觉, 但做开发环境还是没有问题的, 而且, ui 性能体验上要远超 macos 和 ubuntu (注意, 我说都是 ui 性能).</p>
+<p>没有用 bash, 虽然我认为当前 bash 完成度已经超过了cygwin, 但要达到虚拟机的体验. 可能还要一段时间(半年?一年?)</p>
+<p>在前几年, 我花了一定的努力将开发环境从 windows 转到了macos, 当然, 我现在还是认为macos是最佳的开发环境. 只不过, 当前有些变化</p>
+<ul class="simple">
+<li>系统:macos 从 10.9 后体验非常不好. 10.10 是个失败的版本, 10.11 算恢复过来, 但 10.12 这个版本感觉也不是很好.</li>
+<li>硬件部分　new macbook, 2016 rmbp 感觉不好, 高性能的 macos 设备不再推出, 价格飞涨</li>
+</ul>
+<p>所以, 当初我们谈绑定, 比方说 windows 绑定, 只是当你习惯 macos 后, 其实也算是 macos 绑定, 当苹果的软件和硬件保持的水准,这种绑定是可以接受的.  反之, 像我这样的, 感觉会不爽. 特别是随着 windows 10 的不断改进, 新的硬件的诱惑, 比方说 xps 13/15, surface pro/book, thinkpad x1 等.</p>
+<p>在windows 下做 python 开发, 主要的问题来自两个方面</p>
+<ul class="simple">
+<li>包含 c 扩展的包编译问题, 两个问题, 一个要配置编译器, 如 vc 2008, 另一个因为编译需要的库和头通常在windows上得到的方法比较麻烦, ubuntu通常是简单的 apt-get install xxx-dev</li>
+<li>command 的 utf-8 问题</li>
+</ul>
+<p>但目前,这两个问题都有较好的解决方案, 下面就简单都描述一下解决过程</p>
+<p>首先, 关于编译器, 微软专门提供了一个 Microsoft Visual C++ Compiler for Python 2.7, 免费, 可从这个地址下载 <a class="reference external" href="http://www.microsoft.com/en-us/download/details.aspx?id=44266">http://www.microsoft.com/en-us/download/details.aspx?id=44266</a></p>
+<p>当安装后,修改 C:Users[user name]AppDataLocalProgramsCommonMicrosoftVisual C++ for Python9.0vcvarsall.bat, 加入</p>
+<div class="highlight"><pre><span></span>SET <span class="nv">DISTUTILS_USE_SDK</span><span class="o">=</span><span class="m">1</span>
+SET <span class="nv">MSSdk</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+<p>如果你用x86的python 2.7 , 那可能是这样的</p>
+<div class="highlight"><pre><span></span>:x86
+<span class="nb">echo</span> Setting environment <span class="k">for</span> using Microsoft Visual Studio <span class="m">2008</span> x86 tools.
+<span class="nb">set</span> <span class="nv">VCINSTALLDIR</span><span class="o">=</span>%~dp0VC<span class="se">\</span>
+<span class="nb">set</span> <span class="nv">WindowsSdkDir</span><span class="o">=</span>%~dp0WinSDK<span class="se">\</span>
+<span class="k">if</span> not exist <span class="s2">&quot;%VCINSTALLDIR%bin\cl.exe&quot;</span> goto missing
+<span class="nb">set</span> <span class="nv">PATH</span><span class="o">=</span>%VCINSTALLDIR%Bin<span class="p">;</span>%WindowsSdkDir%Bin<span class="p">;</span>%PATH%
+<span class="nb">set</span> <span class="nv">INCLUDE</span><span class="o">=</span>%VCINSTALLDIR%Include<span class="p">;</span>%WindowsSdkDir%Include<span class="p">;</span>%INCLUDE%
+<span class="nb">set</span> <span class="nv">LIB</span><span class="o">=</span>%VCINSTALLDIR%Lib<span class="p">;</span>%WindowsSdkDir%Lib<span class="p">;</span>%LIB%
+<span class="nb">set</span> <span class="nv">LIBPATH</span><span class="o">=</span>%VCINSTALLDIR%Lib<span class="p">;</span>%WindowsSdkDir%Lib<span class="p">;</span>%LIBPATH%
+SET <span class="nv">DISTUTILS_USE_SDK</span><span class="o">=</span><span class="m">1</span>
+SET <span class="nv">MSSdk</span><span class="o">=</span><span class="m">1</span>
+goto :eof
+</pre></div>
+<p>以后如果需要安装需要编译的包, 就选择打开 Visual C++ 2008 32-bit Command Prompt, 然后安装</p>
+<p>由于新的whl 格式, 现在其实大部分基于whl格式的安装文件均为 windows 提供了预先编译的 pyd, 就 c9 而言, 我们依赖的所有库均没有问题</p>
+<p>c9 当前依赖的库:</p>
+<blockquote>
+cython
+gevent
+pyzmq
+twisted
+txzmq
+cyclone
+tornado
+xlrd
+xlwt
+sqlalchemy
+psycopg2
+reportlab==2.7
+pillow
+html5lib==0.95
+xhtml2pdf
+inflect
+bottle==0.11.6
+python-memcached
+sockjs-cyclone
+ipython
+websocket-client
+fabric
+simplejson
+gevent-websocket
+pydispatcher
+M2CryptoWin32
+sqlalchemy-utils
+openpyxl
+wechatpy
+requests
+jieba
+PyJWT
+xpinyin
+qiniu
+shell.py
+rsa</blockquote>
+<p>另外 <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a> 值得收藏, 当安装失败时可以先瞧瞧有没有非官方维护的whl包</p>
+<p>还有就是 virtualenvwrapper-win, 用惯 virtualenvwrapper 便利的不可缺少的工具</p>
+<p>当然, git for windows也是不可缺少的.</p>
+<p>第二点, 就是 command utf-8, 在当前, 解决方案也比较简单</p>
+<ol class="arabic simple">
+<li>首先是chcp 65001</li>
+<li>然后是修改command字体, 比方说 lucida console</li>
+<li>在系统属性中增加环境变量</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">PYTHONIOENCODING</span><span class="o">=</span>utf-8
+</pre></div>
+
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'easynew';
+        var disqus_identifier = 'win10.html';
+        var disqus_url = 'http://www.easynew.com.cn/win10.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//easynew.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://www.easynew.com.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'easynew';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

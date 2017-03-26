@@ -22,10 +22,10 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://www.easynew.com.cn/go_discard_template_method.html">Go 扔掉template method</a></h1>
+                    <h1 class="entry-title"><a href="http://www.easynew.com.cn/win10.html">从骷髅峡谷谈起, 说说 windows 10 python 开发环境</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2015-05-14T11:43:00+08:00">
-                Published: 四 14 五月 2015
+        <abbr class="published" title="2017-03-26T11:14:00+08:00">
+                Published: 周日 26 三月 2017
         </abbr>
 
         <address class="vcard author">
@@ -33,7 +33,117 @@
         </address>
 <p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
 
-</footer><!-- /.post-info --><p>在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是</p>
+</footer><!-- /.post-info --><p>首先是因为骷髅峡谷, 这机器买来时想装黑苹果的, 但不完美. 所以折腾了大半年后还是装回 windows 10, 本来也没有想再把它变成工作机器, 因为潜意识中 windows 不是一个很好的开发环境.</p>
+<p>但是因为在最近计划为 c9 考虑开放 sdk 的事情, 希望用户能在 windows/macos/ubuntu 下均能使用 c9 sdk, 所以试着重新搭建了一下环境. 结果是:</p>
+<p>相当不错, 虽然没有 ubuntu/macos 上那种一气呵成的环境安装感觉, 但做开发环境还是没有问题的, 而且, ui 性能体验上要远超 macos 和 ubuntu (注意, 我说都是 ui 性能).</p>
+<p>没有用 bash, 虽然我认为当前 bash 完成度已经超过了cygwin, 但要达到虚拟机的体验. 可能还要一段时间(半年?一年?)</p>
+<p>在前几年, 我花了一定的努力将开发环境从 windows 转到了macos, 当然, 我现在还是认为macos是最佳的开发环境. 只不过, 当前有些变化</p>
+<ul class="simple">
+<li>系统:macos 从 10.9 后体验非常不好. 10.10 是个失败的版本, 10.11 算恢复过来, 但 10.12 这个版本感觉也不是很好.</li>
+<li>硬件部分　new macbook, 2016 rmbp 感觉不好, 高性能的 macos 设备不再推出, 价格飞涨</li>
+</ul>
+<p>所以, 当初我们谈绑定, 比方说 windows 绑定, 只是当你习惯 macos 后, 其实也算是 macos 绑定, 当苹果的软件和硬件保持的水准,这种绑定是可以接受的.  反之, 像我这样的, 感觉会不爽. 特别是随着 windows 10 的不断改进, 新的硬件的诱惑, 比方说 xps 13/15, surface pro/book, thinkpad x1 等.</p>
+<p>在windows 下做 python 开发, 主要的问题来自两个方面</p>
+<ul class="simple">
+<li>包含 c 扩展的包编译问题, 两个问题, 一个要配置编译器, 如 vc 2008, 另一个因为编译需要的库和头通常在windows上得到的方法比较麻烦, ubuntu通常是简单的 apt-get install xxx-dev</li>
+<li>command 的 utf-8 问题</li>
+</ul>
+<p>但目前,这两个问题都有较好的解决方案, 下面就简单都描述一下解决过程</p>
+<p>首先, 关于编译器, 微软专门提供了一个 Microsoft Visual C++ Compiler for Python 2.7, 免费, 可从这个地址下载 <a class="reference external" href="http://www.microsoft.com/en-us/download/details.aspx?id=44266">http://www.microsoft.com/en-us/download/details.aspx?id=44266</a></p>
+<p>当安装后,修改 C:Users[user name]AppDataLocalProgramsCommonMicrosoftVisual C++ for Python9.0vcvarsall.bat, 加入</p>
+<div class="highlight"><pre><span></span>SET <span class="nv">DISTUTILS_USE_SDK</span><span class="o">=</span><span class="m">1</span>
+SET <span class="nv">MSSdk</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+<p>如果你用x86的python 2.7 , 那可能是这样的</p>
+<div class="highlight"><pre><span></span>:x86
+<span class="nb">echo</span> Setting environment <span class="k">for</span> using Microsoft Visual Studio <span class="m">2008</span> x86 tools.
+<span class="nb">set</span> <span class="nv">VCINSTALLDIR</span><span class="o">=</span>%~dp0VC<span class="se">\</span>
+<span class="nb">set</span> <span class="nv">WindowsSdkDir</span><span class="o">=</span>%~dp0WinSDK<span class="se">\</span>
+<span class="k">if</span> not exist <span class="s2">&quot;%VCINSTALLDIR%bin\cl.exe&quot;</span> goto missing
+<span class="nb">set</span> <span class="nv">PATH</span><span class="o">=</span>%VCINSTALLDIR%Bin<span class="p">;</span>%WindowsSdkDir%Bin<span class="p">;</span>%PATH%
+<span class="nb">set</span> <span class="nv">INCLUDE</span><span class="o">=</span>%VCINSTALLDIR%Include<span class="p">;</span>%WindowsSdkDir%Include<span class="p">;</span>%INCLUDE%
+<span class="nb">set</span> <span class="nv">LIB</span><span class="o">=</span>%VCINSTALLDIR%Lib<span class="p">;</span>%WindowsSdkDir%Lib<span class="p">;</span>%LIB%
+<span class="nb">set</span> <span class="nv">LIBPATH</span><span class="o">=</span>%VCINSTALLDIR%Lib<span class="p">;</span>%WindowsSdkDir%Lib<span class="p">;</span>%LIBPATH%
+SET <span class="nv">DISTUTILS_USE_SDK</span><span class="o">=</span><span class="m">1</span>
+SET <span class="nv">MSSdk</span><span class="o">=</span><span class="m">1</span>
+goto :eof
+</pre></div>
+<p>以后如果需要安装需要编译的包, 就选择打开 Visual C++ 2008 32-bit Command Prompt, 然后安装</p>
+<p>由于新的whl 格式, 现在其实大部分基于whl格式的安装文件均为 windows 提供了预先编译的 pyd, 就 c9 而言, 我们依赖的所有库均没有问题</p>
+<p>c9 当前依赖的库:</p>
+<blockquote>
+cython
+gevent
+pyzmq
+twisted
+txzmq
+cyclone
+tornado
+xlrd
+xlwt
+sqlalchemy
+psycopg2
+reportlab==2.7
+pillow
+html5lib==0.95
+xhtml2pdf
+inflect
+bottle==0.11.6
+python-memcached
+sockjs-cyclone
+ipython
+websocket-client
+fabric
+simplejson
+gevent-websocket
+pydispatcher
+M2CryptoWin32
+sqlalchemy-utils
+openpyxl
+wechatpy
+requests
+jieba
+PyJWT
+xpinyin
+qiniu
+shell.py
+rsa</blockquote>
+<p>另外 <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a> 值得收藏, 当安装失败时可以先瞧瞧有没有非官方维护的whl包</p>
+<p>还有就是 virtualenvwrapper-win, 用惯 virtualenvwrapper 便利的不可缺少的工具</p>
+<p>当然, git for windows也是不可缺少的.</p>
+<p>第二点, 就是 command utf-8, 在当前, 解决方案也比较简单</p>
+<ol class="arabic simple">
+<li>首先是chcp 65001</li>
+<li>然后是修改command字体, 比方说 lucida console</li>
+<li>在系统属性中增加环境变量</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">PYTHONIOENCODING</span><span class="o">=</span>utf-8
+</pre></div>
+<p>There are <a href="http://www.easynew.com.cn/win10.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://www.easynew.com.cn/go_discard_template_method.html" rel="bookmark"
+                           title="Permalink to Go 扔掉template method">Go 扔掉template method</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-05-14T11:43:00+08:00">
+                Published: 周四 14 五月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
+        </address>
+<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info -->                <p>在支持继承的语言中, template method 是代码重用的一种常见方式, 此方法的通用模式是</p>
 <ul class="simple">
 <li>定义一个接口 如BaseService</li>
 <li>创建一个类实现该接口, 完成程序的主要骨架, 将变动的方法抽象出来, 让子类继承实现</li>
@@ -66,25 +176,10 @@
    <span class="nx">DefaultBaseService</span>
 <span class="p">}</span>
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">UserService</span><span class="p">)</span> <span class="nx">ReadId</span><span class="p">(){</span>
-    <span class="nb">println</span><span class="p">(</span><span class="s">&quot;UserService&quot;</span><span class="p">)</span>
-
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nx">main</span><span class="p">(){</span>
-
-    <span class="kd">var</span> <span class="nx">user_service</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">UserService</span><span class="p">{}</span>
-    <span class="nx">user_service</span><span class="p">.</span><span class="nx">Invoke</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span> <span class="c1">// 调用的还是DefaultBaseService方法</span>
-    <span class="nx">user_service</span><span class="p">.</span><span class="nx">ReadId</span><span class="p">()</span> <span class="c1">// 调用的才是user_service</span>
-
-<span class="p">}</span>
-</pre></div>
-<p>There are <a href="http://www.easynew.com.cn/go_discard_template_method.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">UserService</span><span class="p">)</span> <span class="nx">ReadId …</span></pre></div>
+                <a class="readmore" href="http://www.easynew.com.cn/go_discard_template_method.html">read more</a>
+<p>There are <a href="http://www.easynew.com.cn/go_discard_template_method.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -95,7 +190,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-05-09T20:34:00+08:00">
-                Published: 六 09 五月 2015
+                Published: 周六 09 五月 2015
         </abbr>
 
         <address class="vcard author">
@@ -119,7 +214,7 @@
 <li>dapper</li>
 <li>npgsql</li>
 </ul>
-<p>python 通过 pyzmq 向 .net ...</p>
+<p>python 通过 pyzmq 向 .net …</p>
                 <a class="readmore" href="http://www.easynew.com.cn/ubuntu_os_x_c_sharp.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/ubuntu_os_x_c_sharp.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -133,7 +228,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-05-09T17:28:00+08:00">
-                Published: 五 09 五月 2014
+                Published: 周五 09 五月 2014
         </abbr>
 
         <address class="vcard author">
@@ -147,7 +242,7 @@
 <p>但我的尝试是运行ez_setup.py时的这个 错误</p>
 <div class="highlight"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
 </pre></div>
-<p>引发 IOError, google以下, 好象有人报告这个错误, 不过同我这里还不一样  <a class="reference external" href="http://bugs.jython.org/issue1944">http://bugs.jython ...</a></p>
+<p>引发 IOError, google以下, 好象有人报告这个错误, 不过同我这里还不一样  <a class="reference external" href="http://bugs.jython.org/issue1944">http://bugs.jython …</a></p>
                 <a class="readmore" href="http://www.easynew.com.cn/jython-27-beta3.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/jython-27-beta3.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -161,7 +256,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-05-09T09:25:00+08:00">
-                Published: 五 09 五月 2014
+                Published: 周五 09 五月 2014
         </abbr>
 
         <address class="vcard author">
@@ -191,7 +286,7 @@
 <p>pyjnius 问题</p>
 <ol class="arabic simple">
 <li>由于python是多进程部署, 由于java的内存占用, 这不是一个好主意, 会导致内存浪费的比较严重!</li>
-<li>包本身问题 ...</li></ol>
+<li>包本身问题 …</li></ol>
                 <a class="readmore" href="http://www.easynew.com.cn/jvm-interactive-note.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/jvm-interactive-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -205,7 +300,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-09-22T12:19:00+08:00">
-                Published: 日 22 九月 2013
+                Published: 周日 22 九月 2013
         </abbr>
 
         <address class="vcard author">
@@ -227,7 +322,7 @@
 <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext</span> <span class="k">as</span> <span class="n">_</span>
 
-<span class="n">COUNTRY ...</span></pre></div></div>
+<span class="n">COUNTRY …</span></pre></div></div>
                 <a class="readmore" href="http://www.easynew.com.cn/django-admin-linkage.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/django-admin-linkage.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -241,7 +336,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-07-15T00:00:00+08:00">
-                Published: 一 15 七月 2013
+                Published: 周一 15 七月 2013
         </abbr>
 
         <address class="vcard author">
@@ -275,7 +370,7 @@
 <li>进入主界面. 这个界面完成主要的功能</li>
 </ol>
 <ul class="simple">
-<li>按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历 ...</li></ul></div>
+<li>按公司和部门, 搜索, 选择特定的项目(选择列按钮)显示简历 …</li></ul></div>
                 <a class="readmore" href="http://www.easynew.com.cn/resume.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/resume.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -289,7 +384,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-07-10T13:56:00+08:00">
-                Published: 三 10 七月 2013
+                Published: 周三 10 七月 2013
         </abbr>
 
         <address class="vcard author">
@@ -311,7 +406,7 @@
                 <span class="c1"># log excpeiton</span>
                 <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">ex</span><span class="o">.</span><span class="n">message</span><span class="p">}</span>
 </pre></div>
-<div class="highlight"><pre><span></span><span class="kd">var ...</span></pre></div>
+<div class="highlight"><pre><span></span><span class="kd">var …</span></pre></div>
                 <a class="readmore" href="http://www.easynew.com.cn/cefpython_issues.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/cefpython_issues.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -325,7 +420,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-06-30T15:25:00+08:00">
-                Published: 日 30 六月 2013
+                Published: 周日 30 六月 2013
         </abbr>
 
         <address class="vcard author">
@@ -348,7 +443,7 @@
 <li>创建了activex 控件, 解决发布的问题</li>
 <li>借助remobjects dataabstract , 实现分布式数据访问.</li>
 </ol>
-<p>marsx 在某些方面是成功的,他达到了我的一些目的: 达成软件即开发环境是可能的, 在开发时也有很好的效率, 特别是ui的定制上, 几乎是客户要什么现场就可以完成. 但主要的问题在paxcompiler ...</p>
+<p>marsx 在某些方面是成功的,他达到了我的一些目的: 达成软件即开发环境是可能的, 在开发时也有很好的效率, 特别是ui的定制上, 几乎是客户要什么现场就可以完成. 但主要的问题在paxcompiler …</p>
                 <a class="readmore" href="http://www.easynew.com.cn/my-framework-viewpoint.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/my-framework-viewpoint.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -362,7 +457,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-06-29T13:48:00+08:00">
-                Published: 六 29 六月 2013
+                Published: 周六 29 六月 2013
         </abbr>
 
         <address class="vcard author">
@@ -386,7 +481,7 @@
 <p>各种符号的滥用解很大程度上是需要改善lisp的括号使用， 符号使用列表:</p>
 <pre class="literal-block">
 # 的使用。 #{1 2 3 } 表示set, #&quot;\W+&quot; 表示正则, #(&gt; (count %) 2) 表示匿名函数， #_宏表示忽略下一个clojure形式.
-* repl ...</pre></div>
+* repl …</pre></div>
                 <a class="readmore" href="http://www.easynew.com.cn/clojure-note.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/clojure-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -400,7 +495,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-06-19T12:42:00+08:00">
-                Published: 三 19 六月 2013
+                Published: 周三 19 六月 2013
         </abbr>
 
         <address class="vcard author">
@@ -433,7 +528,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-06-19T07:42:00+08:00">
-                Published: 三 19 六月 2013
+                Published: 周三 19 六月 2013
         </abbr>
 
         <address class="vcard author">
@@ -459,7 +554,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-06-16T22:08:00+08:00">
-                Published: 日 16 六月 2013
+                Published: 周日 16 六月 2013
         </abbr>
 
         <address class="vcard author">
@@ -479,7 +574,7 @@
 <li>对于每个要我们做软件的企业,我们将争取他们为以后的后续服务提供费用</li>
 <li>saas 将是未来软件主要存在的形式,是我们今后的努力方向</li>
 </ul>
-<p>错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制 ...</p></div>
+<p>错误是没有放弃桌面软件, 没有将精力集中到web, 沉迷于实现axpata类似分布式桌面应用框架, .然已经用python, 但还没有发现python其实是最爱. 还是在定制 …</p></div>
                 <a class="readmore" href="http://www.easynew.com.cn/google-docs-note.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/google-docs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -493,7 +588,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-06-16T16:02:00+08:00">
-                Published: 日 16 六月 2013
+                Published: 周日 16 六月 2013
         </abbr>
 
         <address class="vcard author">
@@ -514,7 +609,7 @@
 <span class="p">});</span>
 </pre></div>
 <p>这里要说的是tree的node的destroy, 无论服务端是否出错， 它一定会把节点给删掉， 不合理啊。 extjs论坛有人发贴 <a class="reference external" href="http://www.sencha.com/forum/showthread.php?211235">NodeInterface destroy with callback?</a>，无人理睬。</p>
-<p>当然 ...</p>
+<p>当然 …</p>
                 <a class="readmore" href="http://www.easynew.com.cn/extjs-nodeinterface-destroy.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/extjs-nodeinterface-destroy.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -528,7 +623,7 @@
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-06-12T04:12:00+08:00">
-                Published: 三 12 六月 2013
+                Published: 周三 12 六月 2013
         </abbr>
 
         <address class="vcard author">
@@ -551,7 +646,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
 <p>pelican-plugins 建议用submodule的方法获取</p>
 <p>git submodule add git://github.com/getpelican/pelican-plugins.git</p>
 <p>然后在其他机器就是git submodule init/git submodule update了</p>
-<p>我的publish.sh ...</p></div>
+<p>我的publish.sh …</p></div>
                 <a class="readmore" href="http://www.easynew.com.cn/first-blog.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/first-blog.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -565,7 +660,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2012-09-16T00:00:00+08:00">
-                Published: 日 16 九月 2012
+                Published: 周日 16 九月 2012
         </abbr>
 
         <address class="vcard author">
@@ -578,7 +673,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
 <p>Sublime Text 2 是一个很强大的编辑器，最近开始获得了很高的人气 － 这不是没有理由的。它是商业软件。Sublime Text 2 有很多支持 Python 的插件。虽然核心部分保持封闭但围绕着这个编辑器还是形成了 活跃的插件生态系统 。</p>
 <p>提示：你可以免费使用 Sublime 。它只是会提示你“请购买”而已。</p>
 <p>这是我使用 Sublime 这么久以来发现的小技巧。我是站在在 OS X 视角来写的，但在 Linux 和 Windows 平台这些技巧应该也适用。</p>
-<p>我以前是 Eclipse 的死党。虽然 Sublime 并没有像 Eclipse ...</p>
+<p>我以前是 Eclipse 的死党。虽然 Sublime 并没有像 Eclipse …</p>
                 <a class="readmore" href="http://www.easynew.com.cn/python-web-sublime-text-2.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/python-web-sublime-text-2.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -592,7 +687,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2012-08-22T00:00:00+08:00">
-                Published: 三 22 八月 2012
+                Published: 周三 22 八月 2012
         </abbr>
 
         <address class="vcard author">
@@ -619,7 +714,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2012-08-10T00:00:00+08:00">
-                Published: 五 10 八月 2012
+                Published: 周五 10 八月 2012
         </abbr>
 
         <address class="vcard author">
@@ -640,7 +735,7 @@ OUTPUT_PATH = '../jiangjianxao.github.com'
 <p>然后</p>
 <blockquote>
 cd /usr/local/lib/python2.7/dist-packages
-sudo gedit ...</blockquote>
+sudo gedit …</blockquote>
                 <a class="readmore" href="http://www.easynew.com.cn/ubuntu-pythonpath.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/ubuntu-pythonpath.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -654,7 +749,7 @@ sudo gedit ...</blockquote>
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2012-06-17T00:00:00+08:00">
-                Published: 日 17 六月 2012
+                Published: 周日 17 六月 2012
         </abbr>
 
         <address class="vcard author">
@@ -687,7 +782,7 @@ sudo gedit ...</blockquote>
 </pre></div>
 <p>extjs 4.2 海皇星主题,frame 将是很粗的一根, 而且当form被嵌入到其他容器时,除了这个很粗的框, 背景没有同容器一样, 所以在该主题中frame应该设置为false</p>
 <ol class="arabic simple">
-<li>Store datachanged 对update没有效果 ...</li></ol></div>
+<li>Store datachanged 对update没有效果 …</li></ol></div>
                 <a class="readmore" href="http://www.easynew.com.cn/extjs-note.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/extjs-note.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -701,7 +796,7 @@ sudo gedit ...</blockquote>
                 <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2012-06-07T13:19:00+08:00">
-                Published: 四 07 六月 2012
+                Published: 周四 07 六月 2012
         </abbr>
 
         <address class="vcard author">
@@ -727,37 +822,9 @@ sudo gedit ...</blockquote>
 <span class="c1">#error_log  logs/error.log  notice;</span>
 <span class="c1">#error_log  logs/error.log  info;</span>
 
-<span class="k">pid</span>        <span class="s">logs/nginx.pid ...</span></pre></div></div>
+<span class="k">pid</span>        <span class="s">logs/nginx.pid …</span></pre></div></div>
                 <a class="readmore" href="http://www.easynew.com.cn/windows-nginx-tornado.html">read more</a>
 <p>There are <a href="http://www.easynew.com.cn/windows-nginx-tornado.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://www.easynew.com.cn/extjs-model-with-grid-tree.html" rel="bookmark"
-                           title="Permalink to extjs model同时用于grid和tree的问题">extjs model同时用于grid和tree的问题</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-06-04T00:00:00+08:00">
-                Published: 一 04 六月 2012
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://www.easynew.com.cn/author/jjx.html">jjx</a>
-        </address>
-<p>In <a href="http://www.easynew.com.cn/category/misc.html">misc</a>.</p>
-
-</footer><!-- /.post-info -->                <p>当model用在tree中的,extjs会自动mixin NodeInterface ,结果destroy 是由NodeInterface执行,这导致一个问题.</p>
-<p>当你从grid中获取一个model,然后调用destroy时,由于NodeInterface destroy是最终是通过NodeInterface.parentNode来删除的</p>
-<blockquote>
-parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
-<p>但grid中的model ,不存在parent node,会导致destroy 不会向后端发送delete rest命令.</p>
-<p>回避的方法是创建两个model,如 SubjectNode/Subject ,一个用于tree,一个用于grid</p>
-
-                <a class="readmore" href="http://www.easynew.com.cn/extjs-model-with-grid-tree.html">read more</a>
-<p>There are <a href="http://www.easynew.com.cn/extjs-model-with-grid-tree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
@@ -767,7 +834,7 @@ parentNode.removeChild(this, destroy, suppressEvents);</blockquote>
                 </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
-                        <h2>blogroll</h2>
+                        <h2>links</h2>
                         <ul>
                             <li><a href="http://getpelican.com/">Pelican</a></li>
                             <li><a href="http://python.org/">Python.org</a></li>
